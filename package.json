@@ -3,12 +3,13 @@
   "scripts": {
     "dev": "solid-start dev",
     "build": "solid-start build",
-    "start": "solid-start start"
+    "start": "solid-start start",
+    "postinstall": "node patch-globals.cjs"
   },
   "type": "module",
   "devDependencies": {
     "cypress": "^10.11.0",
-    "solid-start-netlify": "^0.1.0",
+    "solid-start-static": "^0.1.0",
     "typescript": "^4.8.3",
     "vite": "^3.1.0"
   },

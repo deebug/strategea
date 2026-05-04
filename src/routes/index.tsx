@@ -17,7 +17,7 @@ export default function Home() {
       consultingTitle: "Digital Business Consulting",
       consultingDesc: "We provide strategic guidance to optimize your digital infrastructure. Our expertise covers comprehensive ERP and CRM integrations, alongside advanced data analysis to drive actionable business intelligence.",
       historyTitle: "Our History",
-      historyDesc: "Our journey began in 2000 as Sitesource, a passionate one-man firm dedicated to robust front-end and back-end development. Evolving with the digital landscape, we transformed into Strategea COMMV in 2023. During the 2019 - 2026 period, a leading role as CEO for Didakta BV was also fulfilled. In April 2026, we proudly became part of DIEP Management (diep.one), bridging the gap between Tech and Talent.",
+      historyDesc: "Our journey began in 2000 as Sitesource, a passionate one-man firm dedicated to robust front-end and back-end development. Evolving with the digital landscape, we transformed into Strategea COMMV in 2023. During the 2023 - 2026 period, a leading role as CEO for Didakta BV was also fulfilled. In April 2026, we proudly became part of DIEP Management (diep.one), bridging the gap between Tech and Talent.",
       contact: "Get in touch"
     },
     nl: {

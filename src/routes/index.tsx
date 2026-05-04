@@ -17,7 +17,7 @@ export default function Home() {
       consultingTitle: "Digital Business Consulting",
       consultingDesc: "We provide strategic guidance to optimize your digital infrastructure. Our expertise covers comprehensive ERP and CRM integrations, alongside advanced data analysis to drive actionable business intelligence.",
       historyTitle: "Our History",
-      historyDesc: "Our journey began in 2000 as Sitesource, a passionate one-man firm dedicated to robust front-end and back-end development. Evolving with the digital landscape, we transformed into Strategea COMMV in 2019. During the 2019 - 2026 period, a leading role as CEO for Didakta BV was also fulfilled. In April 2026, we proudly became part of DIEP Management (diep.one), bridging the gap between Tech and Talent.",
+      historyDesc: "Our journey began in 2000 as Sitesource, a passionate one-man firm dedicated to robust front-end and back-end development. Evolving with the digital landscape, we transformed into Strategea COMMV in 2023. During the 2019 - 2026 period, a leading role as CEO for Didakta BV was also fulfilled. In April 2026, we proudly became part of DIEP Management (diep.one), bridging the gap between Tech and Talent.",
       contact: "Get in touch"
     },
     nl: {
@@ -26,7 +26,7 @@ export default function Home() {
       consultingTitle: "Strategisch Digitaal Advies",
       consultingDesc: "Wij bieden strategisch advies om uw digitale infrastructuur te optimaliseren. Onze expertise omvat naadloze ERP- en CRM-integraties en diepgaande data-analyse om meetbare bedrijfswaarde te creëren.",
       historyTitle: "Onze Historiek",
-      historyDesc: "Ons verhaal startte in 2000 als Sitesource, een eenmanszaak gespecialiseerd in front-end en back-end development. In 2019 zijn we geëvolueerd naar Strategea COMMV. In de periode 2019 - 2026 werd tevens een leidende rol als CEO voor Didakta BV vervuld. Sinds april 2026 maken we met trots deel uit van DIEP Management (diep.one), waar we tech en talent met elkaar verbinden.",
+      historyDesc: "Ons verhaal startte in 2000 als Sitesource, een eenmanszaak gespecialiseerd in front-end en back-end development. In 2023 zijn we geëvolueerd naar Strategea COMMV. In de periode 2019 - 2026 werd tevens een leidende rol als CEO voor Didakta BV vervuld. Sinds april 2026 maken we met trots deel uit van DIEP Management (diep.one), waar we tech en talent met elkaar verbinden.",
       contact: "Neem contact op"
     }
   };
@@ -73,6 +73,10 @@ export default function Home() {
             <span>{content[lang()].contact}</span>
           </a>
         </div>
+        
+        <footer class="app-footer">
+          <p>Strategea COMMV &bull; BTW / VAT: BE1002562801</p>
+        </footer>
       </div>
     </main>
   );

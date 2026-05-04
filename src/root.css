@@ -238,3 +238,15 @@ body {
     max-width: 280px;
   }
 }
+
+.app-footer {
+  width: 100%;
+  text-align: center;
+  padding-top: 3rem;
+  margin-top: 1rem;
+  border-top: 1px solid rgba(0,0,0,0.05);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}

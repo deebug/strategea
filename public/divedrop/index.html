@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DiveDrop – dive exports into your SSI logbook | Strategea</title>
+<meta name="description" content="Share your Oceanic+ (Apple Watch) or UDDF dive export and DiveDrop adds the missing dives to your MySSI logbook, depth profile and dive site included.">
+<meta property="og:title" content="DiveDrop">
+<meta property="og:description" content="Share your dive export. Your SSI logbook is up to date. Profile included.">
+<meta property="og:image" content="https://strategea.be/divedrop/img/icon.png">
+<link rel="icon" href="img/icon.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Outfit:wght@300;400;600;800&display=swap">
+<style>
+  :root{--bg-color:#f9f9fb;--text-primary:#111827;--text-secondary:#4b5563;--accent-1:#54b3d6;--accent-2:#2a5a8a;--card-bg:#fff}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Outfit','Montserrat',sans-serif;background:var(--bg-color);color:var(--text-primary);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:var(--accent-2)}
+  .wrap{max-width:1000px;margin:0 auto;padding:4rem 1.25rem 3rem}
+  .lang-toggle{position:absolute;top:2rem;right:2rem;display:flex;background:var(--card-bg);border-radius:50px;box-shadow:0 4px 6px -1px rgba(0,0,0,.05);padding:.25rem;z-index:10}
+  .lang-toggle button{background:transparent;border:0;padding:.5rem 1rem;font-family:inherit;font-weight:600;font-size:.9rem;color:var(--text-secondary);border-radius:50px;cursor:pointer;transition:all .3s}
+  .lang-toggle button.active{background:var(--text-primary);color:#fff}
+  .brand{display:flex;align-items:center;gap:.6rem;font-weight:600;color:var(--text-secondary);font-size:.9rem;text-decoration:none;margin-bottom:3rem}
+  .brand img{height:22px}
+  .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:3rem;align-items:center;margin-bottom:4rem}
+  .hero .icon{width:96px;height:96px;border-radius:22px;box-shadow:0 10px 30px -5px rgba(42,90,138,.35);margin-bottom:1.25rem}
+  h1{font-size:3rem;font-weight:800;letter-spacing:-.02em;line-height:1.05;margin-bottom:.75rem}
+  .tag{font-size:1.25rem;color:var(--text-secondary);font-weight:300;max-width:34ch;margin-bottom:1.5rem}
+  .cta{display:inline-flex;align-items:center;gap:.6rem;background:var(--text-primary);color:#fff;text-decoration:none;padding:.9rem 1.4rem;border-radius:50px;font-weight:600;transition:transform .3s,box-shadow .3s}
+  .cta:hover{transform:translateY(-2px);box-shadow:0 10px 25px -5px rgba(0,0,0,.2)}
+  .cta.soft{background:var(--card-bg);color:var(--text-primary);border:1px solid rgba(0,0,0,.06);margin-left:.5rem}
+  .phones{display:flex;gap:1rem;justify-content:center}
+  .phones img{width:31%;border-radius:22px;box-shadow:0 20px 40px -10px rgba(17,24,39,.25);background:#fff}
+  .phones img:nth-child(2){transform:translateY(-18px)}
+  h2{font-size:1.6rem;font-weight:600;margin:3.5rem 0 1.25rem}
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem}
+  .step{background:var(--card-bg);border-radius:24px;padding:1.5rem;box-shadow:0 10px 30px -5px rgba(0,0,0,.04);border:1px solid rgba(0,0,0,.02)}
+  .step .n{display:inline-block;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--accent-1),var(--accent-2));color:#fff;font-weight:700;font-size:.85rem;text-align:center;line-height:28px;margin-bottom:.75rem}
+  .step h3{font-size:1rem;font-weight:600;margin-bottom:.35rem}
+  .step p{color:var(--text-secondary);font-size:.92rem;line-height:1.5}
+  .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.25rem}
+  .card{background:var(--card-bg);border-radius:24px;padding:2rem;box-shadow:0 10px 30px -5px rgba(0,0,0,.04);border:1px solid rgba(0,0,0,.02)}
+  .card h3{font-size:1.1rem;font-weight:600;margin-bottom:.5rem}
+  .card p,.card li{color:var(--text-secondary);line-height:1.6}
+  .card ul{padding-left:1.1rem}
+  .price{font-size:2.4rem;font-weight:800;letter-spacing:-.02em}
+  .price small{font-size:1rem;font-weight:400;color:var(--text-secondary)}
+  .faq details{background:var(--card-bg);border-radius:16px;padding:1rem 1.25rem;margin-bottom:.6rem;border:1px solid rgba(0,0,0,.03)}
+  .faq summary{cursor:pointer;font-weight:600}
+  .faq p{color:var(--text-secondary);margin-top:.5rem;line-height:1.6}
+  footer{margin-top:4rem;padding-top:2rem;border-top:1px solid rgba(0,0,0,.06);color:var(--text-secondary);font-size:.85rem;display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between}
+  [hidden]{display:none!important}
+  @media (max-width:760px){.hero{grid-template-columns:1fr}h1{font-size:2.3rem}.lang-toggle{top:1rem;right:1rem}.wrap{padding-top:5rem}}
+</style>
+</head>
+<body>
+<div class="lang-toggle" aria-label="Language">
+  <button data-lang="en">EN</button><button data-lang="nl">NL</button>
+</div>
+<main class="wrap">
+  <a class="brand" href="/"><img src="/strategea.svg" alt="Strategea"> <span data-i18n="by"></span></a>
+
+  <section class="hero">
+    <div>
+      <img class="icon" src="img/icon.png" alt="DiveDrop app icon">
+      <h1>DiveDrop</h1>
+      <p class="tag" data-i18n="tag"></p>
+      <a class="cta" href="mailto:info@strategea.be?subject=DiveDrop%20TestFlight" data-i18n="cta"></a>
+      <a class="cta soft" href="#how" data-i18n="how_link"></a>
+    </div>
+    <div class="phones">
+      <img data-shot="04-share-sheet" alt="iOS share sheet with DiveDrop">
+      <img data-shot="01-list" alt="DiveDrop dive list with sync status">
+      <img data-shot="02-detail" alt="Dive detail with depth profile and map">
+    </div>
+  </section>
+
+  <h2 id="how" data-i18n="how"></h2>
+  <div class="steps">
+    <div class="step"><span class="n">1</span><h3 data-i18n="s1t"></h3><p data-i18n="s1d"></p></div>
+    <div class="step"><span class="n">2</span><h3 data-i18n="s2t"></h3><p data-i18n="s2d"></p></div>
+    <div class="step"><span class="n">3</span><h3 data-i18n="s3t"></h3><p data-i18n="s3d"></p></div>
+    <div class="step"><span class="n">4</span><h3 data-i18n="s4t"></h3><p data-i18n="s4d"></p></div>
+    <div class="step"><span class="n">5</span><h3 data-i18n="s5t"></h3><p data-i18n="s5d"></p></div>
+  </div>
+
+  <h2 data-i18n="what"></h2>
+  <div class="grid2">
+    <div class="card"><h3 data-i18n="f1t"></h3><p data-i18n="f1d"></p></div>
+    <div class="card"><h3 data-i18n="f2t"></h3><p data-i18n="f2d"></p></div>
+    <div class="card"><h3 data-i18n="f3t"></h3><p data-i18n="f3d"></p></div>
+    <div class="card"><h3 data-i18n="f4t"></h3><p data-i18n="f4d"></p></div>
+  </div>
+
+  <h2 data-i18n="pricing"></h2>
+  <div class="grid2">
+    <div class="card">
+      <div class="price">€0 <small data-i18n="p_free_s"></small></div>
+      <p data-i18n="p_free"></p>
+    </div>
+    <div class="card">
+      <div class="price">€4,99 <small data-i18n="p_once_s"></small></div>
+      <p data-i18n="p_once"></p>
+    </div>
+  </div>
+
+  <h2 data-i18n="faq"></h2>
+  <div class="faq">
+    <details><summary data-i18n="q1"></summary><p data-i18n="a1"></p></details>
+    <details><summary data-i18n="q2"></summary><p data-i18n="a2"></p></details>
+    <details><summary data-i18n="q3"></summary><p data-i18n="a3"></p></details>
+    <details><summary data-i18n="q4"></summary><p data-i18n="a4"></p></details>
+  </div>
+
+  <footer>
+    <span>Strategea COMMV &bull; BTW / VAT: BE1002562801</span>
+    <span><a href="privacy/" data-i18n="privacy"></a> &bull; <a href="mailto:info@strategea.be">info@strategea.be</a> &bull; <span data-i18n="notaff"></span></span>
+  </footer>
+</main>
+<script>
+const T = {
+ en: {by:"an app by Strategea", tag:"Share your dive export. Your SSI logbook is up to date. Depth profile included.",
+  cta:"Join the TestFlight beta", how_link:"How it works", how:"How it works",
+  s1t:"Export", s1d:"In Oceanic+ on your iPhone: Logbook › Export Dives. You get an email with a download link.",
+  s2t:"Long-press", s2d:"Long-press the link in Mail and choose Share…",
+  s3t:"Pick DiveDrop", s3d:"DiveDrop sits at the front of the share sheet. It unpacks the file and reads every dive.",
+  s4t:"Compare", s4d:"Dives already in MySSI are recognised, even manually logged ones a few minutes off. Pool dips are skipped.",
+  s5t:"Send", s5d:"Review any dive, then send the missing ones to SSI with profile, temperature, tank pressure and dive site.",
+  what:"What goes into your logbook", f1t:"The full depth profile", f1d:"Every sample from your computer: depth, water temperature, ascent rate and ascent alarms, so the dive looks in MySSI like a computer-synced one.",
+  f2t:"The right dive site", f2d:"DiveDrop matches your entry point against SSI's own database of 24,000 verified sites and picks the nearest one. Change it in two taps.",
+  f3t:"No duplicates", f3d:"Your existing MySSI logbook is the source of truth. Dives already there stay there; dives you logged by hand are recognised by day, time, depth and duration.",
+  f4t:"No server, no tracking", f4d:"Your SSI login goes straight from your phone to SSI and lives only in your Keychain. DiveDrop has no backend, no analytics and no ads.",
+  pricing:"Pricing", p_free_s:"to start", p_free:"Download free. Your first 3 dives to SSI are free, so you can see it works with your own logbook.",
+  p_once_s:"once, no subscription", p_once:"Unlock unlimited dives with a single in-app purchase. Restorable on all your devices.",
+  faq:"Questions", q1:"Which dive computers and apps work?", a1:"Anything that exports UDDF: Oceanic+ on Apple Watch (via Export Dives), Subsurface, MacDive, Shearwater Cloud, Diving Log and more. Garmin FIT and Shearwater XML are on the roadmap.",
+  q2:"Does SSI mark the dives as computer-verified?", a2:"Dives created through the app currently arrive as unconfirmed, the same as a manually entered dive. Your dive centre can still verify them. We have asked SSI for a supported way to flag them.",
+  q3:"Is this an official SSI product?", a3:"No. DiveDrop is an independent tool that talks to the same interface the MySSI app uses, on your behalf and with your own account. It works as long as SSI allows it.",
+  q4:"My phone shows 'Open with' another app instead of DiveDrop", a4:"That is the app iOS picked for zip files. Use the long-press menu › Share… › DiveDrop, or tap More… in the preview. Both always work.",
+  privacy:"Privacy policy", notaff:"Not affiliated with SSI, Oceanic or Huish Outdoors"},
+ nl: {by:"een app van Strategea", tag:"Deel je duik-export. Je SSI-logboek is bijgewerkt. Met diepteprofiel.",
+  cta:"Doe mee aan de TestFlight-bèta", how_link:"Zo werkt het", how:"Zo werkt het",
+  s1t:"Exporteer", s1d:"In Oceanic+ op je iPhone: Logbook › Export Dives. Je krijgt een mail met een downloadlink.",
+  s2t:"Lang drukken", s2d:"Druk lang op de link in Mail en kies Deel…",
+  s3t:"Kies DiveDrop", s3d:"DiveDrop staat vooraan in het deelmenu. De app pakt het bestand uit en leest elke duik.",
+  s4t:"Vergelijk", s4d:"Duiken die al in MySSI staan worden herkend, ook manueel gelogde met enkele minuten verschil. Zwembad-dips worden overgeslagen.",
+  s5t:"Verstuur", s5d:"Bekijk elke duik en verstuur de ontbrekende naar SSI, met profiel, temperatuur, tankdruk en duikstek.",
+  what:"Wat er in je logboek komt", f1t:"Het volledige diepteprofiel", f1d:"Elke sample van je computer: diepte, watertemperatuur, opstijgsnelheid en opstijgalarmen, zodat de duik er in MySSI uitziet als een gesyncte computerduik.",
+  f2t:"De juiste duikstek", f2d:"DiveDrop legt je instappunt naast SSI's eigen database van 24.000 geverifieerde stekken en kiest de dichtstbijzijnde. Wijzigen kan in twee tikken.",
+  f3t:"Geen dubbels", f3d:"Je bestaande MySSI-logboek is de bron. Wat er al in staat blijft staan; manueel gelogde duiken worden herkend op dag, tijd, diepte en duur.",
+  f4t:"Geen server, geen tracking", f4d:"Je SSI-login gaat rechtstreeks van je telefoon naar SSI en staat alleen in je Keychain. DiveDrop heeft geen backend, geen analytics en geen advertenties.",
+  pricing:"Prijs", p_free_s:"om te starten", p_free:"Gratis downloaden. Je eerste 3 duiken naar SSI zijn gratis, zodat je met je eigen logboek ziet dat het werkt.",
+  p_once_s:"eenmalig, geen abonnement", p_once:"Ontgrendel onbeperkt duiken met één in-app-aankoop. Herstelbaar op al je toestellen.",
+  faq:"Vragen", q1:"Welke duikcomputers en apps werken?", a1:"Alles wat UDDF exporteert: Oceanic+ op Apple Watch (via Export Dives), Subsurface, MacDive, Shearwater Cloud, Diving Log en meer. Garmin FIT en Shearwater XML staan op de planning.",
+  q2:"Markeert SSI de duiken als computer-geverifieerd?", a2:"Duiken die via de app worden aangemaakt komen momenteel binnen als niet bevestigd, net als een manueel ingevoerde duik. Je duikcentrum kan ze nog steeds bevestigen. We hebben SSI gevraagd naar een ondersteunde manier om ze te markeren.",
+  q3:"Is dit een officieel SSI-product?", a3:"Nee. DiveDrop is een onafhankelijke tool die met dezelfde interface praat als de MySSI-app, namens jou en met je eigen account. Het werkt zolang SSI dit toelaat.",
+  q4:"Mijn telefoon toont 'Open met' een andere app in plaats van DiveDrop", a4:"Dat is de app die iOS voor zip-bestanden heeft gekozen. Gebruik het long-press-menu › Deel… › DiveDrop, of tik op Meer… in de voorvertoning. Beide werken altijd.",
+  privacy:"Privacybeleid", notaff:"Niet verbonden aan SSI, Oceanic of Huish Outdoors"}
+};
+function apply(lang){
+  const t = T[lang] || T.en;
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t[el.dataset.i18n] ?? ''; });
+  document.querySelectorAll('[data-shot]').forEach(img => { img.src = 'img/' + lang + '-' + img.dataset.shot + '.png'; });
+  document.querySelectorAll('.lang-toggle button').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+  try { localStorage.setItem('divedrop.lang', lang); } catch (e) {}
+}
+document.querySelectorAll('.lang-toggle button').forEach(b => b.addEventListener('click', () => apply(b.dataset.lang)));
+let start = 'en';
+try { start = localStorage.getItem('divedrop.lang') || ((navigator.language || '').toLowerCase().startsWith('nl') ? 'nl' : 'en'); } catch (e) {}
+apply(start);
+</script>
+</body>
+</html>

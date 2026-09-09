@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DiveDrop – Support | Strategea</title>
+<meta name="description" content="Support for DiveDrop: questions, problems with an export, feature requests.">
+<link rel="icon" href="../img/icon.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Outfit:wght@300;400;600;800&display=swap">
+<style>
+  :root{--bg-color:#f9f9fb;--text-primary:#111827;--text-secondary:#4b5563;--accent-1:#54b3d6;--accent-2:#2a5a8a;--card-bg:#fff}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Outfit','Montserrat',sans-serif;background:var(--bg-color);color:var(--text-primary);-webkit-font-smoothing:antialiased}
+  a{color:var(--accent-2)}
+  .wrap{max-width:760px;margin:0 auto;padding:4rem 1.25rem 3rem}
+  .lang-toggle{position:absolute;top:2rem;right:2rem;display:flex;background:var(--card-bg);border-radius:50px;box-shadow:0 4px 6px -1px rgba(0,0,0,.05);padding:.25rem;z-index:10}
+  .lang-toggle button{background:transparent;border:0;padding:.5rem 1rem;font-family:inherit;font-weight:600;font-size:.9rem;color:var(--text-secondary);border-radius:50px;cursor:pointer}
+  .lang-toggle button.active{background:var(--text-primary);color:#fff}
+  .brand{display:flex;align-items:center;gap:.6rem;font-weight:600;color:var(--text-secondary);font-size:.9rem;text-decoration:none;margin-bottom:2.5rem}
+  .brand img{height:22px}
+  h1{font-size:2rem;font-weight:800;letter-spacing:-.02em;margin-bottom:.5rem}
+  h2{font-size:1.2rem;font-weight:600;margin:2rem 0 .75rem}
+  p,li{color:var(--text-secondary);line-height:1.65}
+  .faq details{background:var(--card-bg);border-radius:16px;padding:1rem 1.25rem;margin-bottom:.6rem;border:1px solid rgba(0,0,0,.03)}
+  .faq summary{cursor:pointer;font-weight:600;color:var(--text-primary)}
+  .faq p{margin-top:.5rem}
+  form{background:var(--card-bg);border-radius:24px;padding:2rem;box-shadow:0 10px 30px -5px rgba(0,0,0,.04);border:1px solid rgba(0,0,0,.02);display:grid;gap:1rem}
+  label{display:grid;gap:.35rem;font-weight:600;font-size:.9rem}
+  input,select,textarea{font:inherit;padding:.7rem .9rem;border:1px solid rgba(0,0,0,.12);border-radius:12px;background:#fff;width:100%}
+  textarea{min-height:140px;resize:vertical}
+  input:focus,select:focus,textarea:focus{outline:2px solid var(--accent-1);border-color:transparent}
+  button.submit{background:var(--text-primary);color:#fff;border:0;padding:.9rem 1.4rem;border-radius:50px;font-weight:600;font-size:1rem;cursor:pointer;justify-self:start}
+  .hp{position:absolute;left:-9999px}
+  small{color:var(--text-secondary)}
+  footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid rgba(0,0,0,.06);color:var(--text-secondary);font-size:.85rem}
+</style>
+</head>
+<body>
+<div class="lang-toggle" aria-label="Language"><button data-lang="en">EN</button><button data-lang="nl">NL</button></div>
+<main class="wrap">
+  <a class="brand" href="/divedrop/"><img src="/strategea.svg" alt="Strategea"> DiveDrop</a>
+  <h1 data-i18n="title"></h1>
+  <p data-i18n="intro"></p>
+
+  <h2 data-i18n="faq"></h2>
+  <div class="faq">
+    <details><summary data-i18n="q1"></summary><p data-i18n="a1"></p></details>
+    <details><summary data-i18n="q2"></summary><p data-i18n="a2"></p></details>
+    <details><summary data-i18n="q3"></summary><p data-i18n="a3"></p></details>
+    <details><summary data-i18n="q4"></summary><p data-i18n="a4"></p></details>
+    <details><summary data-i18n="q5"></summary><p data-i18n="a5"></p></details>
+  </div>
+
+  <h2 data-i18n="formtitle"></h2>
+  <form name="divedrop-support" method="POST" action="/divedrop/support/thanks/" data-netlify="true" netlify-honeypot="website" enctype="multipart/form-data">
+    <input type="hidden" name="form-name" value="divedrop-support">
+    <input type="hidden" name="language" id="langField" value="en">
+    <p class="hp"><label>Website <input name="website" tabindex="-1" autocomplete="off"></label></p>
+    <label><span data-i18n="f_name"></span><input type="text" name="name" required autocomplete="name"></label>
+    <label><span data-i18n="f_email"></span><input type="email" name="email" required autocomplete="email"></label>
+    <label><span data-i18n="f_device"></span>
+      <select name="device">
+        <option value="oceanic-plus">Oceanic+ (Apple Watch)</option>
+        <option value="garmin">Garmin Descent</option>
+        <option value="suunto">Suunto</option>
+        <option value="shearwater">Shearwater</option>
+        <option value="uddf-other">UDDF (Subsurface, MacDive, Diving Log, …)</option>
+        <option value="other">Other / not sure</option>
+      </select>
+    </label>
+    <label><span data-i18n="f_topic"></span>
+      <select name="topic">
+        <option value="import" data-i18n="t_import"></option>
+        <option value="ssi" data-i18n="t_ssi"></option>
+        <option value="purchase" data-i18n="t_purchase"></option>
+        <option value="feature" data-i18n="t_feature"></option>
+        <option value="other" data-i18n="t_other"></option>
+      </select>
+    </label>
+    <label><span data-i18n="f_message"></span><textarea name="message" required></textarea></label>
+    <label><span data-i18n="f_file"></span><input type="file" name="export" accept=".zip,.uddf,.fit,.xml"><small data-i18n="f_filehint"></small></label>
+    <button class="submit" type="submit" data-i18n="send"></button>
+    <small data-i18n="privacy"></small>
+  </form>
+
+  <footer>DIEP CLOUD BV, Pannenhuisstraat 9, 8900 Ieper &bull; BTW / VAT: BE 1038.498.133 &bull; <a href="/divedrop/">DiveDrop</a> &bull; <a href="/divedrop/privacy/" data-i18n="privacylink"></a> &bull; <a href="mailto:info@strategea.be">info@strategea.be</a></footer>
+</main>
+<script>
+const T = {
+ en: {title:"DiveDrop support", intro:"Something not working, or a dive computer you'd like to see supported? Check the answers below, or write to us. We usually reply within two working days.",
+  faq:"Frequent questions",
+  q1:"DiveDrop doesn't appear in the share sheet", a1:"Long-press the download link in Mail and choose Share…, then DiveDrop. In Files, long-press the file and choose Share. If the app is missing there, tap More and switch DiveDrop on.",
+  q2:"\"Open with DiveDrop\" opens my browser instead", a2:"That button in Mail's link preview hands a web address to iOS, which sends it to the browser. Use Share… › DiveDrop instead; it downloads the export itself.",
+  q3:"A dive shows \"In SSI\" but I don't see it in MySSI", a3:"DiveDrop found a dive on the same day within 30 minutes with a similar depth or duration, most likely one you logged by hand. Tap the dive: if it really is a different dive, use Send anyway.",
+  q4:"Dives arrive as \"not confirmed\" in MySSI", a4:"SSI marks dives as confirmed only through a dive centre link. Dives imported by DiveDrop are like manually entered ones; your dive centre can still verify them.",
+  q5:"My purchase isn't recognised on my other iPhone", a5:"Open DiveDrop › Account › Restore purchase while signed in to the same Apple Account.",
+  formtitle:"Contact us", f_name:"Name", f_email:"Email", f_device:"Dive computer or app", f_topic:"Topic", f_message:"What happened, step by step?", f_file:"Export file (optional)", f_filehint:"The .zip, .uddf or .fit that caused the problem. Max 8 MB.",
+  t_import:"Import or file problem", t_ssi:"Sending to SSI", t_purchase:"Purchase or restore", t_feature:"Feature request", t_other:"Other",
+  send:"Send", privacy:"We use what you send only to answer you. Attached exports are deleted after the case is closed.", privacylink:"Privacy policy"},
+ nl: {title:"DiveDrop-support", intro:"Werkt iets niet, of wil je een duikcomputer ondersteund zien? Kijk hieronder, of schrijf ons. We antwoorden meestal binnen twee werkdagen.",
+  faq:"Veelgestelde vragen",
+  q1:"DiveDrop staat niet in het deelmenu", a1:"Druk lang op de downloadlink in Mail en kies Deel…, dan DiveDrop. In Bestanden: lang drukken op het bestand en Deel kiezen. Staat de app er niet, tik dan op Meer en zet DiveDrop aan.",
+  q2:"\"Open met DiveDrop\" opent mijn browser", a2:"Die knop in de mailvoorvertoning geeft een webadres aan iOS, en dat gaat naar de browser. Gebruik Deel… › DiveDrop; de app downloadt de export zelf.",
+  q3:"Een duik staat op \"In SSI\" maar ik zie hem niet in MySSI", a3:"DiveDrop vond op dezelfde dag een duik binnen 30 minuten met een gelijkaardige diepte of duur, waarschijnlijk een die je manueel logde. Tik op de duik: is het echt een andere duik, kies dan Toch versturen.",
+  q4:"Duiken komen als \"niet bevestigd\" in MySSI", a4:"SSI markeert duiken enkel als bevestigd via een duikcentrum. Duiken uit DiveDrop zijn zoals manueel ingevoerde duiken; je duikcentrum kan ze nog steeds bevestigen.",
+  q5:"Mijn aankoop wordt niet herkend op mijn andere iPhone", a5:"Open DiveDrop › Account › Aankoop herstellen, aangemeld met dezelfde Apple Account.",
+  formtitle:"Contacteer ons", f_name:"Naam", f_email:"E-mail", f_device:"Duikcomputer of app", f_topic:"Onderwerp", f_message:"Wat gebeurde er, stap voor stap?", f_file:"Exportbestand (optioneel)", f_filehint:"De .zip, .uddf of .fit die het probleem gaf. Max. 8 MB.",
+  t_import:"Import- of bestandsprobleem", t_ssi:"Versturen naar SSI", t_purchase:"Aankoop of herstellen", t_feature:"Functiewens", t_other:"Iets anders",
+  send:"Verstuur", privacy:"We gebruiken wat je stuurt alleen om je te antwoorden. Bijgevoegde exports worden na afhandeling verwijderd.", privacylink:"Privacybeleid"}
+};
+function apply(lang){
+  const t = T[lang] || T.en; document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t[el.dataset.i18n] ?? ''; });
+  document.getElementById('langField').value = lang;
+  document.querySelectorAll('.lang-toggle button').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+  try { localStorage.setItem('divedrop.lang', lang); } catch (e) {}
+}
+document.querySelectorAll('.lang-toggle button').forEach(b => b.addEventListener('click', () => apply(b.dataset.lang)));
+let start = 'en'; try { start = localStorage.getItem('divedrop.lang') || ((navigator.language || '').toLowerCase().startsWith('nl') ? 'nl' : 'en'); } catch (e) {}
+apply(start);
+</script>
+</body>
+</html>

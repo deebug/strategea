@@ -35,7 +35,7 @@
 </style>
 </head>
 <body>
-<div class="lang-toggle" aria-label="Language"><button data-lang="en">EN</button><button data-lang="nl">NL</button></div>
+<div class="lang-toggle" aria-label="Language"><button data-lang="en">EN</button><button data-lang="fr">FR</button><button data-lang="nl">NL</button></div>
 <main class="wrap">
   <a class="brand" href="/divedrop/"><img src="/strategea.svg" alt="Strategea"> DiveDrop</a>
   <h1 data-i18n="title"></h1>
@@ -64,7 +64,7 @@
         <option value="suunto">Suunto</option>
         <option value="shearwater">Shearwater</option>
         <option value="uddf-other">UDDF (Subsurface, MacDive, Diving Log, …)</option>
-        <option value="other">Other / not sure</option>
+        <option value="other">Other / Autre / Andere</option>
       </select>
     </label>
     <label><span data-i18n="f_topic"></span>
@@ -96,6 +96,16 @@ const T = {
   formtitle:"Contact us", f_name:"Name", f_email:"Email", f_device:"Dive computer or app", f_topic:"Topic", f_message:"What happened, step by step?", f_file:"Export file (optional)", f_filehint:"The .zip, .uddf or .fit that caused the problem. Max 8 MB.",
   t_import:"Import or file problem", t_ssi:"Sending to SSI", t_purchase:"Purchase or restore", t_feature:"Feature request", t_other:"Other",
   send:"Send", privacy:"We use what you send only to answer you. Attached exports are deleted after the case is closed.", privacylink:"Privacy policy"},
+ fr: {title:"Support DiveDrop", intro:"Quelque chose ne fonctionne pas, ou vous voulez voir un ordinateur de plongée pris en charge ? Consultez les réponses ci-dessous, ou écrivez-nous. Nous répondons généralement sous deux jours ouvrés.",
+  faq:"Questions fréquentes",
+  q1:"DiveDrop n'apparaît pas dans la feuille de partage", a1:"Faites un appui long sur le lien de téléchargement dans Mail et choisissez Partager…, puis DiveDrop. Dans Fichiers, appui long sur le fichier puis Partager. Si l'app n'y est pas, touchez Plus et activez DiveDrop.",
+  q2:"« Ouvrir avec DiveDrop » ouvre mon navigateur", a2:"Ce bouton de l'aperçu de Mail transmet une adresse web à iOS, qui l'envoie au navigateur. Utilisez Partager… › DiveDrop ; l'app télécharge l'export elle-même.",
+  q3:"Une plongée affiche « Dans SSI » mais je ne la vois pas dans MySSI", a3:"DiveDrop a trouvé le même jour une plongée à moins de 30 minutes avec une profondeur ou une durée similaire, probablement une saisie à la main. Touchez la plongée : si c'est vraiment une autre plongée, choisissez Envoyer quand même.",
+  q4:"Les plongées arrivent « non confirmées » dans MySSI", a4:"SSI ne marque une plongée comme confirmée que via un centre de plongée. Les plongées importées par DiveDrop sont comme les plongées saisies à la main ; votre centre peut toujours les valider.",
+  q5:"Mon achat n'est pas reconnu sur mon autre iPhone", a5:"Ouvrez DiveDrop › Compte › Restaurer l'achat, connecté au même compte Apple.",
+  formtitle:"Contactez-nous", f_name:"Nom", f_email:"E-mail", f_device:"Ordinateur ou app de plongée", f_topic:"Sujet", f_message:"Que s'est-il passé, étape par étape ?", f_file:"Fichier d'export (facultatif)", f_filehint:"Le .zip, .uddf ou .fit qui a posé problème. Max. 8 Mo.",
+  t_import:"Problème d'import ou de fichier", t_ssi:"Envoi vers SSI", t_purchase:"Achat ou restauration", t_feature:"Demande de fonctionnalité", t_other:"Autre",
+  send:"Envoyer", privacy:"Nous utilisons ce que vous envoyez uniquement pour vous répondre. Les exports joints sont supprimés une fois le dossier clos.", privacylink:"Politique de confidentialité"},
  nl: {title:"DiveDrop-support", intro:"Werkt iets niet, of wil je een duikcomputer ondersteund zien? Kijk hieronder, of schrijf ons. We antwoorden meestal binnen twee werkdagen.",
   faq:"Veelgestelde vragen",
   q1:"DiveDrop staat niet in het deelmenu", a1:"Druk lang op de downloadlink in Mail en kies Deel…, dan DiveDrop. In Bestanden: lang drukken op het bestand en Deel kiezen. Staat de app er niet, tik dan op Meer en zet DiveDrop aan.",
@@ -115,7 +125,7 @@ function apply(lang){
   try { localStorage.setItem('divedrop.lang', lang); } catch (e) {}
 }
 document.querySelectorAll('.lang-toggle button').forEach(b => b.addEventListener('click', () => apply(b.dataset.lang)));
-let start = 'en'; try { start = localStorage.getItem('divedrop.lang') || ((navigator.language || '').toLowerCase().startsWith('nl') ? 'nl' : 'en'); } catch (e) {}
+let start = 'en'; try { start = localStorage.getItem('divedrop.lang') || (l => l.startsWith('nl') ? 'nl' : l.startsWith('fr') ? 'fr' : 'en')((navigator.language || '').toLowerCase()); } catch (e) {}
 apply(start);
 </script>
 </body>

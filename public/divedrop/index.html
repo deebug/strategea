@@ -54,7 +54,7 @@
 </head>
 <body>
 <div class="lang-toggle" aria-label="Language">
-  <button data-lang="en">EN</button><button data-lang="nl">NL</button>
+  <button data-lang="en">EN</button><button data-lang="fr">FR</button><button data-lang="nl">NL</button>
 </div>
 <main class="wrap">
   <a class="brand" href="/"><img src="/strategea.svg" alt="Strategea"> <span data-i18n="by"></span></a>
@@ -136,6 +136,24 @@ const T = {
   q3:"Is this an official SSI product?", a3:"No. DiveDrop is an independent tool that talks to the same interface the MySSI app uses, on your behalf and with your own account. It works as long as SSI allows it.",
   q4:"The preview shows 'Open with' another app instead of DiveDrop", a4:"iOS picks one app for zip files. Tap More… in the preview and choose DiveDrop; iOS remembers it next time.",
   support:"Support", privacy:"Privacy policy", notaff:"Not affiliated with SSI, Oceanic or Huish Outdoors"},
+ fr: {by:"une app de Strategea", tag:"Partagez votre export de plongées avec DiveDrop. Votre carnet SSI est à jour. Profil de profondeur inclus.",
+  cta:"Rejoindre la bêta TestFlight", how_link:"Comment ça marche", how:"Comment ça marche",
+  s1t:"Exportez", s1d:"Dans Oceanic+ sur votre iPhone : Logbook › Export Dives. Vous recevez un e-mail avec un lien de téléchargement.",
+  s2t:"Appui long sur le lien", s2d:"Choisissez Partager… › DiveDrop. Directement dans la feuille de partage, DiveDrop télécharge l'export, lit les plongées et les compare avec votre carnet SSI.",
+  s3t:"Envoyez", s3d:"Touchez Envoyer : les plongées manquantes partent vers SSI avec leur profil de profondeur. Terminé, sans ouvrir l'app. Les fichiers .fit Garmin/Suunto et .uddf Shearwater/Subsurface fonctionnent de la même façon, aussi depuis Fichiers.",
+  s4t:"Comparez", s4d:"Les plongées déjà dans MySSI sont reconnues, même celles saisies à la main avec quelques minutes d'écart. Les trempettes en piscine sont ignorées.",
+  s5t:"Affinez dans l'app", s5d:"Ouvrez DiveDrop pour la courbe de profondeur, la carte, les sites de plongée, et pour ignorer ou renvoyer une plongée.",
+  what:"Ce qui entre dans votre carnet", f1t:"Le profil de profondeur complet", f1d:"Chaque échantillon de votre ordinateur : profondeur, température de l'eau, vitesse de remontée et alarmes, pour que la plongée ressemble dans MySSI à une plongée synchronisée depuis un ordinateur.",
+  f2t:"Le bon site de plongée", f2d:"DiveDrop compare votre point de mise à l'eau avec la base SSI de 24 000 sites vérifiés et choisit le plus proche. Modifiable en deux touches.",
+  f3t:"Pas de doublons", f3d:"Votre carnet MySSI existant fait foi. Ce qui y est reste ; les plongées saisies à la main sont reconnues par jour, heure, profondeur et durée.",
+  f4t:"Pas de serveur, pas de suivi", f4d:"Votre identifiant SSI va directement de votre téléphone à SSI et ne vit que dans votre trousseau. DiveDrop n'a ni backend, ni analytics, ni publicité.",
+  pricing:"Prix", p_free_s:"pour commencer", p_free:"Téléchargement gratuit. Vos 3 premières plongées vers SSI sont offertes, pour vérifier que ça marche avec votre propre carnet.",
+  p_once_s:"une fois, sans abonnement", p_once:"Débloquez les plongées illimitées avec un seul achat intégré. Restaurable sur tous vos appareils.",
+  faq:"Questions", q1:"Quels ordinateurs et apps de plongée fonctionnent ?", a1:"Oceanic+ sur Apple Watch (via Export Dives), Garmin Descent et Suunto (fichiers FIT depuis Garmin Connect ou l'app Suunto), Shearwater Cloud, Subsurface, MacDive et Diving Log (UDDF). Testé avec des fichiers Oceanic+, Shearwater Teric et Garmin Descent Mk2.",
+  q2:"SSI marque-t-il les plongées comme vérifiées par ordinateur ?", a2:"Les plongées créées via l'app arrivent pour l'instant comme non confirmées, comme une plongée saisie à la main. Votre centre de plongée peut toujours les valider. Nous avons demandé à SSI une méthode officielle pour les marquer.",
+  q3:"Est-ce un produit officiel SSI ?", a3:"Non. DiveDrop est un outil indépendant qui dialogue avec la même interface que l'app MySSI, en votre nom et avec votre propre compte. Il fonctionne tant que SSI l'autorise.",
+  q4:"L'aperçu propose « Ouvrir avec » une autre app que DiveDrop", a4:"iOS choisit une seule app pour les fichiers zip. Touchez Plus… dans l'aperçu et choisissez DiveDrop ; iOS s'en souviendra.",
+  support:"Support", privacy:"Politique de confidentialité", notaff:"Sans lien avec SSI, Oceanic ou Huish Outdoors"},
  nl: {by:"een app van Strategea", tag:"Deel je duik-export met DiveDrop. Je SSI-logboek is bijgewerkt. Met diepteprofiel.",
   cta:"Doe mee aan de TestFlight-bèta", how_link:"Zo werkt het", how:"Zo werkt het",
   s1t:"Exporteer", s1d:"In Oceanic+ op je iPhone: Logbook › Export Dives. Je krijgt een mail met een downloadlink.",
@@ -159,13 +177,13 @@ function apply(lang){
   const t = T[lang] || T.en;
   document.documentElement.lang = lang;
   document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t[el.dataset.i18n] ?? ''; });
-  document.querySelectorAll('[data-shot]').forEach(img => { img.src = 'img/' + lang + '-' + img.dataset.shot + '.png'; });
+  document.querySelectorAll('[data-shot]').forEach(img => { img.src = 'img/' + (lang === 'nl' ? 'nl' : 'en') + '-' + img.dataset.shot + '.png'; });
   document.querySelectorAll('.lang-toggle button').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
   try { localStorage.setItem('divedrop.lang', lang); } catch (e) {}
 }
 document.querySelectorAll('.lang-toggle button').forEach(b => b.addEventListener('click', () => apply(b.dataset.lang)));
 let start = 'en';
-try { start = localStorage.getItem('divedrop.lang') || ((navigator.language || '').toLowerCase().startsWith('nl') ? 'nl' : 'en'); } catch (e) {}
+try { start = localStorage.getItem('divedrop.lang') || (l => l.startsWith('nl') ? 'nl' : l.startsWith('fr') ? 'fr' : 'en')((navigator.language || '').toLowerCase()); } catch (e) {}
 apply(start);
 </script>
 </body>

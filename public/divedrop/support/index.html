@@ -16,7 +16,8 @@
   .lang-toggle button{background:transparent;border:0;padding:.5rem 1rem;font-family:inherit;font-weight:600;font-size:.9rem;color:var(--text-secondary);border-radius:50px;cursor:pointer}
   .lang-toggle button.active{background:var(--text-primary);color:#fff}
   .brand{display:flex;align-items:center;gap:.6rem;font-weight:600;color:var(--text-secondary);font-size:.9rem;text-decoration:none;margin-bottom:2.5rem}
-  .brand img{height:22px}
+  .brand .appicon{width:36px;height:36px;border-radius:9px;box-shadow:0 2px 6px rgba(0,0,0,.12)}
+  .brand span{color:var(--text-primary);font-size:1.05rem}.brand small{color:var(--text-secondary);font-weight:500;font-size:.85rem;margin-left:.35rem}
   h1{font-size:2rem;font-weight:800;letter-spacing:-.02em;margin-bottom:.5rem}
   h2{font-size:1.2rem;font-weight:600;margin:2rem 0 .75rem}
   p,li{color:var(--text-secondary);line-height:1.65}
@@ -37,7 +38,7 @@
 <body>
 <div class="lang-toggle" aria-label="Language"><button data-lang="en">EN</button><button data-lang="fr">FR</button><button data-lang="nl">NL</button></div>
 <main class="wrap">
-  <a class="brand" href="/divedrop/"><img src="/strategea.svg" alt="Strategea"> DiveDrop</a>
+  <a class="brand" href="/divedrop/"><img class="appicon" src="../img/icon.png" alt="DiveDrop"> <span>DiveDrop <small>by Strategea</small></span></a>
   <h1 data-i18n="title"></h1>
   <p data-i18n="intro"></p>
 

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DiveDrop compatibility – which dive computers work with SSI | Strategea</title>
+<meta name="description" content="Which dive computers and dive log apps DiveDrop reads into your MySSI logbook, and exactly which data survives the trip: Oceanic+, Garmin Descent, Suunto, Shearwater, Subsurface, MacDive, Diving Log.">
+<meta property="og:title" content="DiveDrop compatibility list">
+<meta property="og:description" content="Which dive computers get their dives into your SSI logbook, and what arrives.">
+<meta property="og:image" content="https://strategea.be/divedrop/img/icon.png">
+<link rel="icon" href="../img/icon.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Outfit:wght@300;400;600;800&display=swap">
+<style>
+  :root{
+    --bg-color:#f9f9fb;--text-primary:#111827;--text-secondary:#4b5563;--muted:#9099a8;
+    --accent-1:#54b3d6;--accent-2:#2a5a8a;--card-bg:#fff;
+    --ok:#0f7b4f;--ok-bg:#e6f5ee;--maybe:#8a5a12;--maybe-bg:#fdf2e0;--via:#2a5a8a;--via-bg:#e9f0f7;
+    --line:rgba(17,24,39,.08);--shadow:0 10px 30px -8px rgba(17,24,39,.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Outfit','Montserrat',sans-serif;background:var(--bg-color);color:var(--text-primary);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:var(--accent-2)}
+  .wrap{max-width:1080px;margin:0 auto;padding:4rem 1.25rem 3rem}
+  .lang-toggle{position:absolute;top:2rem;right:2rem;display:flex;background:var(--card-bg);border-radius:50px;box-shadow:0 4px 6px -1px rgba(0,0,0,.05);padding:.25rem;z-index:10}
+  .lang-toggle button{background:transparent;border:0;padding:.5rem 1rem;font-family:inherit;font-weight:600;font-size:.9rem;color:var(--text-secondary);border-radius:50px;cursor:pointer;transition:all .3s}
+  .lang-toggle button.active{background:var(--text-primary);color:#fff}
+  .brand{display:flex;align-items:center;gap:.6rem;font-weight:600;color:var(--text-secondary);font-size:.9rem;text-decoration:none;margin-bottom:2.5rem}
+  .brand img{height:30px}
+
+  h1{font-size:2.7rem;font-weight:800;letter-spacing:-.025em;line-height:1.06;margin-bottom:.8rem;text-wrap:balance}
+  .tag{font-size:1.15rem;color:var(--text-secondary);font-weight:300;max-width:58ch;line-height:1.55}
+  .rule{background:linear-gradient(135deg,var(--accent-2),#16324f);color:#fff;border-radius:26px;padding:1.9rem 2rem;margin-top:2rem;box-shadow:0 18px 40px -18px rgba(42,90,138,.7)}
+  .rule h2{font-size:1.15rem;font-weight:700;margin:0 0 .5rem;color:#fff}
+  .rule p{line-height:1.6;color:rgba(255,255,255,.86);max-width:66ch}
+  .rule .fmts{display:flex;gap:.5rem;margin-top:1rem;flex-wrap:wrap}
+  .fmt{display:inline-block;padding:.3rem .85rem;border-radius:50px;font-size:.82rem;font-weight:700;letter-spacing:.04em;background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.25)}
+
+  h2.sec{font-size:1.45rem;font-weight:700;margin:3.25rem 0 .4rem;letter-spacing:-.01em}
+  .lead{color:var(--text-secondary);line-height:1.6;max-width:68ch;margin-bottom:1.4rem}
+
+  .legend{display:flex;flex-wrap:wrap;gap:.55rem;margin:1.2rem 0 1.6rem}
+  .legend .pill{cursor:default}
+  .pill{display:inline-flex;align-items:center;gap:.4rem;padding:.3rem .8rem;border-radius:50px;font-size:.79rem;font-weight:600;white-space:nowrap;line-height:1.35}
+  .pill.ok{background:var(--ok-bg);color:var(--ok)}
+  .pill.maybe{background:var(--maybe-bg);color:var(--maybe)}
+  .pill.via{background:var(--via-bg);color:var(--via)}
+
+  .group{margin-top:2rem}
+  .group-head{display:flex;align-items:baseline;gap:.75rem;flex-wrap:wrap;margin-bottom:.35rem}
+  .group-head h3{font-size:1.1rem;font-weight:700}
+  .group-head .ext{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.8rem;font-weight:600;color:var(--accent-2);background:var(--via-bg);padding:.18rem .6rem;border-radius:6px}
+  .group-note{color:var(--text-secondary);font-size:.92rem;line-height:1.55;margin-bottom:1rem;max-width:66ch}
+
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:1.1rem}
+  .dev{background:var(--card-bg);border-radius:22px;padding:1.4rem 1.5rem;box-shadow:var(--shadow);border:1px solid var(--line);display:flex;flex-direction:column;gap:.85rem}
+  .dev header{display:flex;justify-content:space-between;align-items:flex-start;gap:.75rem}
+  .dev h4{font-size:1.05rem;font-weight:700;line-height:1.25}
+  .dev .models{color:var(--muted);font-size:.85rem;font-weight:400;display:block;margin-top:.15rem;line-height:1.4}
+  .route{color:var(--text-secondary);font-size:.92rem;line-height:1.55}
+  .route b{color:var(--text-primary);font-weight:600}
+
+  .fields{display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem;border-top:1px solid var(--line);padding-top:.85rem}
+  .f{display:flex;align-items:center;gap:.4rem;font-size:.82rem;color:var(--text-secondary);line-height:1.3}
+  .f i{width:17px;height:17px;border-radius:50%;flex:none;display:grid;place-items:center;font-size:.68rem;font-weight:800;font-style:normal}
+  .f.y i{background:var(--ok-bg);color:var(--ok)}
+  .f.y{color:var(--text-primary);font-weight:500}
+  .f.n i{background:#eef0f3;color:var(--muted)}
+  .f.n{color:var(--muted)}
+  .f.u i{background:var(--maybe-bg);color:var(--maybe)}
+
+  .note{font-size:.88rem;color:var(--text-secondary);line-height:1.55;border-left:3px solid var(--line);padding-left:.8rem}
+
+  .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.1rem;margin-top:1.25rem}
+  .card{background:var(--card-bg);border-radius:22px;padding:1.6rem;box-shadow:var(--shadow);border:1px solid var(--line)}
+  .card h3{font-size:1.02rem;font-weight:700;margin-bottom:.5rem}
+  .card p{color:var(--text-secondary);line-height:1.6}
+  .card p + p{margin-top:.6rem}
+  .ask{background:linear-gradient(135deg,#0f7b4f,#0b5c3b);color:#fff}
+  .ask h3,.ask p{color:#fff}
+  .ask p{color:rgba(255,255,255,.88)}
+  .cta{display:inline-flex;align-items:center;gap:.6rem;background:#fff;color:#0b5c3b;text-decoration:none;padding:.75rem 1.25rem;border-radius:50px;font-weight:700;margin-top:1rem;transition:transform .3s,box-shadow .3s}
+  .cta:hover{transform:translateY(-2px);box-shadow:0 10px 25px -5px rgba(0,0,0,.25)}
+  .updated{margin-top:2rem;font-size:.85rem;color:var(--muted)}
+  footer{margin-top:3rem;padding-top:2rem;border-top:1px solid var(--line);color:var(--text-secondary);font-size:.85rem;display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between}
+  @media (max-width:760px){h1{font-size:2.1rem}.lang-toggle{top:1rem;right:1rem}.wrap{padding-top:5rem}.fields{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="lang-toggle" aria-label="Language">
+  <button data-lang="en">EN</button><button data-lang="fr">FR</button><button data-lang="nl">NL</button>
+</div>
+<main class="wrap">
+  <a class="brand" href="../"><img src="/strategea.svg" alt="Strategea"> <span data-i18n="back"></span></a>
+
+  <h1 data-i18n="h1"></h1>
+  <p class="tag" data-i18n="tag"></p>
+
+  <div class="rule">
+    <h2 data-i18n="rule_h"></h2>
+    <p data-i18n="rule_p"></p>
+    <div class="fmts"><span class="fmt">.uddf</span><span class="fmt">.fit</span><span class="fmt" data-i18n="fmt_zip"></span></div>
+  </div>
+
+  <h2 class="sec" data-i18n="matrix_h"></h2>
+  <p class="lead" data-i18n="matrix_lead"></p>
+  <div class="legend">
+    <span class="pill ok" data-i18n="lg_ok"></span>
+    <span class="pill maybe" data-i18n="lg_maybe"></span>
+    <span class="pill via" data-i18n="lg_via"></span>
+  </div>
+
+  <div id="groups"></div>
+
+  <h2 class="sec" data-i18n="help_h"></h2>
+  <p class="lead" data-i18n="help_lead"></p>
+  <div class="card ask">
+    <h3 data-i18n="help_t"></h3>
+    <p data-i18n="help_a"></p>
+    <p data-i18n="help_b"></p>
+    <a class="cta" href="mailto:info@strategea.be?subject=Dive%20log%20sample" data-i18n="help_cta"></a>
+  </div>
+
+  <h2 class="sec" data-i18n="know_h"></h2>
+  <div class="grid2">
+    <div class="card"><h3 data-i18n="k1t"></h3><p data-i18n="k1d"></p></div>
+    <div class="card"><h3 data-i18n="k2t"></h3><p data-i18n="k2d"></p></div>
+    <div class="card"><h3 data-i18n="k3t"></h3><p data-i18n="k3d"></p></div>
+    <div class="card"><h3 data-i18n="k4t"></h3><p data-i18n="k4d"></p></div>
+  </div>
+
+  <p class="updated"><span data-i18n="updated"></span> 12/09/2026</p>
+
+  <footer>
+    <span>DiveDrop &bull; DIEP CLOUD BV, Pannenhuisstraat 9, 8900 Ieper &bull; BTW / VAT: BE 1038.498.133</span>
+    <span><a href="../" data-i18n="f_home"></a> &bull; <a href="../support/" data-i18n="f_support"></a> &bull; <a href="../privacy/" data-i18n="f_privacy"></a> &bull; <span data-i18n="notaff"></span></span>
+  </footer>
+</main>
+<script>
+// Field states: y = we have seen this arrive in a MySSI logbook from this source,
+// n = this source does not carry it, u = we do not know yet because no real file
+// from this device has been through. Every u on this page is a gap a diver can close.
+const FIELDS = ['profile','temp','pressure','gps','weight','rating'];
+
+const GROUPS = [
+ {id:'uddf', ext:'.uddf / .zip', rows:[
+  {dev:"Oceanic+ on Apple Watch", models:"Ultra, Ultra 2, Series 9 and later", s:"ok",
+   f:{profile:'y',temp:'y',pressure:'y',gps:'y',weight:'y',rating:'y'},
+   route:{en:"Oceanic+ › Logbook › Export Dives, then share the emailed link with DiveDrop.",
+          fr:"Oceanic+ › Logbook › Export Dives, puis partagez le lien reçu par e-mail avec DiveDrop.",
+          nl:"Oceanic+ › Logbook › Export Dives, deel daarna de link uit de mail met DiveDrop."},
+   note:{en:"Checked against a real 34-dive export, dive by dive, on the SSI side afterwards, and since then against 34 more dives from three other divers' watches in three time zones. Tank pressure, weight and rating arrive when you filled them in in Oceanic+. This export stores temperatures in Kelvin and stamps its times two minutes out; DiveDrop corrects both.",
+         fr:"Vérifié plongée par plongée sur un vrai export de 34 plongées, côté SSI, puis sur 34 plongées de plus venant des montres de trois autres plongeurs, dans trois fuseaux horaires. Pression, lestage et note arrivent si vous les avez saisis dans Oceanic+. Cet export stocke les températures en Kelvin et décale les heures de deux minutes ; DiveDrop corrige les deux.",
+         nl:"Duik per duik nagekeken aan de SSI-kant, op een echte export van 34 duiken, en daarna op nog eens 34 duiken van de horloges van drie andere duikers, in drie tijdzones. Tankdruk, lood en beoordeling komen mee als je ze in Oceanic+ invulde. Deze export bewaart temperaturen in Kelvin en zet de tijden twee minuten verkeerd; DiveDrop corrigeert allebei."}},
+
+  {dev:"Shearwater Cloud", models:"Perdix, Perdix 2, Petrel 3, Teric, Peregrine, Tern", s:"ok",
+   f:{profile:'y',temp:'y',pressure:'y',gps:'n',weight:'u',rating:'u'},
+   route:{en:"Shearwater Cloud on desktop › select your dives › Export › UDDF.",
+          fr:"Shearwater Cloud sur ordinateur › sélectionnez vos plongées › Export › UDDF.",
+          nl:"Shearwater Cloud op desktop › selecteer je duiken › Export › UDDF."},
+   note:{en:"Confirmed on nine real Shearwater Cloud exports: Perdix, Perdix 2, Petrel 3 and Peregrine TX, open circuit and rebreather, trimix included. The richest air data of the lot: with a transmitter, tank pressure arrives sample by sample, not just start and end. No GPS in these computers, so DiveDrop asks you to pick the dive site.",
+         fr:"Confirmé sur neuf vrais exports Shearwater Cloud : Perdix, Perdix 2, Petrel 3 et Peregrine TX, circuit ouvert et recycleur, trimix compris. Les meilleures données d'air du lot : avec un émetteur, la pression arrive échantillon par échantillon, pas seulement début et fin. Pas de GPS dans ces ordinateurs, DiveDrop vous demande donc le site.",
+         nl:"Bevestigd op negen echte Shearwater Cloud-exports: Perdix, Perdix 2, Petrel 3 en Peregrine TX, open circuit en rebreather, trimix inbegrepen. De rijkste luchtdata van allemaal: met een zender komt de tankdruk sample per sample mee, niet alleen begin en eind. Geen GPS in deze computers, dus DiveDrop vraagt je de stek te kiezen."}},
+
+  {dev:"Subsurface", models:"any computer Subsurface can download from", s:"ok",
+   f:{profile:'y',temp:'y',pressure:'y',gps:'y',weight:'u',rating:'u'},
+   route:{en:"File › Export › UDDF, your whole logbook or a selection of it.",
+          fr:"Fichier › Exporter › UDDF, tout le carnet ou une sélection.",
+          nl:"Bestand › Exporteren › UDDF, je hele logboek of een selectie."},
+   note:{en:"The widest door into DiveDrop. Whatever Subsurface managed to pull off your computer comes along, plus anything you typed in yourself. If your brand is not on this page, this is almost certainly your route.",
+         fr:"La porte la plus large vers DiveDrop. Tout ce que Subsurface a pu tirer de votre ordinateur suit, plus ce que vous avez saisi. Si votre marque n'est pas sur cette page, c'est presque sûrement votre voie.",
+         nl:"De breedste deur naar DiveDrop. Alles wat Subsurface uit je computer kreeg gaat mee, plus wat je zelf invulde. Staat jouw merk niet op deze pagina, dan is dit vrijwel zeker jouw weg."}},
+
+  {dev:"MacDive", models:"macOS", s:"ok",
+   f:{profile:'y',temp:'y',pressure:'y',gps:'y',weight:'u',rating:'u'},
+   route:{en:"Export your logbook as UDDF and share the file with DiveDrop.",
+          fr:"Exportez votre carnet en UDDF et partagez le fichier avec DiveDrop.",
+          nl:"Exporteer je logboek als UDDF en deel het bestand met DiveDrop."},
+   note:{en:"One real MacDive export has been through so far, and it arrived complete: profile, temperature, tank pressure and position. One file is thin evidence, so a second one from a different setup would be welcome.",
+         fr:"Un seul vrai export MacDive est passé jusqu'ici, et il est arrivé complet : profil, température, pression et position. Un seul fichier reste une preuve mince, un deuxième venant d'une autre configuration serait bienvenu.",
+         nl:"Eén echte MacDive-export is er tot nu toe door gegaan, en die kwam compleet aan: profiel, temperatuur, tankdruk en positie. Eén bestand is dun bewijs, dus een tweede uit een andere opstelling is welkom."}},
+
+  {dev:"Diving Log 6", models:"Windows", s:"ok",
+   f:{profile:'y',temp:'y',pressure:'y',gps:'y',weight:'u',rating:'u'},
+   route:{en:"File › Export › UDDF. The same export its SSI QR-code helpers use, minus the QR codes and the one-dive-at-a-time part.",
+          fr:"Fichier › Exporter › UDDF. Le même export que ses outils QR pour SSI, sans les codes QR ni le plongée-par-plongée.",
+          nl:"Bestand › Exporteren › UDDF. Dezelfde export die de QR-hulpjes voor SSI gebruiken, zonder QR-codes en zonder duik-per-duik."},
+   note:{en:"Confirmed on a real Diving Log 6 export with three tanks and a Descent Mk3i behind it. Two quirks of that export are handled: it declares an average depth of zero, so DiveDrop computes its own, and it numbers its tanks, so the first one is what goes into your logbook. If you have been feeding dives to SSI through a QR-code page, this is the same file, handed over in one go.",
+         fr:"Confirmé sur un vrai export Diving Log 6 à trois blocs, avec un Descent Mk3i derrière. Deux particularités de cet export sont gérées : il déclare une profondeur moyenne de zéro, DiveDrop calcule donc la sienne, et il numérote ses blocs, le premier est celui qui entre dans votre carnet. Si vous passiez vos plongées à SSI via une page à codes QR, c'est le même fichier, transmis en une fois.",
+         nl:"Bevestigd op een echte Diving Log 6-export met drie flessen en een Descent Mk3i erachter. Twee eigenaardigheden van die export worden opgevangen: hij geeft een gemiddelde diepte van nul op, dus rekent DiveDrop zelf, en hij nummert zijn flessen, dus de eerste is wat in je logboek komt. Voerde je je duiken tot nu toe via een QR-pagina aan SSI, dan is dit hetzelfde bestand, in één keer."}},
+ ]},
+
+ {id:'fit', ext:'.fit', rows:[
+  {dev:"Garmin Descent", models:"Mk1, Mk2, Mk2i, Mk2S, Mk3i", s:"ok",
+   f:{profile:'y',temp:'y',pressure:'y',gps:'y',weight:'n',rating:'n'},
+   route:{en:"Garmin Connect › open the dive › Export to FIT, then share the file with DiveDrop.",
+          fr:"Garmin Connect › ouvrez la plongée › Export to FIT, puis partagez le fichier avec DiveDrop.",
+          nl:"Garmin Connect › open de duik › Export to FIT, deel het bestand daarna met DiveDrop."},
+   note:{en:"Checked against 30 real dives off these watches: open circuit, multi-gas, closed circuit and freediving. With a Garmin tank transmitter the starting pressure comes across as well. Position comes from the surface fix, so the dive site is usually found on its own.",
+         fr:"Vérifié sur 30 vraies plongées issues de ces montres : circuit ouvert, multigaz, recycleur et apnée. Avec un émetteur Garmin, la pression de départ suit aussi. La position vient du point en surface, le site est donc généralement trouvé tout seul.",
+         nl:"Nagekeken op 30 echte duiken van deze horloges: open circuit, multigas, rebreather en apneu. Met een Garmin-zender komt ook de begindruk mee. De positie komt van de oppervlaktefix, dus de stek wordt meestal vanzelf gevonden."}},
+
+  {dev:"Garmin Descent", models:"G1, G2, X50i", s:"ok",
+   f:{profile:'y',temp:'y',pressure:'y',gps:'y',weight:'n',rating:'n'},
+   route:{en:"Same route through Garmin Connect.",
+          fr:"Même chemin via Garmin Connect.",
+          nl:"Zelfde weg via Garmin Connect."},
+   note:{en:"Confirmed on real G1 and X50i files, one of them with tank pressure. No G2 file has crossed our desk yet, but it writes the same format. Since Garmin switched off its own SSI connection, exporting the FIT is the only route left out of the Garmin app, and that is the gap this fills.",
+         fr:"Confirmé sur de vrais fichiers G1 et X50i, dont un avec la pression du bloc. Aucun fichier G2 ne nous est encore passé entre les mains, mais il écrit le même format. Depuis que Garmin a coupé sa connexion SSI, exporter le FIT est la seule sortie de l'app Garmin, et c'est la brèche que ceci comble.",
+         nl:"Bevestigd op echte G1- en X50i-bestanden, één ervan met tankdruk. Een G2-bestand hebben we nog niet gezien, maar dat schrijft hetzelfde formaat. Sinds Garmin zijn eigen SSI-koppeling uitzette is het FIT-bestand exporteren de enige uitweg uit de Garmin-app, en precies dat gat vult dit."}},
+
+  {dev:"Suunto", models:"Ocean, Vertical 2", s:"ok",
+   f:{profile:'y',temp:'y',pressure:'u',gps:'n',weight:'n',rating:'n'},
+   route:{en:"Suunto app › the dive › export, which gives a .fit file.",
+          fr:"App Suunto › la plongée › exporter, ce qui donne un fichier .fit.",
+          nl:"Suunto-app › de duik › exporteren geeft een .fit-bestand."},
+   note:{en:"Confirmed on real Ocean files, scuba and freediving, and on a Vertical 2 snorkel. Worth saying: these files taught us that Suunto writes depth on only some of its records, and an earlier version of DiveDrop flattened the profile because of it. Fixed, and now checked against the real thing. The files carry no position, so you pick the dive site yourself.",
+         fr:"Confirmé sur de vrais fichiers Ocean, scaphandre et apnée, et sur un snorkeling Vertical 2. À dire franchement : ces fichiers nous ont appris que Suunto n'écrit la profondeur que sur une partie de ses enregistrements, et une version antérieure de DiveDrop aplatissait le profil à cause de cela. Corrigé, et vérifié depuis sur de vrais fichiers. Aucune position dans ces fichiers, vous choisissez donc le site.",
+         nl:"Bevestigd op echte Ocean-bestanden, scuba en freediving, en op een Vertical 2-snorkelsessie. Eerlijk erbij: deze bestanden leerden ons dat Suunto maar op een deel van zijn records een diepte schrijft, en een eerdere versie van DiveDrop trok het profiel daardoor plat. Opgelost, en sindsdien tegen de echte bestanden nagekeken. De bestanden dragen geen positie, dus kies je de stek zelf."}},
+
+  {dev:"Suunto", models:"D5, EON Steel, EON Core, Zoop and older", s:"via",
+   f:{profile:'u',temp:'u',pressure:'u',gps:'n',weight:'u',rating:'u'},
+   route:{en:"These do not write a FIT file at all. Use Suunto DM5 on a desktop and export UDDF, or download them into Subsurface.",
+          fr:"Ceux-ci n'écrivent aucun fichier FIT. Utilisez Suunto DM5 sur ordinateur et exportez en UDDF, ou téléchargez-les dans Subsurface.",
+          nl:"Die schrijven helemaal geen FIT-bestand. Gebruik Suunto DM5 op desktop en exporteer UDDF, of haal ze binnen in Subsurface."},
+   note:{en:"A common misunderstanding, so worth stating plainly: the FIT export is a feature of Suunto's newest watches only. Everything older goes out through UDDF.",
+         fr:"Un malentendu fréquent, autant le dire clairement : l'export FIT n'existe que sur les montres Suunto les plus récentes. Tout le reste sort en UDDF.",
+         nl:"Een veelgemaakte vergissing, dus voor alle duidelijkheid: de FIT-export bestaat alleen op de nieuwste Suunto-horloges. Al de rest gaat eruit via UDDF."}},
+ ]},
+
+ {id:'via', ext:'', rows:[
+  {dev:"Mares, Scubapro, Cressi, Aqualung", models:"Apeks, Seac, Ratio, Divesoft, Atomic, Heinrichs Weikamp, Oceanic consoles and others", s:"via",
+   f:{profile:'u',temp:'u',pressure:'u',gps:'u',weight:'u',rating:'u'},
+   route:{en:"No export DiveDrop can read directly. Download the dives into Subsurface over USB or Bluetooth first, then export UDDF from there.",
+          fr:"Pas d'export lisible directement. Téléchargez d'abord les plongées dans Subsurface en USB ou Bluetooth, puis exportez en UDDF.",
+          nl:"Geen export die DiveDrop rechtstreeks leest. Haal de duiken eerst via USB of Bluetooth in Subsurface binnen en exporteer daar UDDF."},
+   note:{en:"Subsurface talks to well over a hundred dive computers, far more than we could ever test ourselves, and it is free. Once the dives are in Subsurface the rest of this page applies.",
+         fr:"Subsurface dialogue avec bien plus de cent ordinateurs, bien plus que ce que nous pourrions tester, et il est gratuit. Une fois les plongées dedans, le reste de cette page s'applique.",
+         nl:"Subsurface praat met ruim honderd duikcomputers, veel meer dan wij ooit zelf kunnen testen, en het is gratis. Staan de duiken er eenmaal in, dan geldt de rest van deze pagina."}},
+ ]},
+];
+
+const T = {
+ en:{back:"back to DiveDrop", h1:"Will DiveDrop work with my dive computer?",
+  tag:"Probably. This page says how sure we are, per computer, and exactly which data survives the trip into your SSI logbook.",
+  rule_h:"One rule decides it", rule_p:"DiveDrop never talks to your dive computer. It reads the file your computer's own app already gives you. So the question is not which brand you own, but whether anything in your setup can hand you one of these files. If it can, you are in.",
+  fmt_zip:"Oceanic+ export (zip)",
+  matrix_h:"What actually arrives, per source",
+  matrix_lead:"Built from real imports, not from spec sheets. Every green square below is something we have watched come out of a real file off that device: 69 files so far, covering seven Garmin models, nine Shearwater exports, Oceanic+ from four different watches, two Suunto watches, MacDive, Diving Log and a rebreather. Amber squares are honest gaps.",
+  lg_ok:"Confirmed with real dives", lg_maybe:"Should work, not confirmed yet", lg_via:"Goes through Subsurface first",
+  g_uddf:"Anything that exports UDDF", g_uddf_n:"The open dive-log format. Most desktop logbooks and cloud apps can write it, which makes it the widest way in.",
+  g_fit:"Garmin and Suunto FIT files", g_fit_n:"The activity format Garmin invented and Suunto also writes. DiveDrop decodes the dive messages inside it: depth samples, temperature, gas and alarms.",
+  g_via:"Everything else", g_via_n:"Plenty of good computers have no export DiveDrop can read. That does not lock you out, it just adds one free step.",
+  f_profile:"Depth profile", f_temp:"Water temperature", f_pressure:"Tank pressure", f_gps:"GPS position", f_weight:"Weight", f_rating:"Rating",
+  help_h:"You can turn a square green", help_lead:"This is the one thing that genuinely moves this page, and it costs you a single file.",
+  help_t:"Send an export from your own computer",
+  help_a:"A .uddf or a .fit is enough. We do not need your SSI login and would have no use for it. What arrives is used to test the parser and deleted once it stops being useful.",
+  help_b:"Know what you are sending: a dive log says where you dived, when, and for how long. If that bothers you, please don't. If it doesn't, you will have fixed the next diver's import before they ever hit it.",
+  help_cta:"Send a sample file",
+  know_h:"Worth knowing before you start",
+  k1t:"Dives arrive unconfirmed", k1d:"Exactly like a dive you type into MySSI by hand. Your dive centre can still verify them, and for a certification count it verifies from your log either way.",
+  k2t:"Running it twice is safe", k2d:"DiveDrop reads your existing MySSI logbook first and recognises what is already there, including dives you entered by hand. Hand it a whole season without making duplicates.",
+  k3t:"Short and shallow records are skipped", k3d:"Anything under five minutes or shallower than a metre and a half stays out by default: surface checks and pool dips. Switch it off in the app if you want them.",
+  k4t:"Android", k4d:"An Android build exists and is in testing while Google works through its verification. Ask and you can have the test build today.",
+  updated:"Last updated",
+  f_home:"DiveDrop", f_support:"Support", f_privacy:"Privacy policy", notaff:"Not affiliated with SSI, Oceanic, Garmin, Suunto, Shearwater or Huish Outdoors"},
+
+ fr:{back:"retour à DiveDrop", h1:"DiveDrop fonctionnera-t-il avec mon ordinateur ?",
+  tag:"Probablement. Cette page dit à quel point nous en sommes sûrs, ordinateur par ordinateur, et quelles données survivent au voyage vers votre carnet SSI.",
+  rule_h:"Une seule règle décide", rule_p:"DiveDrop ne dialogue jamais avec votre ordinateur de plongée. Il lit le fichier que l'app de votre ordinateur vous donne déjà. La question n'est donc pas quelle marque vous possédez, mais si quelque chose dans votre équipement peut vous remettre un de ces fichiers. Si oui, c'est bon.",
+  fmt_zip:"Export Oceanic+ (zip)",
+  matrix_h:"Ce qui arrive vraiment, par source",
+  matrix_lead:"Construit à partir d'imports réels, pas de fiches techniques. Chaque case verte ci-dessous, nous l'avons vue sortir d'un vrai fichier de cet appareil : 69 fichiers à ce jour, couvrant sept modèles Garmin, neuf exports Shearwater, Oceanic+ depuis quatre montres différentes, deux montres Suunto, MacDive, Diving Log et un recycleur. Les cases orange sont des trous assumés.",
+  lg_ok:"Confirmé avec de vraies plongées", lg_maybe:"Devrait marcher, pas encore confirmé", lg_via:"Passe d'abord par Subsurface",
+  g_uddf:"Tout ce qui exporte en UDDF", g_uddf_n:"Le format ouvert de carnet de plongée. La plupart des logiciels et apps cloud savent l'écrire, ce qui en fait la voie la plus large.",
+  g_fit:"Fichiers FIT Garmin et Suunto", g_fit_n:"Le format d'activité inventé par Garmin, que Suunto écrit aussi. DiveDrop décode les messages de plongée à l'intérieur : échantillons de profondeur, température, gaz et alarmes.",
+  g_via:"Tout le reste", g_via_n:"Beaucoup de bons ordinateurs n'ont aucun export lisible par DiveDrop. Cela ne vous exclut pas, cela ajoute une étape gratuite.",
+  f_profile:"Profil de profondeur", f_temp:"Température de l'eau", f_pressure:"Pression du bloc", f_gps:"Position GPS", f_weight:"Lestage", f_rating:"Note",
+  help_h:"Vous pouvez faire passer une case au vert", help_lead:"C'est la seule chose qui fasse vraiment avancer cette page, et elle vous coûte un fichier.",
+  help_t:"Envoyez un export de votre ordinateur",
+  help_a:"Un .uddf ou un .fit suffit. Nous n'avons pas besoin de votre identifiant SSI et n'en aurions aucun usage. Ce qui arrive sert à tester l'analyseur et est supprimé dès que ce n'est plus utile.",
+  help_b:"Sachez ce que vous envoyez : un carnet dit où vous avez plongé, quand et combien de temps. Si cela vous gêne, ne l'envoyez pas. Sinon, vous aurez réparé l'import du prochain plongeur avant qu'il ne le rencontre.",
+  help_cta:"Envoyer un fichier",
+  know_h:"À savoir avant de commencer",
+  k1t:"Les plongées arrivent non confirmées", k1d:"Exactement comme une plongée saisie à la main dans MySSI. Votre centre peut toujours les valider, et pour un décompte il valide d'après votre carnet de toute façon.",
+  k2t:"Relancer deux fois ne risque rien", k2d:"DiveDrop lit d'abord votre carnet MySSI et reconnaît ce qui s'y trouve, y compris les saisies manuelles. Confiez-lui une saison entière sans créer de doublons.",
+  k3t:"Les enregistrements courts sont ignorés", k3d:"Moins de cinq minutes ou moins d'un mètre cinquante restent dehors par défaut : vérifications en surface et piscine. Désactivable dans l'app.",
+  k4t:"Android", k4d:"Une version Android existe et est en test pendant que Google avance sur sa vérification. Demandez-la et vous l'aurez aujourd'hui.",
+  updated:"Dernière mise à jour",
+  f_home:"DiveDrop", f_support:"Support", f_privacy:"Politique de confidentialité", notaff:"Sans lien avec SSI, Oceanic, Garmin, Suunto, Shearwater ou Huish Outdoors"},
+
+ nl:{back:"terug naar DiveDrop", h1:"Werkt DiveDrop met mijn duikcomputer?",
+  tag:"Waarschijnlijk wel. Deze pagina zegt hoe zeker we zijn, per computer, en welke gegevens de reis naar je SSI-logboek overleven.",
+  rule_h:"Eén regel beslist", rule_p:"DiveDrop praat nooit met je duikcomputer. Hij leest het bestand dat de app van je computer je al geeft. De vraag is dus niet welk merk je hebt, maar of iets in je uitrusting je zo'n bestand kan aanreiken. Kan dat, dan zit je goed.",
+  fmt_zip:"Oceanic+-export (zip)",
+  matrix_h:"Wat er echt aankomt, per bron",
+  matrix_lead:"Gebouwd op echte imports, niet op productfiches. Elk groen vakje hieronder hebben we uit een echt bestand van dat toestel zien komen: 69 bestanden tot nu toe, van zeven Garmin-modellen, negen Shearwater-exports, Oceanic+ van vier verschillende horloges, twee Suunto-horloges, MacDive, Diving Log en een rebreather. Oranje vakjes zijn eerlijke gaten.",
+  lg_ok:"Bevestigd met echte duiken", lg_maybe:"Zou moeten werken, nog niet bevestigd", lg_via:"Gaat eerst door Subsurface",
+  g_uddf:"Alles wat UDDF exporteert", g_uddf_n:"Het open duiklogformaat. De meeste desktoplogboeken en cloud-apps kunnen het schrijven, en dat maakt het de breedste weg naar binnen.",
+  g_fit:"Garmin- en Suunto-FIT-bestanden", g_fit_n:"Het activiteitenformaat dat Garmin bedacht en dat Suunto ook schrijft. DiveDrop decodeert de duikberichten erin: dieptesamples, temperatuur, gas en alarmen.",
+  g_via:"Al de rest", g_via_n:"Heel wat goede computers hebben geen export die DiveDrop leest. Dat sluit je niet buiten, het kost je één gratis tussenstap.",
+  f_profile:"Diepteprofiel", f_temp:"Watertemperatuur", f_pressure:"Tankdruk", f_gps:"GPS-positie", f_weight:"Lood", f_rating:"Beoordeling",
+  help_h:"Jij kan een vakje groen maken", help_lead:"Dit is het enige wat deze pagina echt vooruit helpt, en het kost je één bestand.",
+  help_t:"Stuur een export van je eigen computer",
+  help_a:"Een .uddf of een .fit volstaat. Je SSI-login hebben we niet nodig en er is niets wat we ermee zouden kunnen. Wat binnenkomt dient om de parser te testen en wordt gewist zodra het niet meer nuttig is.",
+  help_b:"Weet wat je verstuurt: een duiklog vertelt waar je dook, wanneer en hoe lang. Zit je daarmee, doe het dan niet. Zit je daar niet mee, dan heb je de import van de volgende duiker gerepareerd voor die er ooit tegenaan loopt.",
+  help_cta:"Een bestand opsturen",
+  know_h:"Goed om te weten voor je begint",
+  k1t:"Duiken komen binnen als niet bevestigd", k1d:"Precies zoals een duik die je met de hand in MySSI typt. Je duikcentrum kan ze nog altijd bevestigen, en voor een duikaantal bevestigt het toch vanuit je eigen logboek.",
+  k2t:"Twee keer draaien kan geen kwaad", k2d:"DiveDrop leest eerst je bestaande MySSI-logboek en herkent wat er al staat, ook handmatige invoer. Gooi er een heel seizoen in zonder dubbels te maken.",
+  k3t:"Korte en ondiepe registraties vallen weg", k3d:"Alles korter dan vijf minuten of ondieper dan anderhalve meter blijft standaard buiten: oppervlaktechecks en zwembaddips. Uit te zetten in de app.",
+  k4t:"Android", k4d:"Er is een Android-versie en die wordt getest terwijl Google zijn verificatie doorloopt. Vraag ernaar en je hebt hem vandaag.",
+  updated:"Laatst bijgewerkt",
+  f_home:"DiveDrop", f_support:"Support", f_privacy:"Privacybeleid", notaff:"Niet verbonden aan SSI, Oceanic, Garmin, Suunto, Shearwater of Huish Outdoors"}
+};
+
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+function apply(lang){
+  const t = T[lang] || T.en;
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t[el.dataset.i18n] ?? ''; });
+
+  document.getElementById('groups').innerHTML = GROUPS.map(g => {
+    const cards = g.rows.map(r => {
+      const label = r.s === 'ok' ? t.lg_ok : r.s === 'maybe' ? t.lg_maybe : t.lg_via;
+      const fields = FIELDS.map(k => {
+        const st = r.f[k];                       // y, n or u
+        const mark = st === 'y' ? '✓' : st === 'n' ? '–' : '?';
+        return '<span class="f ' + st + '"><i>' + mark + '</i>' + esc(t['f_' + k]) + '</span>';
+      }).join('');
+      return '<article class="dev">' +
+        '<header><h4>' + esc(r.dev) + '<span class="models">' + esc(r.models) + '</span></h4>' +
+        '<span class="pill ' + r.s + '">' + esc(label) + '</span></header>' +
+        '<p class="route">' + esc(r.route[lang] || r.route.en) + '</p>' +
+        '<div class="fields">' + fields + '</div>' +
+        '<p class="note">' + esc(r.note[lang] || r.note.en) + '</p>' +
+        '</article>';
+    }).join('');
+    return '<section class="group"><div class="group-head"><h3>' + esc(t['g_' + g.id]) + '</h3>' +
+      (g.ext ? '<span class="ext">' + esc(g.ext) + '</span>' : '') + '</div>' +
+      '<p class="group-note">' + esc(t['g_' + g.id + '_n']) + '</p>' +
+      '<div class="cards">' + cards + '</div></section>';
+  }).join('');
+
+  document.querySelectorAll('.lang-toggle button').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+  try { localStorage.setItem('divedrop.lang', lang); } catch (e) {}
+}
+document.querySelectorAll('.lang-toggle button').forEach(b => b.addEventListener('click', () => apply(b.dataset.lang)));
+let start = 'en';
+try { start = localStorage.getItem('divedrop.lang') || (l => l.startsWith('nl') ? 'nl' : l.startsWith('fr') ? 'fr' : 'en')((navigator.language || '').toLowerCase()); } catch (e) {}
+apply(start);
+</script>
+</body>
+</html>

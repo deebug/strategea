@@ -32,6 +32,11 @@
   button.submit{background:var(--text-primary);color:#fff;border:0;padding:.9rem 1.4rem;border-radius:50px;font-weight:600;font-size:1rem;cursor:pointer;justify-self:start}
   .hp{position:absolute;left:-9999px}
   small{color:var(--text-secondary)}
+  .more{color:var(--text-secondary);line-height:1.65;margin-top:.9rem}
+  .faqgroup{margin-bottom:1.4rem}
+  .faqgroup h3{display:flex;align-items:center;gap:.5rem;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-secondary);margin:0 0 .6rem}
+  .faqgroup h3 svg{width:15px;height:15px;fill:var(--text-secondary)}
+  [hidden]{display:none!important}
   footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid rgba(0,0,0,.06);color:var(--text-secondary);font-size:.85rem}
 </style>
 </head>
@@ -44,12 +49,26 @@
 
   <h2 data-i18n="faq"></h2>
   <div class="faq">
-    <details><summary data-i18n="q1"></summary><p data-i18n="a1"></p></details>
-    <details><summary data-i18n="q2"></summary><p data-i18n="a2"></p></details>
-    <details><summary data-i18n="q3"></summary><p data-i18n="a3"></p></details>
-    <details><summary data-i18n="q4"></summary><p data-i18n="a4"></p></details>
-    <details><summary data-i18n="q5"></summary><p data-i18n="a5"></p></details>
+    <div class="faqgroup">
+      <h3 data-i18n="g_all"></h3>
+      <details><summary data-i18n="q1"></summary><p data-i18n="a1"></p></details>
+      <details><summary data-i18n="q2"></summary><p data-i18n="a2"></p></details>
+      <details><summary data-i18n="q3"></summary><p data-i18n="a3"></p></details>
+    </div>
+    <div class="faqgroup">
+      <h3><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.4 12.7c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.2-2.8.9-3.5.9s-1.8-.8-3-.8c-1.5 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.3 0 2.1-1.1 2.8-2.3.9-1.3 1.3-2.6 1.3-2.6s-2.5-1-2.5-3.8zM14.2 5.9c.6-.8 1.1-1.9 1-3-.9 0-2.1.6-2.8 1.4-.6.7-1.2 1.8-1 2.9 1 .1 2.1-.5 2.8-1.3z"/></svg><span data-i18n="g_ios"></span></h3>
+      <details><summary data-i18n="i1q"></summary><p data-i18n="i1a"></p></details>
+      <details><summary data-i18n="i2q"></summary><p data-i18n="i2a"></p></details>
+      <details><summary data-i18n="i3q"></summary><p data-i18n="i3a"></p></details>
+    </div>
+    <div class="faqgroup">
+      <h3><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.6 9.48l1.84-3.18a.38.38 0 0 0-.14-.52.38.38 0 0 0-.52.14l-1.86 3.22a11.43 11.43 0 0 0-9.84 0L5.22 5.92a.38.38 0 0 0-.52-.14.38.38 0 0 0-.14.52L6.4 9.48A10.81 10.81 0 0 0 1 18h22a10.81 10.81 0 0 0-5.4-8.52zM7 15.25a1.25 1.25 0 1 1 1.25-1.25A1.25 1.25 0 0 1 7 15.25zm10 0a1.25 1.25 0 1 1 1.25-1.25A1.25 1.25 0 0 1 17 15.25z"/></svg><span data-i18n="g_and"></span></h3>
+      <details><summary data-i18n="n1q"></summary><p data-i18n="n1a"></p></details>
+      <details><summary data-i18n="n2q"></summary><p data-i18n="n2a"></p></details>
+      <details><summary data-i18n="n3q"></summary><p data-i18n="n3a"></p></details>
+    </div>
   </div>
+  <p class="more" data-i18n="more"></p>
 
   <h2 data-i18n="formtitle"></h2>
   <form name="divedrop-support" method="POST" action="/divedrop/support/thanks/" data-netlify="true" netlify-honeypot="website" enctype="multipart/form-data">
@@ -58,6 +77,12 @@
     <p class="hp"><label>Website <input name="website" tabindex="-1" autocomplete="off"></label></p>
     <label><span data-i18n="f_name"></span><input type="text" name="name" required autocomplete="name"></label>
     <label><span data-i18n="f_email"></span><input type="email" name="email" required autocomplete="email"></label>
+    <label><span data-i18n="f_platform"></span>
+      <select name="platform">
+        <option value="iphone">iPhone (iOS)</option>
+        <option value="android">Android</option>
+      </select>
+    </label>
     <label><span data-i18n="f_device"></span>
       <select name="device">
         <option value="oceanic-plus">Oceanic+ (Apple Watch)</option>
@@ -87,40 +112,96 @@
 </main>
 <script>
 const T = {
- en: {title:"DiveDrop support", intro:"Something not working, or a dive computer you'd like to see supported? Check the answers below, or write to us. We usually reply within two working days.",
+ en: {title:"DiveDrop support", intro:"Something not working, or a dive computer you'd like to see supported? These answers apply to the iPhone and the Android app alike. Questions about one platform only are on the <a href=\"/divedrop/\">DiveDrop page</a>. Still stuck? Write to us; we usually reply within two working days.",
   faq:"Frequent questions",
-  q1:"DiveDrop doesn't appear in the share sheet", a1:"Long-press the download link in Mail and choose Share…, then DiveDrop. In Files, long-press the file and choose Share. If the app is missing there, tap More and switch DiveDrop on.",
-  q2:"\"Open with DiveDrop\" opens my browser instead", a2:"That button in Mail's link preview hands a web address to iOS, which sends it to the browser. Use Share… › DiveDrop instead; it downloads the export itself.",
-  q3:"A dive shows \"In SSI\" but I don't see it in MySSI", a3:"DiveDrop found a dive on the same day within 30 minutes with a similar depth or duration, most likely one you logged by hand. Tap the dive: if it really is a different dive, use Send anyway.",
-  q4:"Dives arrive as \"not confirmed\" in MySSI", a4:"SSI marks dives as confirmed only through a dive centre link. Dives imported by DiveDrop are like manually entered ones; your dive centre can still verify them.",
-  q5:"My purchase isn't recognised on my other iPhone", a5:"Open DiveDrop › Account › Restore purchase while signed in to the same Apple Account.",
-  formtitle:"Contact us", f_name:"Name", f_email:"Email", f_device:"Dive computer or app", f_topic:"Topic", f_message:"What happened, step by step?", f_file:"Export file (optional)", f_filehint:"The .zip, .uddf or .fit that caused the problem. Max 8 MB.",
+  g_all:"Both apps",
+  g_ios:"On iPhone",
+  g_and:"On Android",
+  q1:"A dive shows \"In SSI\" but I don't see it in MySSI",
+  a1:"DiveDrop found a dive on the same day within 30 minutes with a similar depth or duration, most likely one you logged by hand. Tap the dive: if it really is a different dive, use Send anyway.",
+  q2:"Do I pay twice for iPhone and Android?",
+  a2:"Yes, if you want to use both. Apple and Google each keep their own purchases and neither can see the other's, so an unlock cannot carry across. Within one platform the purchase follows your account to every device you own.",
+  q3:"Nothing happens when I share a file",
+  a3:"Check that the file really is a .zip, .uddf or .fit and that it has finished downloading. If the app opens but finds no dives, send us the file with the form below. That is usually a format we have not seen yet, and it is the fastest way to get it supported.",
+  i1q:"DiveDrop doesn't appear in the share sheet",
+  i1a:"Long-press the download link in Mail and choose Share…, then DiveDrop. In Files, long-press the file and choose Share. If the app is missing there, tap More and switch DiveDrop on.",
+  i2q:"\"Open with DiveDrop\" opens my browser instead",
+  i2a:"That button in Mail's link preview hands a web address to iOS, which sends it to the browser. Use Share… › DiveDrop instead; it downloads the export itself.",
+  i3q:"My purchase isn't recognised on my other iPhone",
+  i3a:"Open DiveDrop › Account › Restore purchase while signed in to the same Apple Account.",
+  n1q:"Where do I share the file?",
+  n1a:"Open Files, Gmail or Drive, long-press the export and choose Share, then DiveDrop. Tapping the file and choosing Open with works too.",
+  n2q:"My purchase isn't recognised",
+  n2a:"Open DiveDrop › Account › Restore purchase, signed in with the same Google account that paid.",
+  n3q:"Is the Android app behind the iPhone one?",
+  n3a:"No. Both send exactly the same data to SSI, and that is checked automatically on every change.",
+  more:"Wondering whether your dive computer is covered, or how SSI marks the dives? Those are answered on the <a href=\"/divedrop/\">DiveDrop page</a> and in the <a href=\"/divedrop/compatibility/\">compatibility list</a>.",
+  formtitle:"Contact us", f_platform:"Which app", f_name:"Name", f_email:"Email", f_device:"Dive computer or app", f_topic:"Topic", f_message:"What happened, step by step?", f_file:"Export file (optional)", f_filehint:"The .zip, .uddf or .fit that caused the problem. Max 8 MB.",
   t_import:"Import or file problem", t_ssi:"Sending to SSI", t_purchase:"Purchase or restore", t_feature:"Feature request", t_other:"Other",
   send:"Send", privacy:"We use what you send only to answer you. Attached exports are deleted after the case is closed.", privacylink:"Privacy policy"},
- fr: {title:"Support DiveDrop", intro:"Quelque chose ne fonctionne pas, ou vous voulez voir un ordinateur de plongée pris en charge ? Consultez les réponses ci-dessous, ou écrivez-nous. Nous répondons généralement sous deux jours ouvrés.",
+ fr: {title:"Support DiveDrop", intro:"Quelque chose ne fonctionne pas, ou vous voulez voir un ordinateur pris en charge ? Ces réponses valent autant pour l'app iPhone que pour Android. Les questions propres à une seule plateforme sont sur la <a href=\"/divedrop/\">page DiveDrop</a>. Toujours bloqué ? Écrivez-nous ; nous répondons généralement sous deux jours ouvrés.",
   faq:"Questions fréquentes",
-  q1:"DiveDrop n'apparaît pas dans la feuille de partage", a1:"Faites un appui long sur le lien de téléchargement dans Mail et choisissez Partager…, puis DiveDrop. Dans Fichiers, appui long sur le fichier puis Partager. Si l'app n'y est pas, touchez Plus et activez DiveDrop.",
-  q2:"« Ouvrir avec DiveDrop » ouvre mon navigateur", a2:"Ce bouton de l'aperçu de Mail transmet une adresse web à iOS, qui l'envoie au navigateur. Utilisez Partager… › DiveDrop ; l'app télécharge l'export elle-même.",
-  q3:"Une plongée affiche « Dans SSI » mais je ne la vois pas dans MySSI", a3:"DiveDrop a trouvé le même jour une plongée à moins de 30 minutes avec une profondeur ou une durée similaire, probablement une saisie à la main. Touchez la plongée : si c'est vraiment une autre plongée, choisissez Envoyer quand même.",
-  q4:"Les plongées arrivent « non confirmées » dans MySSI", a4:"SSI ne marque une plongée comme confirmée que via un centre de plongée. Les plongées importées par DiveDrop sont comme les plongées saisies à la main ; votre centre peut toujours les valider.",
-  q5:"Mon achat n'est pas reconnu sur mon autre iPhone", a5:"Ouvrez DiveDrop › Compte › Restaurer l'achat, connecté au même compte Apple.",
-  formtitle:"Contactez-nous", f_name:"Nom", f_email:"E-mail", f_device:"Ordinateur ou app de plongée", f_topic:"Sujet", f_message:"Que s'est-il passé, étape par étape ?", f_file:"Fichier d'export (facultatif)", f_filehint:"Le .zip, .uddf ou .fit qui a posé problème. Max. 8 Mo.",
+  g_all:"Les deux apps",
+  g_ios:"Sur iPhone",
+  g_and:"Sur Android",
+  q1:"Une plongée affiche « Dans SSI » mais je ne la vois pas dans MySSI",
+  a1:"DiveDrop a trouvé le même jour une plongée à moins de 30 minutes avec une profondeur ou une durée similaire, probablement une saisie à la main. Touchez la plongée : si c'est vraiment une autre plongée, choisissez Envoyer quand même.",
+  q2:"Dois-je payer deux fois pour iPhone et Android ?",
+  a2:"Oui, si vous voulez utiliser les deux. Apple et Google gèrent chacun leurs achats sans se voir, un déblocage ne peut donc pas passer de l'un à l'autre. Au sein d'une plateforme, l'achat suit votre compte sur tous vos appareils.",
+  q3:"Rien ne se passe quand je partage un fichier",
+  a3:"Vérifiez qu'il s'agit bien d'un .zip, .uddf ou .fit et que le téléchargement est terminé. Si l'app s'ouvre sans trouver de plongées, envoyez-nous le fichier via le formulaire ci-dessous : c'est en général un format que nous n'avons pas encore vu, et c'est le plus rapide pour l'ajouter.",
+  i1q:"DiveDrop n'apparaît pas dans la feuille de partage",
+  i1a:"Faites un appui long sur le lien de téléchargement dans Mail et choisissez Partager…, puis DiveDrop. Dans Fichiers, appui long sur le fichier puis Partager. Si l'app n'y est pas, touchez Plus et activez DiveDrop.",
+  i2q:"« Ouvrir avec DiveDrop » ouvre mon navigateur",
+  i2a:"Ce bouton de l'aperçu de Mail transmet une adresse web à iOS, qui l'envoie au navigateur. Utilisez Partager… › DiveDrop ; l'app télécharge l'export elle-même.",
+  i3q:"Mon achat n'est pas reconnu sur mon autre iPhone",
+  i3a:"Ouvrez DiveDrop › Compte › Restaurer l'achat, connecté au même compte Apple.",
+  n1q:"Où est-ce que je partage le fichier ?",
+  n1a:"Ouvrez Fichiers, Gmail ou Drive, appui long sur l'export puis Partager, et choisissez DiveDrop. Toucher le fichier et choisir Ouvrir avec fonctionne aussi.",
+  n2q:"Mon achat n'est pas reconnu",
+  n2a:"Ouvrez DiveDrop › Compte › Restaurer l'achat, connecté avec le compte Google qui a payé.",
+  n3q:"L'app Android est-elle en retard sur celle d'iPhone ?",
+  n3a:"Non. Les deux envoient exactement les mêmes données à SSI, et c'est vérifié automatiquement à chaque changement.",
+  more:"Vous vous demandez si votre ordinateur est pris en charge, ou comment SSI marque les plongées ? C'est répondu sur la <a href=\"/divedrop/\">page DiveDrop</a> et dans la <a href=\"/divedrop/compatibility/\">liste de compatibilité</a>.",
+  formtitle:"Contactez-nous", f_platform:"Quelle app", f_name:"Nom", f_email:"E-mail", f_device:"Ordinateur ou app de plongée", f_topic:"Sujet", f_message:"Que s'est-il passé, étape par étape ?", f_file:"Fichier d'export (facultatif)", f_filehint:"Le .zip, .uddf ou .fit qui a posé problème. Max. 8 Mo.",
   t_import:"Problème d'import ou de fichier", t_ssi:"Envoi vers SSI", t_purchase:"Achat ou restauration", t_feature:"Demande de fonctionnalité", t_other:"Autre",
   send:"Envoyer", privacy:"Nous utilisons ce que vous envoyez uniquement pour vous répondre. Les exports joints sont supprimés une fois le dossier clos.", privacylink:"Politique de confidentialité"},
- nl: {title:"DiveDrop-support", intro:"Werkt iets niet, of wil je een duikcomputer ondersteund zien? Kijk hieronder, of schrijf ons. We antwoorden meestal binnen twee werkdagen.",
+ nl: {title:"DiveDrop-support", intro:"Werkt iets niet, of wil je een duikcomputer ondersteund zien? Deze antwoorden gelden voor de iPhone- en de Android-app allebei. Vragen over één platform staan op de <a href=\"/divedrop/\">DiveDrop-pagina</a>. Kom je er niet uit? Schrijf ons; we antwoorden meestal binnen twee werkdagen.",
   faq:"Veelgestelde vragen",
-  q1:"DiveDrop staat niet in het deelmenu", a1:"Druk lang op de downloadlink in Mail en kies Deel…, dan DiveDrop. In Bestanden: lang drukken op het bestand en Deel kiezen. Staat de app er niet, tik dan op Meer en zet DiveDrop aan.",
-  q2:"\"Open met DiveDrop\" opent mijn browser", a2:"Die knop in de mailvoorvertoning geeft een webadres aan iOS, en dat gaat naar de browser. Gebruik Deel… › DiveDrop; de app downloadt de export zelf.",
-  q3:"Een duik staat op \"In SSI\" maar ik zie hem niet in MySSI", a3:"DiveDrop vond op dezelfde dag een duik binnen 30 minuten met een gelijkaardige diepte of duur, waarschijnlijk een die je manueel logde. Tik op de duik: is het echt een andere duik, kies dan Toch versturen.",
-  q4:"Duiken komen als \"niet bevestigd\" in MySSI", a4:"SSI markeert duiken enkel als bevestigd via een duikcentrum. Duiken uit DiveDrop zijn zoals manueel ingevoerde duiken; je duikcentrum kan ze nog steeds bevestigen.",
-  q5:"Mijn aankoop wordt niet herkend op mijn andere iPhone", a5:"Open DiveDrop › Account › Aankoop herstellen, aangemeld met dezelfde Apple Account.",
-  formtitle:"Contacteer ons", f_name:"Naam", f_email:"E-mail", f_device:"Duikcomputer of app", f_topic:"Onderwerp", f_message:"Wat gebeurde er, stap voor stap?", f_file:"Exportbestand (optioneel)", f_filehint:"De .zip, .uddf of .fit die het probleem gaf. Max. 8 MB.",
+  g_all:"Beide apps",
+  g_ios:"Op iPhone",
+  g_and:"Op Android",
+  q1:"Een duik staat op \"In SSI\" maar ik zie hem niet in MySSI",
+  a1:"DiveDrop vond op dezelfde dag een duik binnen 30 minuten met een gelijkaardige diepte of duur, waarschijnlijk een die je manueel logde. Tik op de duik: is het echt een andere duik, kies dan Toch versturen.",
+  q2:"Betaal ik twee keer voor iPhone en Android?",
+  a2:"Ja, als je allebei wil gebruiken. Apple en Google houden elk hun eigen aankopen bij en zien die van de ander niet, dus een ontgrendeling kan niet mee. Binnen één platform volgt de aankoop je account naar al je toestellen.",
+  q3:"Er gebeurt niets als ik een bestand deel",
+  a3:"Kijk na of het echt een .zip, .uddf of .fit is en of de download klaar is. Opent de app wel maar vindt hij geen duiken, stuur het bestand dan via het formulier hieronder. Meestal is het een formaat dat we nog niet zagen, en zo krijgen we het het snelst ondersteund.",
+  i1q:"DiveDrop staat niet in het deelmenu",
+  i1a:"Druk lang op de downloadlink in Mail en kies Deel…, dan DiveDrop. In Bestanden: lang drukken op het bestand en Deel kiezen. Staat de app er niet, tik dan op Meer en zet DiveDrop aan.",
+  i2q:"\"Open met DiveDrop\" opent mijn browser",
+  i2a:"Die knop in de mailvoorvertoning geeft een webadres aan iOS, en dat gaat naar de browser. Gebruik Deel… › DiveDrop; de app downloadt de export zelf.",
+  i3q:"Mijn aankoop wordt niet herkend op mijn andere iPhone",
+  i3a:"Open DiveDrop › Account › Aankoop herstellen, aangemeld met dezelfde Apple Account.",
+  n1q:"Waar deel ik het bestand?",
+  n1a:"Open Bestanden, Gmail of Drive, druk lang op de export en kies Delen, dan DiveDrop. Op het bestand tikken en Openen met kiezen werkt ook.",
+  n2q:"Mijn aankoop wordt niet herkend",
+  n2a:"Open DiveDrop › Account › Aankoop herstellen, aangemeld met hetzelfde Google-account dat betaalde.",
+  n3q:"Loopt de Android-app achter op die van iPhone?",
+  n3a:"Nee. Allebei sturen ze exact dezelfde gegevens naar SSI, en dat wordt bij elke wijziging automatisch gecontroleerd.",
+  more:"Vraag je je af of jouw duikcomputer erbij zit, of hoe SSI de duiken markeert? Dat staat op de <a href=\"/divedrop/\">DiveDrop-pagina</a> en in de <a href=\"/divedrop/compatibility/\">compatibiliteitslijst</a>.",
+  formtitle:"Contacteer ons", f_platform:"Welke app", f_name:"Naam", f_email:"E-mail", f_device:"Duikcomputer of app", f_topic:"Onderwerp", f_message:"Wat gebeurde er, stap voor stap?", f_file:"Exportbestand (optioneel)", f_filehint:"De .zip, .uddf of .fit die het probleem gaf. Max. 8 MB.",
   t_import:"Import- of bestandsprobleem", t_ssi:"Versturen naar SSI", t_purchase:"Aankoop of herstellen", t_feature:"Functiewens", t_other:"Iets anders",
   send:"Verstuur", privacy:"We gebruiken wat je stuurt alleen om je te antwoorden. Bijgevoegde exports worden na afhandeling verwijderd.", privacylink:"Privacybeleid"}
 };
 function apply(lang){
   const t = T[lang] || T.en; document.documentElement.lang = lang;
-  document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t[el.dataset.i18n] ?? ''; });
+  // Only these carry our own markup (links); everything else is inserted as plain text.
+  const html = new Set(['intro', 'more']);
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const v = t[el.dataset.i18n] ?? '';
+    if (html.has(el.dataset.i18n)) el.innerHTML = v; else el.textContent = v;
+  });
   document.getElementById('langField').value = lang;
   document.querySelectorAll('.lang-toggle button').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
   try { localStorage.setItem('divedrop.lang', lang); } catch (e) {}

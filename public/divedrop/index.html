@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>DiveDrop – dive exports into your SSI logbook | Strategea</title>
-<meta name="description" content="Share your Oceanic+ (Apple Watch) or UDDF dive export and DiveDrop adds the missing dives to your MySSI logbook, depth profile and dive site included.">
+<meta name="description" content="Share your Oceanic+ (Apple Watch), Garmin, Suunto, Shearwater or UDDF dive export and DiveDrop adds the missing dives to your MySSI logbook, depth profile included. For iPhone and Android.">
 <meta property="og:title" content="DiveDrop">
-<meta property="og:description" content="Share your dive export. Your SSI logbook is up to date. Profile included.">
+<meta property="og:description" content="Share your dive export. Your SSI logbook is up to date. Profile included. iPhone and Android.">
 <meta property="og:image" content="https://strategea.be/divedrop/img/icon.png">
 <link rel="icon" href="img/icon.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Outfit:wght@300;400;600;800&display=swap">
 <style>
-  :root{--bg-color:#f9f9fb;--text-primary:#111827;--text-secondary:#4b5563;--accent-1:#54b3d6;--accent-2:#2a5a8a;--card-bg:#fff}
+  :root{--bg-color:#f9f9fb;--text-primary:#111827;--text-secondary:#4b5563;--muted:#9099a8;--accent-1:#54b3d6;--accent-2:#2a5a8a;--card-bg:#fff;--line:rgba(17,24,39,.08)}
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:'Outfit','Montserrat',sans-serif;background:var(--bg-color);color:var(--text-primary);-webkit-font-smoothing:antialiased;overflow-x:hidden}
   a{color:var(--accent-2)}
@@ -25,14 +25,37 @@
   .hero .icon{width:96px;height:96px;border-radius:22px;box-shadow:0 10px 30px -5px rgba(42,90,138,.35);margin-bottom:1.25rem}
   h1{font-size:3rem;font-weight:800;letter-spacing:-.02em;line-height:1.05;margin-bottom:.75rem}
   .tag{font-size:1.25rem;color:var(--text-secondary);font-weight:300;max-width:34ch;margin-bottom:1.5rem}
-  .cta{display:inline-flex;align-items:center;gap:.6rem;background:var(--text-primary);color:#fff;text-decoration:none;padding:.9rem 1.4rem;border-radius:50px;font-weight:600;transition:transform .3s,box-shadow .3s}
-  .cta:hover{transform:translateY(-2px);box-shadow:0 10px 25px -5px rgba(0,0,0,.2)}
-  .ctas{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
-  .cta.soft{background:var(--card-bg);color:var(--text-primary);border:1px solid rgba(0,0,0,.06)}
+
+  /* store buttons */
+  .stores{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
+  .store{display:inline-flex;align-items:center;gap:.7rem;background:var(--text-primary);color:#fff;text-decoration:none;padding:.7rem 1.25rem;border-radius:14px;transition:transform .3s,box-shadow .3s}
+  .store:hover{transform:translateY(-2px);box-shadow:0 10px 25px -5px rgba(0,0,0,.25)}
+  .store svg{width:22px;height:22px;flex:none;fill:currentColor}
+  .store b{display:block;font-size:1rem;font-weight:700;line-height:1.15}
+  .store small{display:block;font-size:.7rem;font-weight:400;opacity:.75;letter-spacing:.02em}
+  .store.soon{background:var(--card-bg);color:var(--text-secondary);border:1px dashed rgba(17,24,39,.22);cursor:default}
+  .store.soon:hover{transform:none;box-shadow:none}
+  .how-link{display:inline-block;margin-top:1rem;font-weight:600;font-size:.95rem}
+
   .phones{display:flex;gap:1rem;justify-content:center}
   .phones img{width:31%;border-radius:22px;box-shadow:0 20px 40px -10px rgba(17,24,39,.25);background:#fff}
   .phones img:nth-child(2){transform:translateY(-18px)}
+
   h2{font-size:1.6rem;font-weight:600;margin:3.5rem 0 1.25rem}
+  .lead{color:var(--text-secondary);line-height:1.6;max-width:64ch;margin:-.6rem 0 1.5rem}
+
+  /* platform cards */
+  .platforms{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.25rem}
+  .plat{background:var(--card-bg);border-radius:24px;padding:1.75rem;box-shadow:0 10px 30px -5px rgba(0,0,0,.04);border:1px solid rgba(0,0,0,.02);display:flex;flex-direction:column;gap:.9rem}
+  .plat header{display:flex;align-items:center;gap:.7rem}
+  .plat header svg{width:26px;height:26px;fill:var(--text-primary);flex:none}
+  .plat h3{font-size:1.15rem;font-weight:700}
+  .plat .req{color:var(--muted);font-size:.85rem;font-weight:400;display:block;margin-top:.1rem}
+  .plat p{color:var(--text-secondary);line-height:1.6;font-size:.95rem}
+  .plat .route{border-top:1px solid var(--line);padding-top:.9rem;font-size:.93rem;color:var(--text-secondary);line-height:1.6}
+  .plat .route b{color:var(--text-primary);font-weight:600}
+  .plat .stores{margin-top:auto;padding-top:.3rem}
+
   .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem}
   .step{background:var(--card-bg);border-radius:24px;padding:1.5rem;box-shadow:0 10px 30px -5px rgba(0,0,0,.04);border:1px solid rgba(0,0,0,.02)}
   .step .n{display:inline-block;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--accent-1),var(--accent-2));color:#fff;font-weight:700;font-size:.85rem;text-align:center;line-height:28px;margin-bottom:.75rem}
@@ -45,9 +68,15 @@
   .card ul{padding-left:1.1rem}
   .price{font-size:2.4rem;font-weight:800;letter-spacing:-.02em}
   .price small{font-size:1rem;font-weight:400;color:var(--text-secondary)}
+
+  /* faq */
+  .faqgroup{margin-bottom:1.5rem}
+  .faqgroup h3{display:flex;align-items:center;gap:.5rem;font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-secondary);margin-bottom:.7rem}
+  .faqgroup h3 svg{width:16px;height:16px;fill:var(--text-secondary)}
   .faq details{background:var(--card-bg);border-radius:16px;padding:1rem 1.25rem;margin-bottom:.6rem;border:1px solid rgba(0,0,0,.03)}
   .faq summary{cursor:pointer;font-weight:600}
   .faq p{color:var(--text-secondary);margin-top:.5rem;line-height:1.6}
+  .more{color:var(--text-secondary);line-height:1.6}
   footer{margin-top:4rem;padding-top:2rem;border-top:1px solid rgba(0,0,0,.06);color:var(--text-secondary);font-size:.85rem;display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between}
   [hidden]{display:none!important}
   @media (max-width:760px){.hero{grid-template-columns:1fr}h1{font-size:2.3rem}.lang-toggle{top:1rem;right:1rem}.wrap{padding-top:5rem}}
@@ -65,18 +94,38 @@
       <img class="icon" src="img/icon.png" alt="DiveDrop app icon">
       <h1>DiveDrop</h1>
       <p class="tag" data-i18n="tag"></p>
-      <div class="ctas">
-        <a class="cta" href="https://apps.apple.com/app/id6810127854" data-i18n="cta"></a>
-        <a class="cta soft" href="#how" data-i18n="how_link"></a>
-        <a class="cta soft" href="compatibility/" data-i18n="compat_link"></a>
-      </div>
+      <div class="stores" id="heroStores"></div>
+      <a class="how-link" href="#how" data-i18n="how_link"></a>
     </div>
     <div class="phones">
-      <img data-shot="04-share-sheet" alt="iOS share sheet with DiveDrop">
+      <img data-shot="04-share-sheet" alt="Share sheet with DiveDrop">
       <img data-shot="01-list" alt="DiveDrop dive list with sync status">
       <img data-shot="02-detail" alt="Dive detail with depth profile and map">
     </div>
   </section>
+
+  <h2 data-i18n="plat_h"></h2>
+  <p class="lead" data-i18n="plat_lead"></p>
+  <div class="platforms">
+    <article class="plat">
+      <header>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.4 12.7c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.2-2.8.9-3.5.9s-1.8-.8-3-.8c-1.5 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.3 0 2.1-1.1 2.8-2.3.9-1.3 1.3-2.6 1.3-2.6s-2.5-1-2.5-3.8zM14.2 5.9c.6-.8 1.1-1.9 1-3-.9 0-2.1.6-2.8 1.4-.6.7-1.2 1.8-1 2.9 1 .1 2.1-.5 2.8-1.3z"/></svg>
+        <div><h3 data-i18n="ios_h"></h3><span class="req" data-i18n="ios_req"></span></div>
+      </header>
+      <p data-i18n="ios_p"></p>
+      <p class="route" data-i18n="ios_route"></p>
+      <div class="stores" id="iosStore"></div>
+    </article>
+    <article class="plat">
+      <header>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.6 9.48l1.84-3.18a.38.38 0 0 0-.14-.52.38.38 0 0 0-.52.14l-1.86 3.22a11.43 11.43 0 0 0-9.84 0L5.22 5.92a.38.38 0 0 0-.52-.14.38.38 0 0 0-.14.52L6.4 9.48A10.81 10.81 0 0 0 1 18h22a10.81 10.81 0 0 0-5.4-8.52zM7 15.25a1.25 1.25 0 1 1 1.25-1.25A1.25 1.25 0 0 1 7 15.25zm10 0a1.25 1.25 0 1 1 1.25-1.25A1.25 1.25 0 0 1 17 15.25z"/></svg>
+        <div><h3 data-i18n="and_h"></h3><span class="req" data-i18n="and_req"></span></div>
+      </header>
+      <p data-i18n="and_p"></p>
+      <p class="route" data-i18n="and_route"></p>
+      <div class="stores" id="andStore"></div>
+    </article>
+  </div>
 
   <h2 id="how" data-i18n="how"></h2>
   <div class="steps">
@@ -112,7 +161,7 @@
     <details><summary data-i18n="q1"></summary><p data-i18n="a1"></p></details>
     <details><summary data-i18n="q2"></summary><p data-i18n="a2"></p></details>
     <details><summary data-i18n="q3"></summary><p data-i18n="a3"></p></details>
-    <details><summary data-i18n="q4"></summary><p data-i18n="a4"></p></details>
+    <p class="more" data-i18n="faq_more"></p>
   </div>
 
   <footer>
@@ -121,66 +170,137 @@
   </footer>
 </main>
 <script>
+// Flip to true the moment Google approves the app; every Play button on the page turns into a real link.
+const ANDROID_LIVE = false;
+const APP_STORE = "https://apps.apple.com/app/id6810127854";
+const PLAY_STORE = "https://play.google.com/store/apps/details?id=be.strategea.divedrop";
+
+const APPLE_PATH = "M16.4 12.7c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.2-2.8.9-3.5.9s-1.8-.8-3-.8c-1.5 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.3 0 2.1-1.1 2.8-2.3.9-1.3 1.3-2.6 1.3-2.6s-2.5-1-2.5-3.8zM14.2 5.9c.6-.8 1.1-1.9 1-3-.9 0-2.1.6-2.8 1.4-.6.7-1.2 1.8-1 2.9 1 .1 2.1-.5 2.8-1.3z";
+const PLAY_PATH = "M3.609 1.814 13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893 2.302 2.302-10.937 6.333zm3.199-3.198 2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.207 12zM5.864 2.658 16.802 8.99l-2.303 2.303z";
+const svg = d => '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="' + d + '"/></svg>';
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+function storeButtons(t, which) {
+  const apple = '<a class="store" href="' + APP_STORE + '">' + svg(APPLE_PATH) +
+    '<span><small>' + esc(t.btn_small_ios) + '</small><b>App Store</b></span></a>';
+  const play = ANDROID_LIVE
+    ? '<a class="store" href="' + PLAY_STORE + '">' + svg(PLAY_PATH) +
+      '<span><small>' + esc(t.btn_small_and) + '</small><b>Google Play</b></span></a>'
+    : '<span class="store soon">' + svg(PLAY_PATH) +
+      '<span><small>' + esc(t.btn_small_soon) + '</small><b>Google Play</b></span></span>';
+  return which === 'ios' ? apple : which === 'and' ? play : apple + play;
+}
+
 const T = {
  en: {by:"an app by Strategea", tag:"Share your dive export with DiveDrop. Your SSI logbook is up to date. Depth profile included.",
-  cta:"Download on the App Store", how_link:"How it works", how:"How it works",
-  s1t:"Export", s1d:"In Oceanic+ on your iPhone: Logbook › Export Dives. You get an email with a download link.",
-  s2t:"Long-press the link", s2d:"Choose Share… › DiveDrop. Right there in the share sheet, DiveDrop downloads the export, reads the dives and compares them with your SSI logbook.",
-  s3t:"Send", s3d:"Tap Send: the missing dives go to SSI with their depth profile. Done, without opening the app. Garmin/Suunto .fit and Shearwater/Subsurface .uddf work the same way, also from Files.",
+  btn_small_ios:"Download on the", btn_small_and:"Get it on", btn_small_soon:"In review, coming to",
+  how_link:"How it works", how:"How it works",
+  plat_h:"On iPhone and on Android", plat_lead:"Same app, same price, same dives in your logbook. Every supported computer works on both.",
+  ios_h:"iPhone", ios_req:"iOS 17 or later",
+  ios_p:"Share straight from Mail or Files. The app doesn't even have to open.",
+  ios_route:"<b>How you hand over a file:</b> long-press the download link in Mail, or the file in Files, and choose Share… › DiveDrop.",
+  and_h:"Android", and_req:"Android 8.0 or later",
+  and_p:"Share from Files, Gmail or Drive. Two taps and your dives are in SSI.",
+  and_route:"<b>How you hand over a file:</b> from Files, Gmail or Drive, tap Share and pick DiveDrop. Or open the file with DiveDrop.",
+  s1t:"Export", s1d:"In Oceanic+: Logbook › Export Dives, and you get an email with a download link. Garmin, Suunto, Shearwater and Subsurface give you a file directly.",
+  s2t:"Share it with DiveDrop", s2d:"Share the link or the file with the app. DiveDrop downloads the export, reads the dives and compares them with your SSI logbook.",
+  s3t:"Send", s3d:"Tap Send and the missing dives go to SSI with their depth profile.",
   s4t:"Compare", s4d:"Dives already in MySSI are recognised, even manually logged ones a few minutes off. Pool dips are skipped.",
-  s5t:"Fine-tune in the app", s5d:"Open DiveDrop for the depth chart, the map, dive sites and to ignore or re-send a dive.",
+  s5t:"Fine-tune in the app", s5d:"Open DiveDrop for the depth chart, dive sites, and to ignore or re-send a dive.",
   what:"What goes into your logbook", f1t:"The full depth profile", f1d:"Every sample from your computer: depth, water temperature, ascent rate and ascent alarms, so the dive looks in MySSI like a computer-synced one.",
   f2t:"The right dive site", f2d:"DiveDrop matches your entry point against SSI's own database of 24,000 verified sites and picks the nearest one. Change it in two taps.",
   f3t:"No duplicates", f3d:"Your existing MySSI logbook is the source of truth. Dives already there stay there; dives you logged by hand are recognised by day, time, depth and duration.",
-  f4t:"No server, no tracking", f4d:"Your SSI login goes straight from your phone to SSI and lives only in your Keychain. DiveDrop has no backend, no analytics and no ads.",
+  f4t:"No server, no tracking", f4d:"Your SSI login goes straight from your phone to SSI and stays on your device. DiveDrop has no backend, no analytics and no ads.",
   pricing:"Pricing", p_free_s:"to start", p_free:"Download free. Your first 3 dives to SSI are free, so you can see it works with your own logbook.",
-  p_once_s:"once, no subscription", p_once:"Unlock unlimited dives with a single in-app purchase. Restorable on all your devices.",
-  faq:"Questions", q1:"Which dive computers and apps work?", a1:"Oceanic+ on Apple Watch, Garmin Descent, Suunto, Shearwater Cloud, Subsurface, MacDive, Diving Log and anything else that exports UDDF or FIT. The <a href='compatibility/'>compatibility list</a> shows, per computer, how sure we are and which data comes across.",
-  q2:"Does SSI mark the dives as computer-verified?", a2:"Dives created through the app currently arrive as unconfirmed, the same as a manually entered dive. Your dive centre can still verify them. We have asked SSI for a supported way to flag them.",
-  q3:"Is this an official SSI product?", a3:"No. DiveDrop is an independent tool that talks to the same interface the MySSI app uses, on your behalf and with your own account. It works as long as SSI allows it.",
-  q4:"The preview shows 'Open with' another app instead of DiveDrop", a4:"iOS picks one app for zip files. Tap More… in the preview and choose DiveDrop; iOS remembers it next time.",
-  compat_link:"Works with my computer?", compat:"Compatibility", support:"Support", privacy:"Privacy policy", notaff:"Not affiliated with SSI, Oceanic or Huish Outdoors"},
+  p_once_s:"once, no subscription", p_once:"Unlock unlimited dives with a single in-app purchase. Bought on the platform you use; each store keeps its own purchases.",
+  faq:"Questions",
+  q1:"Does it work with my dive computer?",
+  a1:"If it can give you a UDDF or a FIT file, yes: Oceanic+ on Apple Watch, Garmin Descent, Suunto, Shearwater, Subsurface, MacDive, Diving Log and more. The <a href=\"compatibility/\">compatibility list</a> says per computer how sure we are and what data comes across.",
+  q2:"Does SSI mark the dives as computer-verified?",
+  a2:"No. Dives added this way arrive as unconfirmed, exactly like one you type in by hand, and your dive centre can still verify them. For a certification count the centre verifies from your log either way.",
+  q3:"Is this an official SSI product?",
+  a3:"No. DiveDrop is independent. It talks to the same interface the MySSI app uses, on your behalf and with your own account, and it works as long as SSI allows it.",
+  more:"More questions? See the <a href=\"support/\">support page</a>.",
+  compat:"Compatibility", support:"Support", privacy:"Privacy policy", notaff:"Not affiliated with SSI, Oceanic, Garmin, Suunto, Shearwater or Huish Outdoors"},
+
  fr: {by:"une app de Strategea", tag:"Partagez votre export de plongées avec DiveDrop. Votre carnet SSI est à jour. Profil de profondeur inclus.",
-  cta:"Télécharger dans l'App Store", how_link:"Comment ça marche", how:"Comment ça marche",
-  s1t:"Exportez", s1d:"Dans Oceanic+ sur votre iPhone : Logbook › Export Dives. Vous recevez un e-mail avec un lien de téléchargement.",
-  s2t:"Appui long sur le lien", s2d:"Choisissez Partager… › DiveDrop. Directement dans la feuille de partage, DiveDrop télécharge l'export, lit les plongées et les compare avec votre carnet SSI.",
-  s3t:"Envoyez", s3d:"Touchez Envoyer : les plongées manquantes partent vers SSI avec leur profil de profondeur. Terminé, sans ouvrir l'app. Les fichiers .fit Garmin/Suunto et .uddf Shearwater/Subsurface fonctionnent de la même façon, aussi depuis Fichiers.",
+  btn_small_ios:"Télécharger dans l'", btn_small_and:"Disponible sur", btn_small_soon:"En validation, bientôt sur",
+  how_link:"Comment ça marche", how:"Comment ça marche",
+  plat_h:"Sur iPhone et sur Android", plat_lead:"Même app, même prix, mêmes plongées dans votre carnet. Tous les ordinateurs pris en charge fonctionnent sur les deux.",
+  ios_h:"iPhone", ios_req:"iOS 17 ou plus récent",
+  ios_p:"Partagez depuis Mail ou Fichiers. L'app n'a même pas besoin de s'ouvrir.",
+  ios_route:"<b>Comment transmettre un fichier :</b> appui long sur le lien dans Mail, ou sur le fichier dans Fichiers, puis Partager… › DiveDrop.",
+  and_h:"Android", and_req:"Android 8.0 ou plus récent",
+  and_p:"Partagez depuis Fichiers, Gmail ou Drive. Deux touches et vos plongées sont dans SSI.",
+  and_route:"<b>Comment transmettre un fichier :</b> depuis Fichiers, Gmail ou Drive, touchez Partager et choisissez DiveDrop. Ou ouvrez le fichier avec DiveDrop.",
+  s1t:"Exportez", s1d:"Dans Oceanic+ : Logbook › Export Dives, et vous recevez un e-mail avec un lien. Garmin, Suunto, Shearwater et Subsurface vous donnent un fichier directement.",
+  s2t:"Partagez avec DiveDrop", s2d:"Partagez le lien ou le fichier avec l'app. DiveDrop télécharge l'export, lit les plongées et les compare avec votre carnet SSI.",
+  s3t:"Envoyez", s3d:"Touchez Envoyer : les plongées manquantes partent vers SSI avec leur profil de profondeur.",
   s4t:"Comparez", s4d:"Les plongées déjà dans MySSI sont reconnues, même celles saisies à la main avec quelques minutes d'écart. Les trempettes en piscine sont ignorées.",
-  s5t:"Affinez dans l'app", s5d:"Ouvrez DiveDrop pour la courbe de profondeur, la carte, les sites de plongée, et pour ignorer ou renvoyer une plongée.",
+  s5t:"Affinez dans l'app", s5d:"Ouvrez DiveDrop pour la courbe de profondeur, les sites de plongée, et pour ignorer ou renvoyer une plongée.",
   what:"Ce qui entre dans votre carnet", f1t:"Le profil de profondeur complet", f1d:"Chaque échantillon de votre ordinateur : profondeur, température de l'eau, vitesse de remontée et alarmes, pour que la plongée ressemble dans MySSI à une plongée synchronisée depuis un ordinateur.",
   f2t:"Le bon site de plongée", f2d:"DiveDrop compare votre point de mise à l'eau avec la base SSI de 24 000 sites vérifiés et choisit le plus proche. Modifiable en deux touches.",
   f3t:"Pas de doublons", f3d:"Votre carnet MySSI existant fait foi. Ce qui y est reste ; les plongées saisies à la main sont reconnues par jour, heure, profondeur et durée.",
-  f4t:"Pas de serveur, pas de suivi", f4d:"Votre identifiant SSI va directement de votre téléphone à SSI et ne vit que dans votre trousseau. DiveDrop n'a ni backend, ni analytics, ni publicité.",
+  f4t:"Pas de serveur, pas de suivi", f4d:"Votre identifiant SSI va directement de votre téléphone à SSI et reste sur votre appareil. DiveDrop n'a ni backend, ni analytics, ni publicité.",
   pricing:"Prix", p_free_s:"pour commencer", p_free:"Téléchargement gratuit. Vos 3 premières plongées vers SSI sont offertes, pour vérifier que ça marche avec votre propre carnet.",
-  p_once_s:"une fois, sans abonnement", p_once:"Débloquez les plongées illimitées avec un seul achat intégré. Restaurable sur tous vos appareils.",
-  faq:"Questions", q1:"Quels ordinateurs et apps de plongée fonctionnent ?", a1:"Oceanic+ sur Apple Watch, Garmin Descent, Suunto, Shearwater Cloud, Subsurface, MacDive, Diving Log et tout ce qui exporte en UDDF ou FIT. La <a href='compatibility/'>liste de compatibilité</a> indique, par ordinateur, notre degré de certitude et les données transmises.",
-  q2:"SSI marque-t-il les plongées comme vérifiées par ordinateur ?", a2:"Les plongées créées via l'app arrivent pour l'instant comme non confirmées, comme une plongée saisie à la main. Votre centre de plongée peut toujours les valider. Nous avons demandé à SSI une méthode officielle pour les marquer.",
-  q3:"Est-ce un produit officiel SSI ?", a3:"Non. DiveDrop est un outil indépendant qui dialogue avec la même interface que l'app MySSI, en votre nom et avec votre propre compte. Il fonctionne tant que SSI l'autorise.",
-  q4:"L'aperçu propose « Ouvrir avec » une autre app que DiveDrop", a4:"iOS choisit une seule app pour les fichiers zip. Touchez Plus… dans l'aperçu et choisissez DiveDrop ; iOS s'en souviendra.",
-  compat_link:"Compatible avec mon ordinateur ?", compat:"Compatibilité", support:"Support", privacy:"Politique de confidentialité", notaff:"Sans lien avec SSI, Oceanic ou Huish Outdoors"},
+  p_once_s:"une fois, sans abonnement", p_once:"Débloquez les plongées illimitées avec un seul achat intégré. Acheté sur la plateforme que vous utilisez ; chaque store garde ses propres achats.",
+  faq:"Questions",
+  q1:"Est-ce que ça marche avec mon ordinateur ?",
+  a1:"S'il peut produire un fichier UDDF ou FIT, oui : Oceanic+ sur Apple Watch, Garmin Descent, Suunto, Shearwater, Subsurface, MacDive, Diving Log et d'autres. La <a href=\"compatibility/\">liste de compatibilité</a> indique, par ordinateur, notre degré de certitude et les données transmises.",
+  q2:"SSI marque-t-il les plongées comme vérifiées par ordinateur ?",
+  a2:"Non. Les plongées ajoutées ainsi arrivent comme non confirmées, exactement comme une saisie à la main, et votre centre peut toujours les valider. Pour un décompte, le centre valide d'après votre carnet de toute façon.",
+  q3:"Est-ce un produit officiel SSI ?",
+  a3:"Non. DiveDrop est indépendant. Il dialogue avec la même interface que l'app MySSI, en votre nom et avec votre propre compte, et fonctionne tant que SSI l'autorise.",
+  more:"D'autres questions\u00a0? Voyez la <a href=\"support/\">page de support</a>.",
+  compat:"Compatibilité", support:"Support", privacy:"Politique de confidentialité", notaff:"Sans lien avec SSI, Oceanic, Garmin, Suunto, Shearwater ou Huish Outdoors"},
+
  nl: {by:"een app van Strategea", tag:"Deel je duik-export met DiveDrop. Je SSI-logboek is bijgewerkt. Met diepteprofiel.",
-  cta:"Download in de App Store", how_link:"Zo werkt het", how:"Zo werkt het",
-  s1t:"Exporteer", s1d:"In Oceanic+ op je iPhone: Logbook › Export Dives. Je krijgt een mail met een downloadlink.",
-  s2t:"Druk lang op de link", s2d:"Kies Deel… › DiveDrop. Meteen in het deelvenster downloadt DiveDrop de export, leest de duiken en vergelijkt ze met je SSI-logboek.",
-  s3t:"Verstuur", s3d:"Tik op Verstuur: de ontbrekende duiken gaan naar SSI, met diepteprofiel. Klaar, zonder de app te openen. Garmin/Suunto .fit en Shearwater/Subsurface .uddf werken op dezelfde manier, ook vanuit Bestanden.",
+  btn_small_ios:"Download in de", btn_small_and:"Ontdek het op", btn_small_soon:"In beoordeling, binnenkort op",
+  how_link:"Zo werkt het", how:"Zo werkt het",
+  plat_h:"Op iPhone en op Android", plat_lead:"Dezelfde app, dezelfde prijs, dezelfde duiken in je logboek. Elke ondersteunde computer werkt op allebei.",
+  ios_h:"iPhone", ios_req:"iOS 17 of nieuwer",
+  ios_p:"Deel rechtstreeks vanuit Mail of Bestanden. De app hoeft niet eens open.",
+  ios_route:"<b>Zo geef je een bestand door:</b> druk lang op de downloadlink in Mail, of op het bestand in Bestanden, en kies Deel… › DiveDrop.",
+  and_h:"Android", and_req:"Android 8.0 of nieuwer",
+  and_p:"Deel vanuit Bestanden, Gmail of Drive. Twee tikken en je duiken staan in SSI.",
+  and_route:"<b>Zo geef je een bestand door:</b> vanuit Bestanden, Gmail of Drive tik je op Delen en kies je DiveDrop. Openen met DiveDrop werkt ook.",
+  s1t:"Exporteer", s1d:"In Oceanic+: Logbook › Export Dives, en je krijgt een mail met een downloadlink. Garmin, Suunto, Shearwater en Subsurface geven je meteen een bestand.",
+  s2t:"Deel met DiveDrop", s2d:"Deel de link of het bestand met de app. DiveDrop downloadt de export, leest de duiken en vergelijkt ze met je SSI-logboek.",
+  s3t:"Verstuur", s3d:"Tik op Verstuur en de ontbrekende duiken gaan naar SSI, met diepteprofiel.",
   s4t:"Vergelijk", s4d:"Duiken die al in MySSI staan worden herkend, ook manueel gelogde met enkele minuten verschil. Zwembad-dips worden overgeslagen.",
-  s5t:"Verfijn in de app", s5d:"Open DiveDrop voor de dieptegrafiek, de kaart, duikstekken, en om een duik te negeren of opnieuw te versturen.",
+  s5t:"Verfijn in de app", s5d:"Open DiveDrop voor de dieptegrafiek, duikstekken, en om een duik te negeren of opnieuw te versturen.",
   what:"Wat er in je logboek komt", f1t:"Het volledige diepteprofiel", f1d:"Elke sample van je computer: diepte, watertemperatuur, opstijgsnelheid en opstijgalarmen, zodat de duik er in MySSI uitziet als een gesyncte computerduik.",
   f2t:"De juiste duikstek", f2d:"DiveDrop legt je instappunt naast SSI's eigen database van 24.000 geverifieerde stekken en kiest de dichtstbijzijnde. Wijzigen kan in twee tikken.",
   f3t:"Geen dubbels", f3d:"Je bestaande MySSI-logboek is de bron. Wat er al in staat blijft staan; manueel gelogde duiken worden herkend op dag, tijd, diepte en duur.",
-  f4t:"Geen server, geen tracking", f4d:"Je SSI-login gaat rechtstreeks van je telefoon naar SSI en staat alleen in je Keychain. DiveDrop heeft geen backend, geen analytics en geen advertenties.",
+  f4t:"Geen server, geen tracking", f4d:"Je SSI-login gaat rechtstreeks van je telefoon naar SSI en blijft op je toestel. DiveDrop heeft geen backend, geen analytics en geen advertenties.",
   pricing:"Prijs", p_free_s:"om te starten", p_free:"Gratis downloaden. Je eerste 3 duiken naar SSI zijn gratis, zodat je met je eigen logboek ziet dat het werkt.",
-  p_once_s:"eenmalig, geen abonnement", p_once:"Ontgrendel onbeperkt duiken met één in-app-aankoop. Herstelbaar op al je toestellen.",
-  faq:"Vragen", q1:"Welke duikcomputers en apps werken?", a1:"Oceanic+ op Apple Watch, Garmin Descent, Suunto, Shearwater Cloud, Subsurface, MacDive, Diving Log en al wat UDDF of FIT exporteert. De <a href='compatibility/'>compatibiliteitslijst</a> toont per computer hoe zeker we zijn en welke gegevens meekomen.",
-  q2:"Markeert SSI de duiken als computer-geverifieerd?", a2:"Duiken die via de app worden aangemaakt komen momenteel binnen als niet bevestigd, net als een manueel ingevoerde duik. Je duikcentrum kan ze nog steeds bevestigen. We hebben SSI gevraagd naar een ondersteunde manier om ze te markeren.",
-  q3:"Is dit een officieel SSI-product?", a3:"Nee. DiveDrop is een onafhankelijke tool die met dezelfde interface praat als de MySSI-app, namens jou en met je eigen account. Het werkt zolang SSI dit toelaat.",
-  q4:"De voorvertoning toont 'Open met' een andere app in plaats van DiveDrop", a4:"iOS kiest één app voor zip-bestanden. Tik op Meer… in de voorvertoning en kies DiveDrop; iOS onthoudt dat de volgende keer.",
-  compat_link:"Werkt het met mijn computer?", compat:"Compatibiliteit", support:"Support", privacy:"Privacybeleid", notaff:"Niet verbonden aan SSI, Oceanic of Huish Outdoors"}
+  p_once_s:"eenmalig, geen abonnement", p_once:"Ontgrendel onbeperkt duiken met één in-app-aankoop. Gekocht op het platform dat je gebruikt; elke winkel houdt zijn eigen aankopen bij.",
+  faq:"Vragen",
+  q1:"Werkt het met mijn duikcomputer?",
+  a1:"Kan die je een UDDF- of FIT-bestand geven, dan ja: Oceanic+ op Apple Watch, Garmin Descent, Suunto, Shearwater, Subsurface, MacDive, Diving Log en meer. De <a href=\"compatibility/\">compatibiliteitslijst</a> toont per computer hoe zeker we zijn en welke gegevens meekomen.",
+  q2:"Markeert SSI de duiken als computer-geverifieerd?",
+  a2:"Nee. Duiken die zo binnenkomen staan als niet bevestigd, net als een duik die je met de hand intikt, en je duikcentrum kan ze nog altijd bevestigen. Voor een duikaantal bevestigt het centrum toch vanuit je eigen logboek.",
+  q3:"Is dit een officieel SSI-product?",
+  a3:"Nee. DiveDrop is onafhankelijk. Hij praat met dezelfde interface als de MySSI-app, namens jou en met je eigen account, en werkt zolang SSI dat toelaat.",
+  more:"Nog vragen? Bekijk de <a href=\"support/\">supportpagina</a>.",
+  compat:"Compatibiliteit", support:"Support", privacy:"Privacybeleid", notaff:"Niet verbonden aan SSI, Oceanic, Garmin, Suunto, Shearwater of Huish Outdoors"}
 };
+
+
+// These sentences carry our own markup (links, bold); everything else is inserted as plain text.
+const HTML_KEYS = new Set(['ios_route', 'and_route', 'faq_more', 'a1']);
+
 function apply(lang){
   const t = T[lang] || T.en;
+  t.faq_more = t.more;
   document.documentElement.lang = lang;
-  document.querySelectorAll('[data-i18n]').forEach(el => { const v = t[el.dataset.i18n] ?? ''; if (el.dataset.i18n === 'a1') el.innerHTML = v; else el.textContent = v; });
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const v = t[el.dataset.i18n] ?? '';
+    if (HTML_KEYS.has(el.dataset.i18n)) el.innerHTML = v; else el.textContent = v;
+  });
+  document.getElementById('heroStores').innerHTML = storeButtons(t, 'both');
+  document.getElementById('iosStore').innerHTML = storeButtons(t, 'ios');
+  document.getElementById('andStore').innerHTML = storeButtons(t, 'and');
   document.querySelectorAll('[data-shot]').forEach(img => { img.src = 'img/' + (lang === 'nl' ? 'nl' : 'en') + '-' + img.dataset.shot + '.png'; });
   document.querySelectorAll('.lang-toggle button').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
   try { localStorage.setItem('divedrop.lang', lang); } catch (e) {}

@@ -40,7 +40,7 @@
   .how-link{display:inline-block;margin-top:1rem;font-weight:600;font-size:.95rem}
   .video{margin:3.5rem 0 0}
   .videobox{position:relative;margin-top:1.25rem;border-radius:24px;overflow:hidden;background:#0d0f14;aspect-ratio:16/9;box-shadow:0 20px 45px -15px rgba(17,24,39,.25)}
-  .videobox iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .videobox video{position:absolute;inset:0;width:100%;height:100%;border:0;background:#0d0f14}
   .vidbtn{position:absolute;inset:0;width:100%;height:100%;padding:0;border:0;background:none;cursor:pointer;display:block}
   .vidbtn img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
   .vidbtn:hover img{transform:scale(1.02)}
@@ -223,7 +223,7 @@ const T = {
   btn_small_ios:"Download on the", btn_small_and:"Get it on", btn_small_soon:"In review, coming to",
   how_link:"How it works", how:"How it works",
   vid_h:"See it in 23 seconds", vid_lead:"From the export to your logbook, depth profile and all.",
-  vid_play:"Play the video", vid_note:"YouTube only loads once you press play. <a href=\"https://www.youtube.com/watch?v=ppQu4N8W-aE\">Watch on YouTube</a>",
+  vid_play:"Play the video", vid_note:"The film plays from this site; nothing is fetched until you press play. <a href=\"https://www.youtube.com/watch?v=ppQu4N8W-aE\">Also on YouTube</a>",
   plat_h:"On iPhone and on Android", plat_lead:"Same app, same price, same dives in your logbook. Every supported computer works on both.",
   ios_h:"iPhone", ios_req:"iOS 17 or later",
   ios_p:"Share straight from Mail or Files. The app doesn't even have to open.",
@@ -256,7 +256,7 @@ const T = {
   btn_small_ios:"Télécharger dans l'", btn_small_and:"Disponible sur", btn_small_soon:"En validation, bientôt sur",
   how_link:"Comment ça marche", how:"Comment ça marche",
   vid_h:"Voyez-le en 23 secondes", vid_lead:"De l'export à votre carnet, profil de profondeur compris.",
-  vid_play:"Lire la vidéo", vid_note:"YouTube ne se charge qu'au moment où vous lancez la vidéo. <a href=\"https://www.youtube.com/watch?v=ppQu4N8W-aE\">Voir sur YouTube</a>",
+  vid_play:"Lire la vidéo", vid_note:"La vidéo est hébergée sur ce site ; rien n'est chargé avant que vous la lanciez. <a href=\"https://www.youtube.com/watch?v=ppQu4N8W-aE\">Aussi sur YouTube</a>",
   plat_h:"Sur iPhone et sur Android", plat_lead:"Même app, même prix, mêmes plongées dans votre carnet. Tous les ordinateurs pris en charge fonctionnent sur les deux.",
   ios_h:"iPhone", ios_req:"iOS 17 ou plus récent",
   ios_p:"Partagez depuis Mail ou Fichiers. L'app n'a même pas besoin de s'ouvrir.",
@@ -289,7 +289,7 @@ const T = {
   btn_small_ios:"Download in de", btn_small_and:"Ontdek het op", btn_small_soon:"In beoordeling, binnenkort op",
   how_link:"Zo werkt het", how:"Zo werkt het",
   vid_h:"Bekijk het in 23 seconden", vid_lead:"Van de export tot in je logboek, diepteprofiel incluis.",
-  vid_play:"Speel de video af", vid_note:"YouTube laadt pas als je op play drukt. <a href=\"https://www.youtube.com/watch?v=ppQu4N8W-aE\">Bekijk op YouTube</a>",
+  vid_play:"Speel de video af", vid_note:"De video staat op deze site; er wordt niets geladen tot je op play drukt. <a href=\"https://www.youtube.com/watch?v=ppQu4N8W-aE\">Ook op YouTube</a>",
   plat_h:"Op iPhone en op Android", plat_lead:"Dezelfde app, dezelfde prijs, dezelfde duiken in je logboek. Elke ondersteunde computer werkt op allebei.",
   ios_h:"iPhone", ios_req:"iOS 17 of nieuwer",
   ios_p:"Deel rechtstreeks vanuit Mail of Bestanden. De app hoeft niet eens open.",
@@ -343,10 +343,16 @@ let start = 'en';
 try { start = localStorage.getItem('divedrop.lang') || (l => l.startsWith('nl') ? 'nl' : l.startsWith('fr') ? 'fr' : 'en')((navigator.language || '').toLowerCase()); } catch (e) {}
 apply(start);
 
-// The poster is a still from the video; YouTube is only contacted once someone presses play.
+// We host the film ourselves: nothing loads until someone presses play, and then it is our own file.
 document.getElementById('vidPlay').addEventListener('click', () => {
-  document.getElementById('videobox').innerHTML =
-    '<iframe src="https://www.youtube-nocookie.com/embed/ppQu4N8W-aE?autoplay=1&rel=0" title="DiveDrop" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+  let small = window.innerWidth < 900;
+  try { small = small || navigator.connection.saveData === true; } catch (e) {}
+  const src = 'video/divedrop-23s' + (small ? '-720' : '') + '.mp4';
+  const v = document.createElement('video');
+  v.src = src; v.controls = true; v.autoplay = true; v.playsInline = true; v.preload = 'auto';
+  v.setAttribute('poster', 'img/video-still.jpg');
+  const box = document.getElementById('videobox');
+  box.innerHTML = ''; box.appendChild(v);
 });
 </script>
 </body>

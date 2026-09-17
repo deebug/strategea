@@ -44,11 +44,10 @@
   .vidbtn{position:absolute;inset:0;width:100%;height:100%;padding:0;border:0;background:none;cursor:pointer;display:block}
   .vidbtn img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
   .vidbtn:hover img{transform:scale(1.02)}
-  .vidbtn .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:1;width:92px;height:92px;border-radius:50%;background:#fff;box-shadow:0 10px 30px -6px rgba(13,20,30,.45);display:flex;align-items:center;justify-content:center;transition:transform .3s,background .3s}
-  .vidbtn .play svg{fill:var(--accent-2)}
-  .vidbtn:hover .play{background:var(--accent-2);transform:translate(-50%,-50%) scale(1.06)}
-  .vidbtn:hover .play svg{fill:#fff}
-  .vidbtn .play svg{width:34px;height:34px;margin-left:5px;transition:fill .3s}
+  .vidbtn .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:1;width:74px;height:74px;border-radius:50%;background:rgba(255,255,255,.82);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.9);box-shadow:0 8px 24px -10px rgba(13,20,30,.3);display:flex;align-items:center;justify-content:center;transition:transform .35s ease,background .35s ease,box-shadow .35s ease}
+  .vidbtn .play svg{width:24px;height:24px;margin-left:3px;color:var(--accent-2);fill:var(--accent-2);transition:fill .35s ease}
+  .vidbtn:hover .play{background:#fff;transform:translate(-50%,-50%) scale(1.08);box-shadow:0 14px 34px -12px rgba(13,20,30,.38)}
+  .vidbtn:hover .play svg{color:var(--accent-1);fill:var(--accent-1)}
   .vidnote{color:var(--muted);font-size:.85rem;margin-top:.7rem}
   .vidnote a{color:var(--muted)}
 
@@ -125,7 +124,7 @@
     <div class="videobox" id="videobox">
       <button class="vidbtn" id="vidPlay" type="button">
         <img src="img/video-still.jpg" alt="" width="1600" height="900" loading="lazy">
-        <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+        <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 6.8v10.4l8.6-5.2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
         <span class="sr" data-i18n="vid_play"></span>
       </button>
     </div>

@@ -7,7 +7,8 @@
 <meta name="description" content="Share your Oceanic+ (Apple Watch), Garmin, Suunto, Shearwater or UDDF dive export and DiveDrop adds the missing dives to your MySSI logbook, depth profile included. For iPhone and Android.">
 <meta property="og:title" content="DiveDrop">
 <meta property="og:description" content="Share your dive export. Your SSI logbook is up to date. Profile included. iPhone and Android.">
-<meta property="og:image" content="https://strategea.be/divedrop/img/icon.png">
+<meta property="og:image" content="https://strategea.be/divedrop/img/video-poster.jpg">
+<meta property="og:video" content="https://www.youtube.com/watch?v=ppQu4N8W-aE">
 <link rel="icon" href="img/icon.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Outfit:wght@300;400;600;800&display=swap">
 <style>
@@ -35,7 +36,21 @@
   .store small{display:block;font-size:.7rem;font-weight:400;opacity:.75;letter-spacing:.02em}
   .store.soon{background:var(--card-bg);color:var(--text-secondary);border:1px dashed rgba(17,24,39,.22);cursor:default}
   .store.soon:hover{transform:none;box-shadow:none}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
   .how-link{display:inline-block;margin-top:1rem;font-weight:600;font-size:.95rem}
+  .video{margin:3.5rem 0 0}
+  .videobox{position:relative;margin-top:1.25rem;border-radius:24px;overflow:hidden;background:#0d0f14;aspect-ratio:16/9;box-shadow:0 20px 45px -15px rgba(17,24,39,.25)}
+  .videobox iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .vidbtn{position:absolute;inset:0;width:100%;height:100%;padding:0;border:0;background:none;cursor:pointer;display:block}
+  .vidbtn img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+  .vidbtn:hover img{transform:scale(1.02)}
+  .vidbtn .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:1;width:92px;height:92px;border-radius:50%;background:#fff;box-shadow:0 10px 30px -6px rgba(13,20,30,.45);display:flex;align-items:center;justify-content:center;transition:transform .3s,background .3s}
+  .vidbtn .play svg{fill:var(--accent-2)}
+  .vidbtn:hover .play{background:var(--accent-2);transform:translate(-50%,-50%) scale(1.06)}
+  .vidbtn:hover .play svg{fill:#fff}
+  .vidbtn .play svg{width:34px;height:34px;margin-left:5px;transition:fill .3s}
+  .vidnote{color:var(--muted);font-size:.85rem;margin-top:.7rem}
+  .vidnote a{color:var(--muted)}
 
   .phones{display:flex;gap:1rem;justify-content:center}
   .phones img{width:31%;border-radius:22px;box-shadow:0 20px 40px -10px rgba(17,24,39,.25);background:#fff}
@@ -102,6 +117,19 @@
       <img data-shot="01-list" alt="DiveDrop dive list with sync status">
       <img data-shot="02-detail" alt="Dive detail with depth profile and map">
     </div>
+  </section>
+
+  <section class="video">
+    <h2 data-i18n="vid_h"></h2>
+    <p class="lead" data-i18n="vid_lead"></p>
+    <div class="videobox" id="videobox">
+      <button class="vidbtn" id="vidPlay" type="button">
+        <img src="img/video-still.jpg" alt="" width="1600" height="900" loading="lazy">
+        <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+        <span class="sr" data-i18n="vid_play"></span>
+      </button>
+    </div>
+    <p class="vidnote" data-i18n="vid_note"></p>
   </section>
 
   <h2 data-i18n="plat_h"></h2>
@@ -195,6 +223,8 @@ const T = {
  en: {by:"an app by Strategea", tag:"Share your dive export with DiveDrop. Your SSI logbook is up to date. Depth profile included.",
   btn_small_ios:"Download on the", btn_small_and:"Get it on", btn_small_soon:"In review, coming to",
   how_link:"How it works", how:"How it works",
+  vid_h:"See it in 23 seconds", vid_lead:"From the export to your logbook, depth profile and all.",
+  vid_play:"Play the video", vid_note:"YouTube only loads once you press play. <a href=\"https://www.youtube.com/watch?v=ppQu4N8W-aE\">Watch on YouTube</a>",
   plat_h:"On iPhone and on Android", plat_lead:"Same app, same price, same dives in your logbook. Every supported computer works on both.",
   ios_h:"iPhone", ios_req:"iOS 17 or later",
   ios_p:"Share straight from Mail or Files. The app doesn't even have to open.",
@@ -226,6 +256,8 @@ const T = {
  fr: {by:"une app de Strategea", tag:"Partagez votre export de plongées avec DiveDrop. Votre carnet SSI est à jour. Profil de profondeur inclus.",
   btn_small_ios:"Télécharger dans l'", btn_small_and:"Disponible sur", btn_small_soon:"En validation, bientôt sur",
   how_link:"Comment ça marche", how:"Comment ça marche",
+  vid_h:"Voyez-le en 23 secondes", vid_lead:"De l'export à votre carnet, profil de profondeur compris.",
+  vid_play:"Lire la vidéo", vid_note:"YouTube ne se charge qu'au moment où vous lancez la vidéo. <a href=\"https://www.youtube.com/watch?v=ppQu4N8W-aE\">Voir sur YouTube</a>",
   plat_h:"Sur iPhone et sur Android", plat_lead:"Même app, même prix, mêmes plongées dans votre carnet. Tous les ordinateurs pris en charge fonctionnent sur les deux.",
   ios_h:"iPhone", ios_req:"iOS 17 ou plus récent",
   ios_p:"Partagez depuis Mail ou Fichiers. L'app n'a même pas besoin de s'ouvrir.",
@@ -257,6 +289,8 @@ const T = {
  nl: {by:"een app van Strategea", tag:"Deel je duik-export met DiveDrop. Je SSI-logboek is bijgewerkt. Met diepteprofiel.",
   btn_small_ios:"Download in de", btn_small_and:"Ontdek het op", btn_small_soon:"In beoordeling, binnenkort op",
   how_link:"Zo werkt het", how:"Zo werkt het",
+  vid_h:"Bekijk het in 23 seconden", vid_lead:"Van de export tot in je logboek, diepteprofiel incluis.",
+  vid_play:"Speel de video af", vid_note:"YouTube laadt pas als je op play drukt. <a href=\"https://www.youtube.com/watch?v=ppQu4N8W-aE\">Bekijk op YouTube</a>",
   plat_h:"Op iPhone en op Android", plat_lead:"Dezelfde app, dezelfde prijs, dezelfde duiken in je logboek. Elke ondersteunde computer werkt op allebei.",
   ios_h:"iPhone", ios_req:"iOS 17 of nieuwer",
   ios_p:"Deel rechtstreeks vanuit Mail of Bestanden. De app hoeft niet eens open.",
@@ -288,7 +322,7 @@ const T = {
 
 
 // These sentences carry our own markup (links, bold); everything else is inserted as plain text.
-const HTML_KEYS = new Set(['ios_route', 'and_route', 'faq_more', 'a1']);
+const HTML_KEYS = new Set(['ios_route', 'and_route', 'faq_more', 'a1', 'vid_note']);
 
 function apply(lang){
   const t = T[lang] || T.en;
@@ -309,6 +343,12 @@ document.querySelectorAll('.lang-toggle button').forEach(b => b.addEventListener
 let start = 'en';
 try { start = localStorage.getItem('divedrop.lang') || (l => l.startsWith('nl') ? 'nl' : l.startsWith('fr') ? 'fr' : 'en')((navigator.language || '').toLowerCase()); } catch (e) {}
 apply(start);
+
+// The poster is a still from the video; YouTube is only contacted once someone presses play.
+document.getElementById('vidPlay').addEventListener('click', () => {
+  document.getElementById('videobox').innerHTML =
+    '<iframe src="https://www.youtube-nocookie.com/embed/ppQu4N8W-aE?autoplay=1&rel=0" title="DiveDrop" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+});
 </script>
 </body>
 </html>

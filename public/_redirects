@@ -10,7 +10,9 @@ https://divedrop.app/divedrop/*          https://divedrop.app/:splat   301!
 
 https://divedrop.app/*                   /divedrop/:splat              200!
 
-# Once https://divedrop.app answers, the old addresses move there for good:
-# https://strategea.be/divedrop            https://divedrop.app/         301!
-# https://strategea.be/divedrop/*          https://divedrop.app/:splat   301!
-# https://www.strategea.be/divedrop/*      https://divedrop.app/:splat   301!
+# The old addresses moved there for good. The shipped apps and the store listings
+# still link to strategea.be/divedrop/privacy and the review samples; these keep them working.
+https://strategea.be/divedrop            https://divedrop.app/         301!
+https://strategea.be/divedrop/*          https://divedrop.app/:splat   301!
+https://www.strategea.be/divedrop        https://divedrop.app/         301!
+https://www.strategea.be/divedrop/*      https://divedrop.app/:splat   301!

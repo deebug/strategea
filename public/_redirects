@@ -4,13 +4,9 @@
 https://www.divedrop.app/*               https://divedrop.app/:splat   301!
 
 # Paths from the strategea.be layout, typed on the new domain.
+# (Netlify ignores a trailing slash when matching, so never redirect /x to /x/: that loops.)
 https://divedrop.app/divedrop            https://divedrop.app/         301!
 https://divedrop.app/divedrop/*          https://divedrop.app/:splat   301!
-
-# Section roots without a trailing slash (the pages use relative links).
-https://divedrop.app/support             https://divedrop.app/support/        301!
-https://divedrop.app/privacy             https://divedrop.app/privacy/        301!
-https://divedrop.app/compatibility       https://divedrop.app/compatibility/  301!
 
 https://divedrop.app/*                   /divedrop/:splat              200!
 

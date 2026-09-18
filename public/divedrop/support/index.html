@@ -43,7 +43,7 @@
 <body>
 <div class="lang-toggle" aria-label="Language"><button data-lang="en">EN</button><button data-lang="fr">FR</button><button data-lang="nl">NL</button></div>
 <main class="wrap">
-  <a class="brand" href="/divedrop/"><img class="appicon" src="../img/icon.png" alt="DiveDrop"> <span>DiveDrop <small>by Strategea</small></span></a>
+  <a class="brand" href="../"><img class="appicon" src="../img/icon.png" alt="DiveDrop"> <span>DiveDrop <small>by Strategea</small></span></a>
   <h1 data-i18n="title"></h1>
   <p data-i18n="intro"></p>
 
@@ -71,7 +71,7 @@
   <p class="more" data-i18n="more"></p>
 
   <h2 data-i18n="formtitle"></h2>
-  <form name="divedrop-support" method="POST" action="/divedrop/support/thanks/" data-netlify="true" netlify-honeypot="website" enctype="multipart/form-data">
+  <form name="divedrop-support" method="POST" action="thanks/" data-netlify="true" netlify-honeypot="website" enctype="multipart/form-data">
     <input type="hidden" name="form-name" value="divedrop-support">
     <input type="hidden" name="language" id="langField" value="en">
     <p class="hp"><label>Website <input name="website" tabindex="-1" autocomplete="off"></label></p>
@@ -108,11 +108,11 @@
     <small data-i18n="privacy"></small>
   </form>
 
-  <footer>DIEP CLOUD BV, Pannenhuisstraat 9, 8900 Ieper &bull; BTW / VAT: BE 1038.498.133 &bull; <a href="/divedrop/">DiveDrop</a> &bull; <a href="/divedrop/privacy/" data-i18n="privacylink"></a> &bull; <a href="mailto:info@strategea.be">info@strategea.be</a></footer>
+  <footer>DIEP CLOUD BV, Pannenhuisstraat 9, 8900 Ieper &bull; BTW / VAT: BE 1038.498.133 &bull; <a href="../">DiveDrop</a> &bull; <a href="../privacy/" data-i18n="privacylink"></a> &bull; <a href="mailto:info@strategea.be">info@strategea.be</a></footer>
 </main>
 <script>
 const T = {
- en: {title:"DiveDrop support", intro:"Something not working, or a dive computer you'd like to see supported? These answers apply to the iPhone and the Android app alike. Questions about one platform only are on the <a href=\"/divedrop/\">DiveDrop page</a>. Still stuck? Write to us; we usually reply within two working days.",
+ en: {title:"DiveDrop support", intro:"Something not working, or a dive computer you'd like to see supported? These answers apply to the iPhone and the Android app alike. Questions about one platform only are on the <a href=\"../\">DiveDrop page</a>. Still stuck? Write to us; we usually reply within two working days.",
   faq:"Frequent questions",
   g_all:"Both apps",
   g_ios:"On iPhone",
@@ -135,11 +135,11 @@ const T = {
   n2a:"Open DiveDrop › Account › Restore purchase, signed in with the same Google account that paid.",
   n3q:"Is the Android app behind the iPhone one?",
   n3a:"No. Both send exactly the same data to SSI, and that is checked automatically on every change.",
-  more:"Wondering whether your dive computer is covered, or how SSI marks the dives? Those are answered on the <a href=\"/divedrop/\">DiveDrop page</a> and in the <a href=\"/divedrop/compatibility/\">compatibility list</a>.",
+  more:"Wondering whether your dive computer is covered, or how SSI marks the dives? Those are answered on the <a href=\"../\">DiveDrop page</a> and in the <a href=\"../compatibility/\">compatibility list</a>.",
   formtitle:"Contact us", f_platform:"Which app", f_name:"Name", f_email:"Email", f_device:"Dive computer or app", f_topic:"Topic", f_message:"What happened, step by step?", f_file:"Export file (optional)", f_filehint:"The .zip, .uddf or .fit that caused the problem. Max 8 MB.",
   t_import:"Import or file problem", t_ssi:"Sending to SSI", t_purchase:"Purchase or restore", t_feature:"Feature request", t_other:"Other",
   send:"Send", privacy:"We use what you send only to answer you. Attached exports are deleted after the case is closed.", privacylink:"Privacy policy"},
- fr: {title:"Support DiveDrop", intro:"Quelque chose ne fonctionne pas, ou vous voulez voir un ordinateur pris en charge ? Ces réponses valent autant pour l'app iPhone que pour Android. Les questions propres à une seule plateforme sont sur la <a href=\"/divedrop/\">page DiveDrop</a>. Toujours bloqué ? Écrivez-nous ; nous répondons généralement sous deux jours ouvrés.",
+ fr: {title:"Support DiveDrop", intro:"Quelque chose ne fonctionne pas, ou vous voulez voir un ordinateur pris en charge ? Ces réponses valent autant pour l'app iPhone que pour Android. Les questions propres à une seule plateforme sont sur la <a href=\"../\">page DiveDrop</a>. Toujours bloqué ? Écrivez-nous ; nous répondons généralement sous deux jours ouvrés.",
   faq:"Questions fréquentes",
   g_all:"Les deux apps",
   g_ios:"Sur iPhone",
@@ -162,11 +162,11 @@ const T = {
   n2a:"Ouvrez DiveDrop › Compte › Restaurer l'achat, connecté avec le compte Google qui a payé.",
   n3q:"L'app Android est-elle en retard sur celle d'iPhone ?",
   n3a:"Non. Les deux envoient exactement les mêmes données à SSI, et c'est vérifié automatiquement à chaque changement.",
-  more:"Vous vous demandez si votre ordinateur est pris en charge, ou comment SSI marque les plongées ? C'est répondu sur la <a href=\"/divedrop/\">page DiveDrop</a> et dans la <a href=\"/divedrop/compatibility/\">liste de compatibilité</a>.",
+  more:"Vous vous demandez si votre ordinateur est pris en charge, ou comment SSI marque les plongées ? C'est répondu sur la <a href=\"../\">page DiveDrop</a> et dans la <a href=\"../compatibility/\">liste de compatibilité</a>.",
   formtitle:"Contactez-nous", f_platform:"Quelle app", f_name:"Nom", f_email:"E-mail", f_device:"Ordinateur ou app de plongée", f_topic:"Sujet", f_message:"Que s'est-il passé, étape par étape ?", f_file:"Fichier d'export (facultatif)", f_filehint:"Le .zip, .uddf ou .fit qui a posé problème. Max. 8 Mo.",
   t_import:"Problème d'import ou de fichier", t_ssi:"Envoi vers SSI", t_purchase:"Achat ou restauration", t_feature:"Demande de fonctionnalité", t_other:"Autre",
   send:"Envoyer", privacy:"Nous utilisons ce que vous envoyez uniquement pour vous répondre. Les exports joints sont supprimés une fois le dossier clos.", privacylink:"Politique de confidentialité"},
- nl: {title:"DiveDrop-support", intro:"Werkt iets niet, of wil je een duikcomputer ondersteund zien? Deze antwoorden gelden voor de iPhone- en de Android-app allebei. Vragen over één platform staan op de <a href=\"/divedrop/\">DiveDrop-pagina</a>. Kom je er niet uit? Schrijf ons; we antwoorden meestal binnen twee werkdagen.",
+ nl: {title:"DiveDrop-support", intro:"Werkt iets niet, of wil je een duikcomputer ondersteund zien? Deze antwoorden gelden voor de iPhone- en de Android-app allebei. Vragen over één platform staan op de <a href=\"../\">DiveDrop-pagina</a>. Kom je er niet uit? Schrijf ons; we antwoorden meestal binnen twee werkdagen.",
   faq:"Veelgestelde vragen",
   g_all:"Beide apps",
   g_ios:"Op iPhone",
@@ -189,7 +189,7 @@ const T = {
   n2a:"Open DiveDrop › Account › Aankoop herstellen, aangemeld met hetzelfde Google-account dat betaalde.",
   n3q:"Loopt de Android-app achter op die van iPhone?",
   n3a:"Nee. Allebei sturen ze exact dezelfde gegevens naar SSI, en dat wordt bij elke wijziging automatisch gecontroleerd.",
-  more:"Vraag je je af of jouw duikcomputer erbij zit, of hoe SSI de duiken markeert? Dat staat op de <a href=\"/divedrop/\">DiveDrop-pagina</a> en in de <a href=\"/divedrop/compatibility/\">compatibiliteitslijst</a>.",
+  more:"Vraag je je af of jouw duikcomputer erbij zit, of hoe SSI de duiken markeert? Dat staat op de <a href=\"../\">DiveDrop-pagina</a> en in de <a href=\"../compatibility/\">compatibiliteitslijst</a>.",
   formtitle:"Contacteer ons", f_platform:"Welke app", f_name:"Naam", f_email:"E-mail", f_device:"Duikcomputer of app", f_topic:"Onderwerp", f_message:"Wat gebeurde er, stap voor stap?", f_file:"Exportbestand (optioneel)", f_filehint:"De .zip, .uddf of .fit die het probleem gaf. Max. 8 MB.",
   t_import:"Import- of bestandsprobleem", t_ssi:"Versturen naar SSI", t_purchase:"Aankoop of herstellen", t_feature:"Functiewens", t_other:"Iets anders",
   send:"Verstuur", privacy:"We gebruiken wat je stuurt alleen om je te antwoorden. Bijgevoegde exports worden na afhandeling verwijderd.", privacylink:"Privacybeleid"}

@@ -9,3 +9,16 @@
 /divedrop/beta/*.apk
   Content-Type: application/vnd.android.package-archive
   Content-Disposition: attachment
+
+# The same files as seen on divedrop.app (headers match the requested path, not the rewrite target).
+/sample/*
+  X-Robots-Tag: noindex
+  Cache-Control: public, max-age=300
+
+/beta/*
+  X-Robots-Tag: noindex
+  Cache-Control: public, max-age=300
+
+/beta/*.apk
+  Content-Type: application/vnd.android.package-archive
+  Content-Disposition: attachment

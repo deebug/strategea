@@ -10,7 +10,7 @@
 <link rel="canonical" href="https://divedrop.app/">
 <meta property="og:url" content="https://divedrop.app/">
 <meta property="og:image" content="https://divedrop.app/img/video-poster.jpg">
-<meta property="og:video" content="https://divedrop.app/video/divedrop-1.0.2.mp4">
+<meta property="og:video" content="https://divedrop.app/video/divedrop-ios.mp4">
 <meta property="og:video:type" content="video/mp4">
 <meta property="og:video:width" content="1920">
 <meta property="og:video:height" content="1080">
@@ -371,7 +371,7 @@ apply(start);
 document.getElementById('vidPlay').addEventListener('click', () => {
   let small = window.innerWidth < 900;
   try { small = small || navigator.connection.saveData === true; } catch (e) {}
-  const src = 'video/divedrop-1.0.2' + (small ? '-720' : '') + '.mp4';
+  const src = 'video/divedrop-ios' + (small ? '-720' : '') + '.mp4';
   const v = document.createElement('video');
   v.src = src; v.controls = true; v.autoplay = true; v.playsInline = true; v.preload = 'auto';
   v.setAttribute('poster', 'img/video-still.jpg');

@@ -101,9 +101,8 @@
   .grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.25rem}
   .feat-vis{aspect-ratio:16/10;border-radius:16px;overflow:hidden;background:#f2f2f7;margin:-.5rem -.5rem 1.4rem;position:relative}
   .feat-vis img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
-  .feat-vis img[data-feat="site"]{object-position:left center}
-  .feat-vis img[data-feat="profile"]{object-fit:contain;background:#fff}
-  .feat-vis:has(img[data-feat="profile"]){background:#fff;border:1px solid var(--line)}
+  .feat-vis img[data-feat="profile"],.feat-vis img[data-feat="site"]{object-fit:contain;background:#fff;padding:.7rem;box-sizing:border-box}
+  .feat-vis:has(img[data-feat]){background:#fff;border:1px solid var(--line)}
   .mock{padding:.55rem .7rem;display:flex;flex-direction:column;gap:.35rem;height:100%;justify-content:center}
   .mock .row{background:#fff;border-radius:11px;padding:.4rem .7rem;display:flex;justify-content:space-between;align-items:center;gap:.6rem;font-size:.78rem;line-height:1.25}
   .mock .row b{display:block;font-weight:600;color:var(--text-primary);font-variant-numeric:tabular-nums}

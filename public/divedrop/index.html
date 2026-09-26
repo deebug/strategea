@@ -48,8 +48,7 @@
   .rev-track{display:grid;grid-auto-flow:column;grid-auto-columns:min(34rem,86%);gap:1rem;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;padding:.25rem .1rem 1rem}
   .rev-track::-webkit-scrollbar{display:none}
   .rev{scroll-snap-align:start;background:var(--card-bg);border-radius:22px;padding:1.6rem 1.7rem;border:1px solid rgba(0,0,0,.03);box-shadow:0 10px 30px -8px rgba(0,0,0,.06);display:flex;flex-direction:column;gap:1rem;margin:0}
-  .rev blockquote,.rev .para{margin:0;font-size:1.2rem;font-weight:300;line-height:1.55;color:var(--text-primary);text-wrap:pretty}
-  .rev .para{color:var(--text-secondary)}
+  .rev blockquote{margin:0;font-size:1.2rem;font-weight:300;line-height:1.55;color:var(--text-primary);text-wrap:pretty}
   .rev figcaption{margin-top:auto;display:flex;align-items:center;gap:.45rem;font-size:.85rem;font-weight:500;color:var(--muted)}
   .rev figcaption svg{width:15px;height:15px;fill:currentColor}
   .rev-nav{display:flex;align-items:center;gap:.5rem;margin-top:.2rem}
@@ -358,22 +357,24 @@ const T = {
 };
 
 
-// Reviews on the product page. Add new ones at the end. Rule: `quote` is the reviewer's own words,
-// shown verbatim in quotation marks (in the language they wrote); `para` is a faithful summary in our
-// words, shown without quotation marks and translated. `source` picks the caption.
+// Reviews on the product page. Add new ones at the end; each is shown in quotation marks.
+// `quote` as a string: the reviewer's own words, in the language they wrote (set `lang`).
+// `quote` as an object per language: an anonymised rewording of a real message, faithful to what the
+// person said. `source` picks the caption.
 const REVIEWS = [
   { source: 'appstore', lang: 'en',
     quote: "Thank you so much for this useful and user friendly app! No more manual import from Garmin Dive to SSI App thanks to you! … it also imports dive graphics to SSI." },
   { source: 'user',
-    para: { en: "A diver who moved dozens of dives into SSI with DiveDrop, glad it is finally possible.",
-            fr: "Un plongeur qui a transféré des dizaines de plongées dans SSI avec DiveDrop, ravi que ce soit enfin possible.",
-            nl: "Een duiker die tientallen duiken met DiveDrop in SSI zette, blij dat het eindelijk kan." } },
+    quote: { en: "Thank you for DiveDrop. I moved dozens of dives into SSI with it, and I'm really glad this is finally possible.",
+             fr: "Merci pour DiveDrop. J'ai transféré des dizaines de plongées dans SSI avec l'app, et je suis vraiment content que ce soit enfin possible.",
+             nl: "Bedankt voor DiveDrop. Ik zette er tientallen duiken mee in SSI, en ik ben echt blij dat dit eindelijk kan." } },
 ];
 function renderReviews(t, lang) {
   const track = document.getElementById('revTrack');
   track.innerHTML = REVIEWS.map(r => {
-    const body = r.quote ? `<blockquote lang="${r.lang}">&ldquo;${esc(r.quote)}&rdquo;</blockquote>`
-                         : `<p class="para">${esc(r.para[lang] || r.para.en)}</p>`;
+    const text = typeof r.quote === 'string' ? r.quote : (r.quote[lang] || r.quote.en);
+    const inLang = typeof r.quote === 'string' ? r.lang : (r.quote[lang] ? lang : 'en');
+    const body = `<blockquote lang="${inLang}">&ldquo;${esc(text)}&rdquo;</blockquote>`;
     const icon = r.source === 'appstore' ? `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="${APPLE_PATH}"/></svg>` : '';
     return `<figure class="rev">${body}<figcaption>${icon}<span>${esc(t['src_' + r.source] || '')}</span></figcaption></figure>`;
   }).join('');

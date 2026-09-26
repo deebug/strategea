@@ -8,6 +8,10 @@ https://www.divedrop.app/*               https://divedrop.app/:splat   301!
 https://divedrop.app/divedrop            https://divedrop.app/         301!
 https://divedrop.app/divedrop/*          https://divedrop.app/:splat   301!
 
+# The first launch video was replaced by the 1.0.2 one.
+https://divedrop.app/video/divedrop-23s.mp4       https://divedrop.app/video/divedrop-1.0.2.mp4       301!
+https://divedrop.app/video/divedrop-23s-720.mp4   https://divedrop.app/video/divedrop-1.0.2-720.mp4   301!
+
 https://divedrop.app/*                   /divedrop/:splat              200!
 
 # The old addresses moved there for good. The shipped apps and the store listings

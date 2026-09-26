@@ -10,7 +10,7 @@
 <link rel="canonical" href="https://divedrop.app/">
 <meta property="og:url" content="https://divedrop.app/">
 <meta property="og:image" content="https://divedrop.app/img/video-poster.jpg">
-<meta property="og:video" content="https://divedrop.app/video/divedrop-23s.mp4">
+<meta property="og:video" content="https://divedrop.app/video/divedrop-1.0.2.mp4">
 <meta property="og:video:type" content="video/mp4">
 <meta property="og:video:width" content="1920">
 <meta property="og:video:height" content="1080">
@@ -101,7 +101,10 @@
   .faq summary{cursor:pointer;font-weight:600}
   .faq p{color:var(--text-secondary);margin-top:.5rem;line-height:1.6}
   .more{color:var(--text-secondary);line-height:1.6}
-  footer{margin-top:4rem;padding-top:2rem;border-top:1px solid rgba(0,0,0,.06);color:var(--text-secondary);font-size:.85rem;display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between}
+  .trust{list-style:none;margin:4rem 0 0;display:flex;flex-wrap:wrap;gap:.6rem 1.6rem}
+  .trust li{display:flex;align-items:center;gap:.45rem;font-size:.85rem;color:var(--text-secondary)}
+  .trust svg{width:17px;height:17px;flex:none;fill:none;stroke:var(--accent-2);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  footer{margin-top:1.75rem;padding-top:2rem;border-top:1px solid rgba(0,0,0,.06);color:var(--text-secondary);font-size:.85rem;display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between}
   [hidden]{display:none!important}
   @media (max-width:760px){.hero{grid-template-columns:1fr}h1{font-size:2.3rem}.lang-toggle{top:1rem;right:1rem}.wrap{padding-top:5rem}}
 </style>
@@ -207,9 +210,11 @@
     <p class="more" data-i18n="faq_more"></p>
   </div>
 
+  <ul class="trust"><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span data-i18n="trust_eu"></span></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span data-i18n="trust_lock"></span></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3l18 18"/><path d="M10.6 5.1A10.5 10.5 0 0 1 12 5c6 0 9.5 7 9.5 7a17 17 0 0 1-3.1 4"/><path d="M6.6 6.6C3.9 8.4 2.5 12 2.5 12S6 19 12 19a9.6 9.6 0 0 0 5.4-1.6"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg><span data-i18n="trust_eye"></span></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg><span data-i18n="trust_shield"></span></li></ul>
+
   <footer>
     <span>DiveDrop &bull; DIEP CLOUD BV, Pannenhuisstraat 9, 8900 Ieper &bull; BTW / VAT: BE 1038.498.133</span>
-    <span><a href="compatibility/" data-i18n="compat"></a> &bull; <a href="support/" data-i18n="support"></a> &bull; <a href="privacy/" data-i18n="privacy"></a> &bull; <a href="mailto:support@divedrop.app">support@divedrop.app</a> &bull; <span data-i18n="notaff"></span></span>
+    <span><a href="compatibility/" data-i18n="compat"></a> &bull; <a href="changelog/" data-i18n="changelog"></a> &bull; <a href="support/" data-i18n="support"></a> &bull; <a href="privacy/" data-i18n="privacy"></a> &bull; <a href="mailto:support@divedrop.app">support@divedrop.app</a> &bull; <span data-i18n="notaff"></span></span>
   </footer>
 </main>
 <script>
@@ -238,8 +243,8 @@ const T = {
  en: {by:"an app by Strategea", tag:"Share your dive export with DiveDrop. Your SSI logbook is up to date. Depth profile included.",
   btn_small_ios:"Download on the", btn_small_and:"Get it on", btn_small_soon:"In review, coming to",
   how_link:"How it works", how:"How it works",
-  vid_h:"See it in 23 seconds", vid_lead:"From the export to your logbook, depth profile and all.",
-  vid_play:"Play the video", vid_note:"The film plays from this site; nothing is fetched until you press play. <a href=\"https://www.youtube.com/watch?v=ppQu4N8W-aE\">Also on YouTube</a>",
+  vid_h:"See it in 25 seconds", vid_lead:"From the export to your logbook, depth profile and all.",
+  vid_play:"Play the video", vid_note:"The film plays from this site; nothing is fetched until you press play.",
   quote_by:"App Store review · Garmin diver",
   plat_h:"On iPhone and on Android", plat_lead:"Same app, same price, same dives in your logbook. Every supported computer works on both.",
   ios_h:"iPhone", ios_req:"iOS 17 or later",
@@ -267,13 +272,14 @@ const T = {
   q3:"Is this an official SSI product?",
   a3:"No. DiveDrop is independent. It talks to the same interface the MySSI app uses, on your behalf and with your own account, and it works as long as SSI allows it.",
   more:"More questions? See the <a href=\"support/\">support page</a>.",
-  compat:"Compatibility", support:"Support", privacy:"Privacy policy", notaff:"Not affiliated with SSI, Oceanic, Garmin, Suunto, Shearwater or Huish Outdoors"},
+  trust_eu:"Belgian company, under EU law", trust_lock:"No server of ours: your SSI login stays on your phone", trust_eye:"No tracking, no ads", trust_shield:"Your data is never sold or shared",
+  changelog:"What's new", compat:"Compatibility", support:"Support", privacy:"Privacy policy", notaff:"Not affiliated with SSI, Oceanic, Garmin, Suunto, Shearwater or Huish Outdoors"},
 
  fr: {by:"une app de Strategea", tag:"Partagez votre export de plongées avec DiveDrop. Votre carnet SSI est à jour. Profil de profondeur inclus.",
   btn_small_ios:"Télécharger dans l'", btn_small_and:"Disponible sur", btn_small_soon:"En validation, bientôt sur",
   how_link:"Comment ça marche", how:"Comment ça marche",
-  vid_h:"Voyez-le en 23 secondes", vid_lead:"De l'export à votre carnet, profil de profondeur compris.",
-  vid_play:"Lire la vidéo", vid_note:"La vidéo est hébergée sur ce site ; rien n'est chargé avant que vous la lanciez. <a href=\"https://www.youtube.com/watch?v=ppQu4N8W-aE\">Aussi sur YouTube</a>",
+  vid_h:"Voyez-le en 25 secondes", vid_lead:"De l'export à votre carnet, profil de profondeur compris.",
+  vid_play:"Lire la vidéo", vid_note:"La vidéo est hébergée sur ce site ; rien n'est chargé avant que vous la lanciez.",
   quote_by:"Avis sur l'App Store · plongeur Garmin",
   plat_h:"Sur iPhone et sur Android", plat_lead:"Même app, même prix, mêmes plongées dans votre carnet. Tous les ordinateurs pris en charge fonctionnent sur les deux.",
   ios_h:"iPhone", ios_req:"iOS 17 ou plus récent",
@@ -301,13 +307,14 @@ const T = {
   q3:"Est-ce un produit officiel SSI ?",
   a3:"Non. DiveDrop est indépendant. Il dialogue avec la même interface que l'app MySSI, en votre nom et avec votre propre compte, et fonctionne tant que SSI l'autorise.",
   more:"D'autres questions\u00a0? Voyez la <a href=\"support/\">page de support</a>.",
-  compat:"Compatibilité", support:"Support", privacy:"Politique de confidentialité", notaff:"Sans lien avec SSI, Oceanic, Garmin, Suunto, Shearwater ou Huish Outdoors"},
+  trust_eu:"Entreprise belge, droit européen", trust_lock:"Aucun serveur à nous : votre identifiant SSI reste sur votre téléphone", trust_eye:"Ni pistage ni publicité", trust_shield:"Vos données ne sont jamais vendues ni partagées",
+  changelog:"Nouveautés", compat:"Compatibilité", support:"Support", privacy:"Politique de confidentialité", notaff:"Sans lien avec SSI, Oceanic, Garmin, Suunto, Shearwater ou Huish Outdoors"},
 
  nl: {by:"een app van Strategea", tag:"Deel je duik-export met DiveDrop. Je SSI-logboek is bijgewerkt. Met diepteprofiel.",
   btn_small_ios:"Download in de", btn_small_and:"Ontdek het op", btn_small_soon:"In beoordeling, binnenkort op",
   how_link:"Zo werkt het", how:"Zo werkt het",
-  vid_h:"Bekijk het in 23 seconden", vid_lead:"Van de export tot in je logboek, diepteprofiel incluis.",
-  vid_play:"Speel de video af", vid_note:"De video staat op deze site; er wordt niets geladen tot je op play drukt. <a href=\"https://www.youtube.com/watch?v=ppQu4N8W-aE\">Ook op YouTube</a>",
+  vid_h:"Bekijk het in 25 seconden", vid_lead:"Van de export tot in je logboek, diepteprofiel incluis.",
+  vid_play:"Speel de video af", vid_note:"De video staat op deze site; er wordt niets geladen tot je op play drukt.",
   quote_by:"Review in de App Store · Garmin-duiker",
   plat_h:"Op iPhone en op Android", plat_lead:"Dezelfde app, dezelfde prijs, dezelfde duiken in je logboek. Elke ondersteunde computer werkt op allebei.",
   ios_h:"iPhone", ios_req:"iOS 17 of nieuwer",
@@ -335,7 +342,8 @@ const T = {
   q3:"Is dit een officieel SSI-product?",
   a3:"Nee. DiveDrop is onafhankelijk. Hij praat met dezelfde interface als de MySSI-app, namens jou en met je eigen account, en werkt zolang SSI dat toelaat.",
   more:"Nog vragen? Bekijk de <a href=\"support/\">supportpagina</a>.",
-  compat:"Compatibiliteit", support:"Support", privacy:"Privacybeleid", notaff:"Niet verbonden aan SSI, Oceanic, Garmin, Suunto, Shearwater of Huish Outdoors"}
+  trust_eu:"Belgisch bedrijf, Europees recht", trust_lock:"Geen eigen server: je SSI-login blijft op je toestel", trust_eye:"Geen tracking, geen reclame", trust_shield:"Je gegevens worden nooit verkocht of gedeeld",
+  changelog:"Wat is er nieuw", compat:"Compatibiliteit", support:"Support", privacy:"Privacybeleid", notaff:"Niet verbonden aan SSI, Oceanic, Garmin, Suunto, Shearwater of Huish Outdoors"}
 };
 
 
@@ -366,7 +374,7 @@ apply(start);
 document.getElementById('vidPlay').addEventListener('click', () => {
   let small = window.innerWidth < 900;
   try { small = small || navigator.connection.saveData === true; } catch (e) {}
-  const src = 'video/divedrop-23s' + (small ? '-720' : '') + '.mp4';
+  const src = 'video/divedrop-1.0.2' + (small ? '-720' : '') + '.mp4';
   const v = document.createElement('video');
   v.src = src; v.controls = true; v.autoplay = true; v.playsInline = true; v.preload = 'auto';
   v.setAttribute('poster', 'img/video-still.jpg');

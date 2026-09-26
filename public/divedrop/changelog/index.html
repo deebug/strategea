@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DiveDrop – Changelog | Strategea</title>
+<link rel="canonical" href="https://divedrop.app/changelog/">
+<meta name="description" content="What changed in each version of DiveDrop for iPhone and Android.">
+<link rel="icon" href="../img/icon.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Outfit:wght@300;400;600;800&display=swap">
+<style>
+  :root{--bg-color:#f9f9fb;--text-primary:#111827;--text-secondary:#4b5563;--muted:#9099a8;--accent-1:#54b3d6;--accent-2:#2a5a8a;--card-bg:#fff;--line:rgba(17,24,39,.08)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Outfit','Montserrat',sans-serif;background:var(--bg-color);color:var(--text-primary);-webkit-font-smoothing:antialiased}
+  a{color:var(--accent-2)}
+  .wrap{max-width:760px;margin:0 auto;padding:4rem 1.25rem 3rem}
+  .lang-toggle{position:absolute;top:2rem;right:2rem;display:flex;background:var(--card-bg);border-radius:50px;box-shadow:0 4px 6px -1px rgba(0,0,0,.05);padding:.25rem;z-index:10}
+  .lang-toggle button{background:transparent;border:0;padding:.5rem 1rem;font-family:inherit;font-weight:600;font-size:.9rem;color:var(--text-secondary);border-radius:50px;cursor:pointer}
+  .lang-toggle button.active{background:var(--text-primary);color:#fff}
+  .brand{display:flex;align-items:center;gap:.6rem;font-weight:600;color:var(--text-secondary);font-size:.9rem;text-decoration:none;margin-bottom:2.5rem}
+  .brand .appicon{width:36px;height:36px;border-radius:9px;box-shadow:0 2px 6px rgba(0,0,0,.12)}
+  .brand span{color:var(--text-primary);font-size:1.05rem}.brand small{color:var(--text-secondary);font-weight:500;font-size:.85rem;margin-left:.35rem}
+  h1{font-size:2rem;font-weight:800;letter-spacing:-.02em;margin-bottom:.5rem;text-wrap:balance}
+  .intro{color:var(--text-secondary);line-height:1.65;margin-bottom:2.25rem}
+  .rel{display:grid;grid-template-columns:7.5rem 1fr;gap:0 1.5rem;padding:1.6rem 0;border-top:1px solid var(--line)}
+  .ver{font-size:1.9rem;font-weight:800;letter-spacing:-.02em;line-height:1;font-variant-numeric:tabular-nums}
+  .meta{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .6rem;margin-bottom:.7rem}
+  .chip{font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:999px;padding:.3rem .7rem}
+  .chip.review{background:#fdf1dc;color:#8a5a0a}
+  .chip.done{background:#e3f2f8;color:var(--accent-2)}
+  .when{color:var(--muted);font-size:.9rem;font-weight:500}
+  .plat{display:inline-flex;align-items:center;gap:.3rem;font-size:.85rem;font-weight:600;color:var(--text-secondary)}
+  .plat svg{width:14px;height:14px;fill:currentColor}
+  .rel p{color:var(--text-secondary);line-height:1.65;max-width:62ch}
+  .rel p + p{margin-top:.5rem}
+  .rel .aside{font-size:.92rem;color:var(--muted)}
+  footer{margin-top:2.5rem;padding-top:1.5rem;border-top:1px solid var(--line);color:var(--text-secondary);font-size:.85rem;line-height:1.7}
+  @media (max-width:560px){.rel{grid-template-columns:1fr}.ver{margin-bottom:.6rem}.lang-toggle{top:1rem;right:1rem}}
+</style>
+</head>
+<body>
+<div class="lang-toggle" aria-label="Language"><button data-lang="en">EN</button><button data-lang="fr">FR</button><button data-lang="nl">NL</button></div>
+<main class="wrap">
+  <a class="brand" href="../"><img class="appicon" src="../img/icon.png" alt="DiveDrop"> <span>DiveDrop <small>by Strategea</small></span></a>
+  <h1 data-i18n="title"></h1>
+  <p class="intro" data-i18n="intro"></p>
+
+  <section class="rel">
+    <div class="ver">1.0.2</div>
+    <div>
+      <div class="meta"><span class="chip review" data-i18n="review"></span><span class="plat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.4 12.7c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.2-2.8.9-3.5.9s-1.8-.8-3-.8c-1.5 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.3 0 2.1-1.1 2.8-2.3.9-1.3 1.3-2.6 1.3-2.6s-2.5-1-2.5-3.8zM14.2 5.9c.6-.8 1.1-1.9 1-3-.9 0-2.1.6-2.8 1.4-.6.7-1.2 1.8-1 2.9 1 .1 2.1-.5 2.8-1.3z"/></svg><span data-i18n="ios"></span></span><span class="plat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.6 9.48l1.84-3.18a.38.38 0 0 0-.14-.52.38.38 0 0 0-.52.14l-1.86 3.22a11.43 11.43 0 0 0-9.84 0L5.22 5.92a.38.38 0 0 0-.52-.14.38.38 0 0 0-.14.52L6.4 9.48A10.81 10.81 0 0 0 1 18h22a10.81 10.81 0 0 0-5.4-8.52zM7 15.25a1.25 1.25 0 1 1 1.25-1.25A1.25 1.25 0 0 1 7 15.25zm10 0a1.25 1.25 0 1 1 1.25-1.25A1.25 1.25 0 0 1 17 15.25z"/></svg><span data-i18n="and"></span></span></div>
+      <p data-i18n="n102"></p>
+      <p class="aside" data-i18n="soon"></p>
+    </div>
+  </section>
+
+  <section class="rel">
+    <div class="ver">1.0.1</div>
+    <div>
+      <div class="meta"><span class="chip done" data-i18n="released"></span><span class="when" data-i18n="sep"></span><span class="plat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.4 12.7c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.2-2.8.9-3.5.9s-1.8-.8-3-.8c-1.5 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.3 0 2.1-1.1 2.8-2.3.9-1.3 1.3-2.6 1.3-2.6s-2.5-1-2.5-3.8zM14.2 5.9c.6-.8 1.1-1.9 1-3-.9 0-2.1.6-2.8 1.4-.6.7-1.2 1.8-1 2.9 1 .1 2.1-.5 2.8-1.3z"/></svg><span data-i18n="ios"></span></span></div>
+      <p data-i18n="n101"></p>
+      <p class="aside" data-i18n="and101"></p>
+    </div>
+  </section>
+
+  <section class="rel">
+    <div class="ver">1.0</div>
+    <div>
+      <div class="meta"><span class="chip done" data-i18n="released"></span><span class="when" data-i18n="sep"></span><span class="plat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.4 12.7c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.2-2.8.9-3.5.9s-1.8-.8-3-.8c-1.5 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.3 0 2.1-1.1 2.8-2.3.9-1.3 1.3-2.6 1.3-2.6s-2.5-1-2.5-3.8zM14.2 5.9c.6-.8 1.1-1.9 1-3-.9 0-2.1.6-2.8 1.4-.6.7-1.2 1.8-1 2.9 1 .1 2.1-.5 2.8-1.3z"/></svg><span data-i18n="ios"></span></span></div>
+      <p data-i18n="n10"></p>
+    </div>
+  </section>
+
+  <footer>DIEP CLOUD BV, Pannenhuisstraat 9, 8900 Ieper &bull; BTW / VAT: BE 1038.498.133 &bull; <a href="../" data-i18n="back"></a> &bull; <a href="../support/" data-i18n="support"></a> &bull; <a href="../privacy/" data-i18n="privacy"></a> &bull; <a href="mailto:support@divedrop.app">support@divedrop.app</a></footer>
+</main>
+<script>
+const T = {
+ "en": {
+  "title": "What's new in DiveDrop",
+  "intro": "Every version of DiveDrop, newest first. The apps update through the App Store and Google Play.",
+  "review": "In review",
+  "soon": "Coming soon to the App Store and Google Play",
+  "released": "Released",
+  "sep": "September 2026",
+  "and101": "Android: first release, in review at Google Play.",
+  "ios": "iPhone",
+  "and": "Android",
+  "back": "DiveDrop",
+  "support": "Support",
+  "privacy": "Privacy policy",
+  "n102": "Import several files at once: select all your Garmin .fit files in one go, in the file picker or through Share. A dive that appears twice counts once, and a file that can't be read no longer holds up the rest. New under Account: units (metres, bar and °C or feet, psi and °F, following your phone by default) and a way to rate DiveDrop. Long values are no longer cut off.",
+  "n101": "Suunto dive profiles were read incompletely; fixed. Chained Garmin FIT files, rebreather exports and Diving Log exports now import correctly. When a dive has several tanks, the first tank goes into your logbook. Tested against 69 real exports from Garmin, Suunto, Shearwater, Oceanic+ and more.",
+  "n10": "First release. Share a dive export from Oceanic+, Garmin Descent, Suunto, Shearwater or any UDDF file, and DiveDrop adds the dives that are missing to your MySSI logbook, depth profile included. The first three dives are free."
+ },
+ "fr": {
+  "title": "Nouveautés de DiveDrop",
+  "intro": "Toutes les versions de DiveDrop, de la plus récente à la plus ancienne. Les apps se mettent à jour via l'App Store et Google Play.",
+  "review": "En validation",
+  "soon": "Bientôt sur l'App Store et Google Play",
+  "released": "Publiée",
+  "sep": "septembre 2026",
+  "and101": "Android : première version, en validation chez Google Play.",
+  "ios": "iPhone",
+  "and": "Android",
+  "back": "DiveDrop",
+  "support": "Support",
+  "privacy": "Politique de confidentialité",
+  "n102": "Importez plusieurs fichiers à la fois : sélectionnez tous vos fichiers .fit Garmin en une fois, dans le sélecteur ou via Partager. Une plongée présente deux fois ne compte qu'une fois, et un fichier illisible ne bloque plus les autres. Nouveau dans Compte : les unités (mètres, bar et °C ou pieds, psi et °F, selon votre téléphone par défaut) et noter DiveDrop. Les valeurs longues ne sont plus tronquées.",
+  "n101": "Les profils de plongée Suunto étaient lus de façon incomplète ; corrigé. Les fichiers FIT Garmin enchaînés, les exports recycleur et les exports Diving Log s'importent désormais correctement. Pour une plongée à plusieurs blocs, le premier bloc entre dans votre carnet. Testé sur 69 vrais exports Garmin, Suunto, Shearwater, Oceanic+ et autres.",
+  "n10": "Première version. Partagez un export Oceanic+, Garmin Descent, Suunto, Shearwater ou tout fichier UDDF, et DiveDrop ajoute à votre carnet MySSI les plongées manquantes, profil de profondeur compris. Les trois premières plongées sont offertes."
+ },
+ "nl": {
+  "title": "Nieuw in DiveDrop",
+  "intro": "Elke versie van DiveDrop, de nieuwste eerst. De apps werken zich bij via de App Store en Google Play.",
+  "review": "In beoordeling",
+  "soon": "Binnenkort in de App Store en Google Play",
+  "released": "Uitgebracht",
+  "sep": "september 2026",
+  "and101": "Android: eerste versie, in beoordeling bij Google Play.",
+  "ios": "iPhone",
+  "and": "Android",
+  "back": "DiveDrop",
+  "support": "Support",
+  "privacy": "Privacybeleid",
+  "n102": "Importeer meerdere bestanden tegelijk: selecteer al je Garmin .fit-bestanden in één keer, in de bestandskiezer of via Delen. Een duik die twee keer voorkomt telt één keer, en een onleesbaar bestand houdt de rest niet tegen. Nieuw onder Account: eenheden (meter, bar en °C of feet, psi en °F, standaard zoals je toestel) en DiveDrop beoordelen. Lange waarden worden niet meer afgekapt.",
+  "n101": "Suunto-duikprofielen werden onvolledig ingelezen; opgelost. Gekoppelde Garmin FIT-bestanden, rebreather-exports en Diving Log-exports worden nu correct geïmporteerd. Bij een duik met meerdere flessen gaat de eerste fles in je logboek. Getest tegen 69 echte exports van Garmin, Suunto, Shearwater, Oceanic+ en meer.",
+  "n10": "Eerste versie. Deel een duik-export uit Oceanic+, Garmin Descent, Suunto, Shearwater of elk UDDF-bestand, en DiveDrop zet de ontbrekende duiken in je MySSI-logboek, met diepteprofiel. De eerste drie duiken zijn gratis."
+ }
+};
+function apply(lang){
+  const t = T[lang] || T.en; document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t[el.dataset.i18n] ?? ''; });
+  document.querySelectorAll('.lang-toggle button').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+  try { localStorage.setItem('divedrop.lang', lang); } catch (e) {}
+}
+document.querySelectorAll('.lang-toggle button').forEach(b => b.addEventListener('click', () => apply(b.dataset.lang)));
+let start = 'en'; try { start = localStorage.getItem('divedrop.lang') || (l => l.startsWith('nl') ? 'nl' : l.startsWith('fr') ? 'fr' : 'en')((navigator.language || '').toLowerCase()); } catch (e) {}
+apply(start);
+</script>
+</body>
+</html>

@@ -58,8 +58,6 @@
   .vidbtn .play svg{width:24px;height:24px;margin-left:3px;color:var(--accent-2);fill:var(--accent-2);transition:fill .35s ease}
   .vidbtn:hover .play{background:#fff;transform:translate(-50%,-50%) scale(1.08);box-shadow:0 14px 34px -12px rgba(13,20,30,.38)}
   .vidbtn:hover .play svg{color:var(--accent-1);fill:var(--accent-1)}
-  .vidnote{color:var(--muted);font-size:.85rem;margin-top:.7rem}
-  .vidnote a{color:var(--muted)}
 
   .phones{display:flex;gap:1rem;justify-content:center}
   .phones img{width:31%;border-radius:22px;box-shadow:0 20px 40px -10px rgba(17,24,39,.25);background:#fff}
@@ -141,7 +139,6 @@
         <span class="sr" data-i18n="vid_play"></span>
       </button>
     </div>
-    <p class="vidnote" data-i18n="vid_note"></p>
   </section>
 
   <figure class="quote">
@@ -244,7 +241,7 @@ const T = {
   btn_small_ios:"Download on the", btn_small_and:"Get it on", btn_small_soon:"In review, coming to",
   how_link:"How it works", how:"How it works",
   vid_h:"See it in 25 seconds", vid_lead:"From the export to your logbook, depth profile and all.",
-  vid_play:"Play the video", vid_note:"The film plays from this site; nothing is fetched until you press play.",
+  vid_play:"Play the video",
   quote_by:"App Store review · Garmin diver",
   plat_h:"On iPhone and on Android", plat_lead:"Same app, same price, same dives in your logbook. Every supported computer works on both.",
   ios_h:"iPhone", ios_req:"iOS 17 or later",
@@ -279,7 +276,7 @@ const T = {
   btn_small_ios:"Télécharger dans l'", btn_small_and:"Disponible sur", btn_small_soon:"En validation, bientôt sur",
   how_link:"Comment ça marche", how:"Comment ça marche",
   vid_h:"Voyez-le en 25 secondes", vid_lead:"De l'export à votre carnet, profil de profondeur compris.",
-  vid_play:"Lire la vidéo", vid_note:"La vidéo est hébergée sur ce site ; rien n'est chargé avant que vous la lanciez.",
+  vid_play:"Lire la vidéo",
   quote_by:"Avis sur l'App Store · plongeur Garmin",
   plat_h:"Sur iPhone et sur Android", plat_lead:"Même app, même prix, mêmes plongées dans votre carnet. Tous les ordinateurs pris en charge fonctionnent sur les deux.",
   ios_h:"iPhone", ios_req:"iOS 17 ou plus récent",
@@ -314,7 +311,7 @@ const T = {
   btn_small_ios:"Download in de", btn_small_and:"Ontdek het op", btn_small_soon:"In beoordeling, binnenkort op",
   how_link:"Zo werkt het", how:"Zo werkt het",
   vid_h:"Bekijk het in 25 seconden", vid_lead:"Van de export tot in je logboek, diepteprofiel incluis.",
-  vid_play:"Speel de video af", vid_note:"De video staat op deze site; er wordt niets geladen tot je op play drukt.",
+  vid_play:"Speel de video af",
   quote_by:"Review in de App Store · Garmin-duiker",
   plat_h:"Op iPhone en op Android", plat_lead:"Dezelfde app, dezelfde prijs, dezelfde duiken in je logboek. Elke ondersteunde computer werkt op allebei.",
   ios_h:"iPhone", ios_req:"iOS 17 of nieuwer",
@@ -348,7 +345,7 @@ const T = {
 
 
 // These sentences carry our own markup (links, bold); everything else is inserted as plain text.
-const HTML_KEYS = new Set(['ios_route', 'and_route', 'faq_more', 'a1', 'vid_note']);
+const HTML_KEYS = new Set(['ios_route', 'and_route', 'faq_more', 'a1']);
 
 function apply(lang){
   const t = T[lang] || T.en;

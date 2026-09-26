@@ -44,6 +44,11 @@
   .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
   .how-link{display:inline-block;margin-top:1rem;font-weight:600;font-size:.95rem}
   .video{margin:3.5rem 0 0}
+  .quote{margin:3.5rem 0 0;display:grid;grid-template-columns:auto 1fr;gap:0 1.1rem;max-width:62ch}
+  .quote .mark{font-size:4.2rem;line-height:.8;font-weight:800;color:var(--accent-1);font-family:Georgia,'Times New Roman',serif}
+  .quote blockquote{margin:0;font-size:1.35rem;font-weight:300;line-height:1.5;color:var(--text-primary);text-wrap:balance}
+  .quote figcaption{grid-column:2;margin-top:.8rem;display:flex;align-items:center;gap:.45rem;font-size:.9rem;color:var(--muted);font-weight:500}
+  .quote figcaption svg{width:15px;height:15px;fill:currentColor}
   .videobox{position:relative;margin-top:1.25rem;border-radius:24px;overflow:hidden;background:#0d0f14;aspect-ratio:16/9;box-shadow:0 20px 45px -15px rgba(17,24,39,.25)}
   .videobox video{position:absolute;inset:0;width:100%;height:100%;border:0;background:#0d0f14}
   .vidbtn{position:absolute;inset:0;width:100%;height:100%;padding:0;border:0;background:none;cursor:pointer;display:block}
@@ -135,6 +140,12 @@
     </div>
     <p class="vidnote" data-i18n="vid_note"></p>
   </section>
+
+  <figure class="quote">
+    <span class="mark" aria-hidden="true">&ldquo;</span>
+    <blockquote lang="en">Thank you so much for this useful and user friendly app! No more manual import from Garmin Dive to SSI App thanks to you! &hellip; it also imports dive graphics to SSI.</blockquote>
+    <figcaption><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.4 12.7c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.2-2.8.9-3.5.9s-1.8-.8-3-.8c-1.5 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.3 0 2.1-1.1 2.8-2.3.9-1.3 1.3-2.6 1.3-2.6s-2.5-1-2.5-3.8zM14.2 5.9c.6-.8 1.1-1.9 1-3-.9 0-2.1.6-2.8 1.4-.6.7-1.2 1.8-1 2.9 1 .1 2.1-.5 2.8-1.3z"/></svg><span data-i18n="quote_by"></span></figcaption>
+  </figure>
 
   <h2 data-i18n="plat_h"></h2>
   <p class="lead" data-i18n="plat_lead"></p>
@@ -229,6 +240,7 @@ const T = {
   how_link:"How it works", how:"How it works",
   vid_h:"See it in 23 seconds", vid_lead:"From the export to your logbook, depth profile and all.",
   vid_play:"Play the video", vid_note:"The film plays from this site; nothing is fetched until you press play. <a href=\"https://www.youtube.com/watch?v=ppQu4N8W-aE\">Also on YouTube</a>",
+  quote_by:"App Store review · Garmin diver",
   plat_h:"On iPhone and on Android", plat_lead:"Same app, same price, same dives in your logbook. Every supported computer works on both.",
   ios_h:"iPhone", ios_req:"iOS 17 or later",
   ios_p:"Share straight from Mail or Files. The app doesn't even have to open.",
@@ -262,6 +274,7 @@ const T = {
   how_link:"Comment ça marche", how:"Comment ça marche",
   vid_h:"Voyez-le en 23 secondes", vid_lead:"De l'export à votre carnet, profil de profondeur compris.",
   vid_play:"Lire la vidéo", vid_note:"La vidéo est hébergée sur ce site ; rien n'est chargé avant que vous la lanciez. <a href=\"https://www.youtube.com/watch?v=ppQu4N8W-aE\">Aussi sur YouTube</a>",
+  quote_by:"Avis sur l'App Store · plongeur Garmin",
   plat_h:"Sur iPhone et sur Android", plat_lead:"Même app, même prix, mêmes plongées dans votre carnet. Tous les ordinateurs pris en charge fonctionnent sur les deux.",
   ios_h:"iPhone", ios_req:"iOS 17 ou plus récent",
   ios_p:"Partagez depuis Mail ou Fichiers. L'app n'a même pas besoin de s'ouvrir.",
@@ -295,6 +308,7 @@ const T = {
   how_link:"Zo werkt het", how:"Zo werkt het",
   vid_h:"Bekijk het in 23 seconden", vid_lead:"Van de export tot in je logboek, diepteprofiel incluis.",
   vid_play:"Speel de video af", vid_note:"De video staat op deze site; er wordt niets geladen tot je op play drukt. <a href=\"https://www.youtube.com/watch?v=ppQu4N8W-aE\">Ook op YouTube</a>",
+  quote_by:"Review in de App Store · Garmin-duiker",
   plat_h:"Op iPhone en op Android", plat_lead:"Dezelfde app, dezelfde prijs, dezelfde duiken in je logboek. Elke ondersteunde computer werkt op allebei.",
   ios_h:"iPhone", ios_req:"iOS 17 of nieuwer",
   ios_p:"Deel rechtstreeks vanuit Mail of Bestanden. De app hoeft niet eens open.",

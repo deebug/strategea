@@ -94,6 +94,21 @@
   .step h3{font-size:1rem;font-weight:600;margin-bottom:.35rem}
   .step p{color:var(--text-secondary);font-size:.92rem;line-height:1.5}
   .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.25rem}
+  .feat-vis{aspect-ratio:2.2/1;border-radius:16px;overflow:hidden;background:#f2f2f7;margin:-.5rem -.5rem 1.4rem;position:relative}
+  .feat-vis img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+  .feat-vis img[data-feat="site"]{object-position:left center}
+  .feat-vis img[data-feat="profile"]{object-fit:contain;background:#fff}
+  .feat-vis.tall{aspect-ratio:1.55/1}
+  .mock{padding:.55rem .7rem;display:flex;flex-direction:column;gap:.35rem;height:100%;justify-content:center}
+  .mock .row{background:#fff;border-radius:11px;padding:.4rem .7rem;display:flex;justify-content:space-between;align-items:center;gap:.6rem;font-size:.78rem;line-height:1.25}
+  .mock .row b{display:block;font-weight:600;color:var(--text-primary);font-variant-numeric:tabular-nums}
+  .mock .row small{color:var(--muted);font-variant-numeric:tabular-nums}
+  .mock .row.dim{opacity:.6}
+  .chip{font-size:.68rem;font-weight:600;padding:.18rem .5rem;border-radius:999px;white-space:nowrap;text-align:right}
+  .chip.new{background:#e3efff;color:#0556b0}.chip.in{background:#ececf0;color:#52525b}.chip.ok{background:#dcf5e3;color:#16803c}.chip.skip{background:#ececf0;color:#71717a}
+  .chip-wrap{display:flex;flex-direction:column;align-items:flex-end;gap:.1rem}.chip-wrap i{font-style:normal;font-size:.65rem;color:var(--muted)}
+  .privacy-vis{display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 50%, #e3f2f8 0%, #f2f2f7 70%)}
+  .privacy-vis svg{width:78px;height:78px;fill:none;stroke:var(--accent-2);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
   .card{background:var(--card-bg);border-radius:24px;padding:2rem;box-shadow:0 10px 30px -5px rgba(0,0,0,.04);border:1px solid rgba(0,0,0,.02)}
   .card h3{font-size:1.1rem;font-weight:600;margin-bottom:.5rem}
   .card p,.card li{color:var(--text-secondary);line-height:1.6}
@@ -194,10 +209,10 @@
 
   <h2 data-i18n="what"></h2>
   <div class="grid2">
-    <div class="card"><h3 data-i18n="f1t"></h3><p data-i18n="f1d"></p></div>
-    <div class="card"><h3 data-i18n="f2t"></h3><p data-i18n="f2d"></p></div>
-    <div class="card"><h3 data-i18n="f3t"></h3><p data-i18n="f3d"></p></div>
-    <div class="card"><h3 data-i18n="f4t"></h3><p data-i18n="f4d"></p></div>
+    <div class="card"><div class="feat-vis"><img data-feat="profile" alt="" loading="lazy"></div><h3 data-i18n="f1t"></h3><p data-i18n="f1d"></p></div>
+    <div class="card"><div class="feat-vis"><img data-feat="site" alt="" loading="lazy"></div><h3 data-i18n="f2t"></h3><p data-i18n="f2d"></p></div>
+    <div class="card"><div class="feat-vis tall"><div class="mock" id="dupMock" aria-hidden="true"></div></div><h3 data-i18n="f3t"></h3><p data-i18n="f3d"></p></div>
+    <div class="card"><div class="feat-vis tall privacy-vis" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 3l18 18"/><path d="M10.6 5.1A10.5 10.5 0 0 1 12 5c6 0 9.5 7 9.5 7a17 17 0 0 1-3.1 4"/><path d="M6.6 6.6C3.9 8.4 2.5 12 2.5 12S6 19 12 19a9.6 9.6 0 0 0 5.4-1.6"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg></div><h3 data-i18n="f4t"></h3><p data-i18n="f4d"></p></div>
   </div>
 
   <h2 data-i18n="pricing"></h2>
@@ -282,6 +297,7 @@ const T = {
   q3:"Is this an official SSI product?",
   a3:"No. DiveDrop is independent. It talks to the same interface the MySSI app uses, on your behalf and with your own account, and it works as long as SSI allows it.",
   more:"More questions? See the <a href=\"support/\">support page</a>.",
+  chip_new:"New", chip_in:"In SSI", chip_ok:"Synced", chip_skip:"Skipped", mock_pool:"Pool",
   trust_eu:"Belgian company, under EU law", trust_lock:"No server of ours: your SSI login stays on your phone", trust_eye:"No tracking, no ads", trust_shield:"Your data is never sold or shared",
   changelog:"What's new", compat:"Compatibility", support:"Support", privacy:"Privacy policy", notaff:"Not affiliated with SSI, Oceanic, Garmin, Suunto, Shearwater or Huish Outdoors"},
 
@@ -317,6 +333,7 @@ const T = {
   q3:"Est-ce un produit officiel SSI ?",
   a3:"Non. DiveDrop est indépendant. Il dialogue avec la même interface que l'app MySSI, en votre nom et avec votre propre compte, et fonctionne tant que SSI l'autorise.",
   more:"D'autres questions\u00a0? Voyez la <a href=\"support/\">page de support</a>.",
+  chip_new:"Nouvelle", chip_in:"Dans SSI", chip_ok:"Synchronisée", chip_skip:"Ignorée (auto)", mock_pool:"Piscine",
   trust_eu:"Entreprise belge, droit européen", trust_lock:"Aucun serveur à nous : votre identifiant SSI reste sur votre téléphone", trust_eye:"Ni pistage ni publicité", trust_shield:"Vos données ne sont jamais vendues ni partagées",
   changelog:"Nouveautés", compat:"Compatibilité", support:"Support", privacy:"Politique de confidentialité", notaff:"Sans lien avec SSI, Oceanic, Garmin, Suunto, Shearwater ou Huish Outdoors"},
 
@@ -352,6 +369,7 @@ const T = {
   q3:"Is dit een officieel SSI-product?",
   a3:"Nee. DiveDrop is onafhankelijk. Hij praat met dezelfde interface als de MySSI-app, namens jou en met je eigen account, en werkt zolang SSI dat toelaat.",
   more:"Nog vragen? Bekijk de <a href=\"support/\">supportpagina</a>.",
+  chip_new:"Nieuw", chip_in:"In SSI", chip_ok:"Gesynct", chip_skip:"Overgeslagen", mock_pool:"Zwembad",
   trust_eu:"Belgisch bedrijf, Europees recht", trust_lock:"Geen eigen server: je SSI-login blijft op je toestel", trust_eye:"Geen tracking, geen reclame", trust_shield:"Je gegevens worden nooit verkocht of gedeeld",
   changelog:"Wat is er nieuw", compat:"Compatibiliteit", support:"Support", privacy:"Privacybeleid", notaff:"Niet verbonden aan SSI, Oceanic, Garmin, Suunto, Shearwater of Huish Outdoors"}
 };
@@ -396,6 +414,22 @@ function stepReviews(dir) {
   if (card) track.scrollBy({ left: dir * (card.getBoundingClientRect().width + 16), behavior: 'smooth' });
 }
 
+// "No duplicates" card: a small mock of the dive list with each status the app shows.
+function renderDupMock(t, lang) {
+  const loc = { en: 'en-GB', fr: 'fr-BE', nl: 'nl-BE' }[lang] || 'en-GB';
+  const when = d => new Intl.DateTimeFormat(loc, { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }).format(d);
+  const num = (v, dec) => new Intl.NumberFormat(loc, { minimumFractionDigits: dec, maximumFractionDigits: dec }).format(v);
+  const rows = [
+    [new Date(2026, 7, 22, 14, 22), num(8.2, 1) + ' m · 49 min', 'new', t.chip_new, ''],
+    [new Date(2026, 7, 13, 20, 0), num(8.1, 1) + ' m · 26 min', 'in', t.chip_in, '±6 min'],
+    [new Date(2026, 7, 19, 19, 53), num(14.7, 1) + ' m · 48 min', 'ok', t.chip_ok, ''],
+    [new Date(2026, 7, 2, 11, 5), t.mock_pool + ' · ' + num(3.4, 1) + ' m · 4 min', 'skip', t.chip_skip, ''],
+  ];
+  document.getElementById('dupMock').innerHTML = rows.map(([d, meta, cls, label, extra]) =>
+    `<div class="row${cls === 'skip' ? ' dim' : ''}"><span><b>${esc(when(d))}</b><small>${esc(meta)}</small></span>` +
+    `<span class="chip-wrap"><span class="chip ${cls}">${esc(label)}</span>${extra ? `<i>${esc(extra)}</i>` : ''}</span></div>`).join('');
+}
+
 // These sentences carry our own markup (links, bold); everything else is inserted as plain text.
 const HTML_KEYS = new Set(['ios_route', 'and_route', 'faq_more', 'a1']);
 
@@ -410,6 +444,8 @@ function apply(lang){
   document.getElementById('heroStores').innerHTML = storeButtons(t, 'both');
   document.querySelectorAll('[data-i18n-aria]').forEach(el => el.setAttribute('aria-label', t[el.dataset.i18nAria] || ''));
   renderReviews(t, lang);
+  renderDupMock(t, lang);
+  document.querySelectorAll('[data-feat]').forEach(img => { img.src = 'img/' + (lang === 'nl' ? 'nl' : 'en') + '-feat-' + img.dataset.feat + '.jpg'; });
   document.getElementById('iosStore').innerHTML = storeButtons(t, 'ios');
   document.getElementById('andStore').innerHTML = storeButtons(t, 'and');
   document.querySelectorAll('[data-shot]').forEach(img => { img.src = 'img/' + (lang === 'nl' ? 'nl' : 'en') + '-' + img.dataset.shot + '.png'; });

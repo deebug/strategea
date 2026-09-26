@@ -17,7 +17,7 @@ export default function Home() {
       consultingTitle: "Digital Business Consulting",
       consultingDesc: "We provide strategic guidance to optimize your digital infrastructure. Our expertise covers comprehensive ERP and CRM integrations, alongside advanced data analysis to drive actionable business intelligence.",
       historyTitle: "Our History",
-      historyDesc: "Our journey began in 2000 as Sitesource, a passionate one-man firm dedicated to robust front-end and back-end development. Evolving with the digital landscape, we transformed into Strategea COMMV in 2023. During the 2023 - 2026 period, a leading role as CEO for Didakta BV was also fulfilled. In April 2026, we proudly became part of DIEP Management (diep.one), bridging the gap between Tech and Talent.",
+      historyDesc: "Our journey began in 2000 as Sitesource, a passionate one-man firm dedicated to robust front-end and back-end development. Evolving with the digital landscape, we transformed into Strategea COMMV in 2023. During the 2023 - 2026 period, a leading role as CEO for Didakta BV was also fulfilled. In April 2026, we joined DIEP CLOUD BV (diepcloud.eu) in Ieper, the company behind DIEP Cloud: a platform that lets organisations hear their people, audience and surroundings anonymously, with anonymity built into the architecture.",
       contact: "Get in touch"
     },
     nl: {
@@ -26,7 +26,7 @@ export default function Home() {
       consultingTitle: "Strategisch Digitaal Advies",
       consultingDesc: "Wij bieden strategisch advies om uw digitale infrastructuur te optimaliseren. Onze expertise omvat naadloze ERP- en CRM-integraties en diepgaande data-analyse om meetbare bedrijfswaarde te creëren.",
       historyTitle: "Onze Historiek",
-      historyDesc: "Ons verhaal startte in 2000 als Sitesource, een eenmanszaak gespecialiseerd in front-end en back-end development. In 2023 zijn we geëvolueerd naar Strategea COMMV. In de periode 2023 - 2026 werd tevens een leidende rol als CEO voor Didakta BV vervuld. Sinds april 2026 maken we met trots deel uit van DIEP Management (diep.one), waar we tech en talent met elkaar verbinden.",
+      historyDesc: "Ons verhaal startte in 2000 als Sitesource, een eenmanszaak gespecialiseerd in front-end en back-end development. In 2023 zijn we geëvolueerd naar Strategea COMMV. In de periode 2023 - 2026 werd tevens een leidende rol als CEO voor Didakta BV vervuld. Sinds april 2026 maken we deel uit van DIEP CLOUD BV (diepcloud.eu) in Ieper, het bedrijf achter DIEP Cloud: een platform waarmee organisaties hun medewerkers, publiek en omgeving anoniem laten spreken, met anonimiteit ingebouwd in de architectuur.",
       contact: "Neem contact op"
     }
   };
@@ -65,7 +65,7 @@ export default function Home() {
 
         <div class="history-section">
           <h2>{content[lang()].historyTitle}</h2>
-          <p innerHTML={content[lang()].historyDesc.replace('(diep.one)', '(<a href="https://diep.one" target="_blank" rel="noopener noreferrer">diep.one</a>)')}></p>
+          <p innerHTML={content[lang()].historyDesc.replace('(diepcloud.eu)', '(<a href="https://diepcloud.eu" target="_blank" rel="noopener noreferrer">diepcloud.eu</a>)')}></p>
         </div>
 
         <div class="action-container">

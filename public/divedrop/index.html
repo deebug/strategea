@@ -10,7 +10,7 @@
 <link rel="canonical" href="https://divedrop.app/">
 <meta property="og:url" content="https://divedrop.app/">
 <meta property="og:image" content="https://divedrop.app/img/video-poster.jpg">
-<meta property="og:video" content="https://divedrop.app/video/divedrop-ios.mp4">
+<meta property="og:video" content="https://divedrop.app/video/divedrop-23s.mp4">
 <meta property="og:video:type" content="video/mp4">
 <meta property="og:video:width" content="1920">
 <meta property="og:video:height" content="1080">
@@ -240,7 +240,7 @@ const T = {
  en: {by:"an app by Strategea", tag:"Share your dive export with DiveDrop. Your SSI logbook is up to date. Depth profile included.",
   btn_small_ios:"Download on the", btn_small_and:"Get it on", btn_small_soon:"In review, coming to",
   how_link:"How it works", how:"How it works",
-  vid_h:"See it in 25 seconds", vid_lead:"From the export to your logbook, depth profile and all.",
+  vid_h:"See it in 23 seconds", vid_lead:"From the export to your logbook, depth profile and all.",
   vid_play:"Play the video",
   quote_by:"App Store review · Garmin diver",
   plat_h:"On iPhone and on Android", plat_lead:"Same app, same price, same dives in your logbook. Every supported computer works on both.",
@@ -275,7 +275,7 @@ const T = {
  fr: {by:"une app de Strategea", tag:"Partagez votre export de plongées avec DiveDrop. Votre carnet SSI est à jour. Profil de profondeur inclus.",
   btn_small_ios:"Télécharger dans l'", btn_small_and:"Disponible sur", btn_small_soon:"En validation, bientôt sur",
   how_link:"Comment ça marche", how:"Comment ça marche",
-  vid_h:"Voyez-le en 25 secondes", vid_lead:"De l'export à votre carnet, profil de profondeur compris.",
+  vid_h:"Voyez-le en 23 secondes", vid_lead:"De l'export à votre carnet, profil de profondeur compris.",
   vid_play:"Lire la vidéo",
   quote_by:"Avis sur l'App Store · plongeur Garmin",
   plat_h:"Sur iPhone et sur Android", plat_lead:"Même app, même prix, mêmes plongées dans votre carnet. Tous les ordinateurs pris en charge fonctionnent sur les deux.",
@@ -310,7 +310,7 @@ const T = {
  nl: {by:"een app van Strategea", tag:"Deel je duik-export met DiveDrop. Je SSI-logboek is bijgewerkt. Met diepteprofiel.",
   btn_small_ios:"Download in de", btn_small_and:"Ontdek het op", btn_small_soon:"In beoordeling, binnenkort op",
   how_link:"Zo werkt het", how:"Zo werkt het",
-  vid_h:"Bekijk het in 25 seconden", vid_lead:"Van de export tot in je logboek, diepteprofiel incluis.",
+  vid_h:"Bekijk het in 23 seconden", vid_lead:"Van de export tot in je logboek, diepteprofiel incluis.",
   vid_play:"Speel de video af",
   quote_by:"Review in de App Store · Garmin-duiker",
   plat_h:"Op iPhone en op Android", plat_lead:"Dezelfde app, dezelfde prijs, dezelfde duiken in je logboek. Elke ondersteunde computer werkt op allebei.",
@@ -371,7 +371,7 @@ apply(start);
 document.getElementById('vidPlay').addEventListener('click', () => {
   let small = window.innerWidth < 900;
   try { small = small || navigator.connection.saveData === true; } catch (e) {}
-  const src = 'video/divedrop-ios' + (small ? '-720' : '') + '.mp4';
+  const src = 'video/divedrop-23s' + (small ? '-720' : '') + '.mp4';
   const v = document.createElement('video');
   v.src = src; v.controls = true; v.autoplay = true; v.playsInline = true; v.preload = 'auto';
   v.setAttribute('poster', 'img/video-still.jpg');

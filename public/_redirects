@@ -8,11 +8,11 @@ https://www.divedrop.app/*               https://divedrop.app/:splat   301!
 https://divedrop.app/divedrop            https://divedrop.app/         301!
 https://divedrop.app/divedrop/*          https://divedrop.app/:splat   301!
 
-# Earlier cuts of the film point to the current one (the iPhone cut until Android is in Google Play).
-https://divedrop.app/video/divedrop-23s.mp4         https://divedrop.app/video/divedrop-ios.mp4       302!
-https://divedrop.app/video/divedrop-23s-720.mp4     https://divedrop.app/video/divedrop-ios-720.mp4   302!
-https://divedrop.app/video/divedrop-1.0.2.mp4       https://divedrop.app/video/divedrop-ios.mp4       302!
-https://divedrop.app/video/divedrop-1.0.2-720.mp4   https://divedrop.app/video/divedrop-ios-720.mp4   302!
+# Later cuts of the film were withdrawn; their URLs point to the one on the page.
+https://divedrop.app/video/divedrop-1.0.2.mp4       https://divedrop.app/video/divedrop-23s.mp4       302!
+https://divedrop.app/video/divedrop-1.0.2-720.mp4   https://divedrop.app/video/divedrop-23s-720.mp4   302!
+https://divedrop.app/video/divedrop-ios.mp4         https://divedrop.app/video/divedrop-23s.mp4       302!
+https://divedrop.app/video/divedrop-ios-720.mp4     https://divedrop.app/video/divedrop-23s-720.mp4   302!
 
 https://divedrop.app/*                   /divedrop/:splat              200!
 

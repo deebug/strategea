@@ -32,6 +32,26 @@
   input:focus,select:focus,textarea:focus{outline:2px solid var(--accent-1);border-color:transparent}
   button.submit{background:var(--text-primary);color:#fff;border:0;padding:.9rem 1.4rem;border-radius:50px;font-weight:600;font-size:1rem;cursor:pointer;justify-self:start}
   .hp{position:absolute;left:-9999px}
+  .field{display:grid;gap:.35rem}
+  .flabel{font-weight:600;font-size:.9rem}
+  .drop{position:relative;display:grid;justify-items:center;gap:.45rem;text-align:center;padding:1.5rem 1.25rem;border:1.5px dashed rgba(42,90,138,.32);border-radius:16px;background:linear-gradient(180deg,rgba(84,179,214,.06),rgba(84,179,214,.02));transition:border-color .15s,background .15s}
+  .drop input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;padding:0;border:0}
+  .drop:hover,.drop.over{border-color:var(--accent-1);background:rgba(84,179,214,.1)}
+  .drop:focus-within{outline:2px solid var(--accent-1);outline-offset:2px}
+  .drop-ic{display:grid;place-items:center;width:42px;height:42px;border-radius:12px;background:#fff;box-shadow:0 2px 8px rgba(17,24,39,.08);flex:none}
+  .drop-ic svg{width:22px;height:22px;fill:none;stroke:var(--accent-2);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .drop-main{font-weight:500;color:var(--text-secondary);font-size:.95rem}
+  .drop-main b{color:var(--accent-2);font-weight:600}
+  .drop small{font-weight:400}
+  @media (hover:none){.drop-or{display:none}}
+  .chosen{display:flex;align-items:center;gap:.8rem;padding:.75rem .8rem;border:1px solid rgba(0,0,0,.1);border-radius:14px;background:#fff}
+  .fmeta{display:grid;gap:.1rem;min-width:0;flex:1}
+  .fmeta b{font-weight:600;font-size:.92rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .fmeta small{font-variant-numeric:tabular-nums}
+  #fclear{flex:none;width:34px;height:34px;border:0;border-radius:10px;background:transparent;cursor:pointer;display:grid;place-items:center}
+  #fclear:hover{background:rgba(17,24,39,.06)}
+  #fclear svg{width:18px;height:18px;stroke:var(--text-secondary);stroke-width:2;fill:none;stroke-linecap:round}
+  .ferr{color:#b42318;font-size:.88rem;line-height:1.5}
   small{color:var(--text-secondary)}
   .more{color:var(--text-secondary);line-height:1.65;margin-top:.9rem}
   .faqgroup{margin-bottom:1.4rem}
@@ -43,6 +63,7 @@
 </head>
 <body>
 <div class="lang-toggle" aria-label="Language"><button data-lang="en">EN</button><button data-lang="fr">FR</button><button data-lang="nl">NL</button></div>
+<script src="../nav.js"></script>
 <main class="wrap">
   <a class="brand" href="../"><img class="appicon" src="../img/icon.png" alt="DiveDrop"> <span>DiveDrop <small>by Strategea</small></span></a>
   <h1 data-i18n="title"></h1>
@@ -104,7 +125,21 @@
       </select>
     </label>
     <label><span data-i18n="f_message"></span><textarea name="message" required></textarea></label>
-    <label><span data-i18n="f_file"></span><input type="file" name="export" accept=".zip,.uddf,.fit,.xml"><small data-i18n="f_filehint"></small></label>
+    <div class="field">
+      <span class="flabel" id="fileLabel" data-i18n="f_file"></span>
+      <div class="drop" id="drop">
+        <input type="file" name="export" id="fileIn" accept=".zip,.uddf,.fit,.xml" aria-labelledby="fileLabel" aria-describedby="fileHint">
+        <span class="drop-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 15V4M7.5 8.5 12 4l4.5 4.5M5 14v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4"/></svg></span>
+        <span class="drop-main"><b data-i18n="drop_choose"></b> <span class="drop-or" data-i18n="drop_or"></span></span>
+        <small id="fileHint" data-i18n="f_filehint"></small>
+      </div>
+      <div class="chosen" id="chosen" hidden>
+        <span class="drop-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg></span>
+        <span class="fmeta"><b id="fname"></b><small id="fsize"></small></span>
+        <button type="button" id="fclear" data-i18n-aria="drop_remove"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+      </div>
+      <p class="ferr" id="ferr" role="alert" hidden data-i18n="drop_big"></p>
+    </div>
     <button class="submit" type="submit" data-i18n="send"></button>
     <small data-i18n="privacy"></small>
   </form>
@@ -137,7 +172,7 @@ const T = {
   n3q:"Is the Android app behind the iPhone one?",
   n3a:"No. Both send exactly the same data to SSI, and that is checked automatically on every change.",
   more:"Wondering whether your dive computer is covered, or how SSI marks the dives? Those are answered on the <a href=\"../\">DiveDrop page</a> and in the <a href=\"../compatibility/\">compatibility list</a>.",
-  formtitle:"Contact us", f_platform:"Which app", f_name:"Name", f_email:"Email", f_device:"Dive computer or app", f_topic:"Topic", f_message:"What happened, step by step?", f_file:"Export file (optional)", f_filehint:"The .zip, .uddf or .fit that caused the problem. Max 8 MB.",
+  formtitle:"Contact us", f_platform:"Which app", f_name:"Name", f_email:"Email", f_device:"Dive computer or app", f_topic:"Topic", f_message:"What happened, step by step?", f_file:"Export file (optional)", f_filehint:"The .zip, .uddf or .fit that caused the problem. Max 8 MB.", drop_choose:"Choose a file", drop_or:"or drag it here", drop_remove:"Remove file", drop_big:"This file is larger than 8 MB, the limit for this form. Zip it first, or leave it out and mention it in your message: we'll reply with another way to send it.",
   t_import:"Import or file problem", t_ssi:"Sending to SSI", t_purchase:"Purchase or restore", t_feature:"Feature request", t_other:"Other",
   send:"Send", privacy:"We use what you send only to answer you. Attached exports are deleted after the case is closed.", changeloglink:"What's new", presslink:"Press", privacylink:"Privacy policy"},
  fr: {title:"Support DiveDrop", intro:"Quelque chose ne fonctionne pas, ou vous voulez voir un ordinateur pris en charge ? Ces réponses valent autant pour l'app iPhone que pour Android. Les questions propres à une seule plateforme sont sur la <a href=\"../\">page DiveDrop</a>. Toujours bloqué ? Écrivez-nous ; nous répondons généralement sous deux jours ouvrés.",
@@ -164,7 +199,7 @@ const T = {
   n3q:"L'app Android est-elle en retard sur celle d'iPhone ?",
   n3a:"Non. Les deux envoient exactement les mêmes données à SSI, et c'est vérifié automatiquement à chaque changement.",
   more:"Vous vous demandez si votre ordinateur est pris en charge, ou comment SSI marque les plongées ? C'est répondu sur la <a href=\"../\">page DiveDrop</a> et dans la <a href=\"../compatibility/\">liste de compatibilité</a>.",
-  formtitle:"Contactez-nous", f_platform:"Quelle app", f_name:"Nom", f_email:"E-mail", f_device:"Ordinateur ou app de plongée", f_topic:"Sujet", f_message:"Que s'est-il passé, étape par étape ?", f_file:"Fichier d'export (facultatif)", f_filehint:"Le .zip, .uddf ou .fit qui a posé problème. Max. 8 Mo.",
+  formtitle:"Contactez-nous", f_platform:"Quelle app", f_name:"Nom", f_email:"E-mail", f_device:"Ordinateur ou app de plongée", f_topic:"Sujet", f_message:"Que s'est-il passé, étape par étape ?", f_file:"Fichier d'export (facultatif)", f_filehint:"Le .zip, .uddf ou .fit qui a posé problème. Max. 8 Mo.", drop_choose:"Choisir un fichier", drop_or:"ou le glisser ici", drop_remove:"Retirer le fichier", drop_big:"Ce fichier dépasse 8 Mo, la limite de ce formulaire. Compressez-le en .zip, ou laissez-le de côté et signalez-le dans votre message : nous vous répondrons avec un autre moyen de l'envoyer.",
   t_import:"Problème d'import ou de fichier", t_ssi:"Envoi vers SSI", t_purchase:"Achat ou restauration", t_feature:"Demande de fonctionnalité", t_other:"Autre",
   send:"Envoyer", privacy:"Nous utilisons ce que vous envoyez uniquement pour vous répondre. Les exports joints sont supprimés une fois le dossier clos.", changeloglink:"Nouveautés", presslink:"Presse", privacylink:"Politique de confidentialité"},
  nl: {title:"DiveDrop-support", intro:"Werkt iets niet, of wil je een duikcomputer ondersteund zien? Deze antwoorden gelden voor de iPhone- en de Android-app allebei. Vragen over één platform staan op de <a href=\"../\">DiveDrop-pagina</a>. Kom je er niet uit? Schrijf ons; we antwoorden meestal binnen twee werkdagen.",
@@ -191,7 +226,7 @@ const T = {
   n3q:"Loopt de Android-app achter op die van iPhone?",
   n3a:"Nee. Allebei sturen ze exact dezelfde gegevens naar SSI, en dat wordt bij elke wijziging automatisch gecontroleerd.",
   more:"Vraag je je af of jouw duikcomputer erbij zit, of hoe SSI de duiken markeert? Dat staat op de <a href=\"../\">DiveDrop-pagina</a> en in de <a href=\"../compatibility/\">compatibiliteitslijst</a>.",
-  formtitle:"Contacteer ons", f_platform:"Welke app", f_name:"Naam", f_email:"E-mail", f_device:"Duikcomputer of app", f_topic:"Onderwerp", f_message:"Wat gebeurde er, stap voor stap?", f_file:"Exportbestand (optioneel)", f_filehint:"De .zip, .uddf of .fit die het probleem gaf. Max. 8 MB.",
+  formtitle:"Contacteer ons", f_platform:"Welke app", f_name:"Naam", f_email:"E-mail", f_device:"Duikcomputer of app", f_topic:"Onderwerp", f_message:"Wat gebeurde er, stap voor stap?", f_file:"Exportbestand (optioneel)", f_filehint:"De .zip, .uddf of .fit die het probleem gaf. Max. 8 MB.", drop_choose:"Kies een bestand", drop_or:"of sleep het hierheen", drop_remove:"Bestand verwijderen", drop_big:"Dit bestand is groter dan 8 MB, de limiet van dit formulier. Zip het eerst, of laat het weg en vermeld het in je bericht: we antwoorden met een andere manier om het te sturen.",
   t_import:"Import- of bestandsprobleem", t_ssi:"Versturen naar SSI", t_purchase:"Aankoop of herstellen", t_feature:"Functiewens", t_other:"Iets anders",
   send:"Verstuur", privacy:"We gebruiken wat je stuurt alleen om je te antwoorden. Bijgevoegde exports worden na afhandeling verwijderd.", changeloglink:"Wat is er nieuw", presslink:"Pers", privacylink:"Privacybeleid"}
 };
@@ -203,11 +238,41 @@ function apply(lang){
     const v = t[el.dataset.i18n] ?? '';
     if (html.has(el.dataset.i18n)) el.innerHTML = v; else el.textContent = v;
   });
+  document.querySelectorAll('[data-i18n-aria]').forEach(el => el.setAttribute('aria-label', t[el.dataset.i18nAria] || ''));
   document.getElementById('langField').value = lang;
+  showFile();
   document.querySelectorAll('.lang-toggle button').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
   try { localStorage.setItem('divedrop.lang', lang); } catch (e) {}
 }
 document.querySelectorAll('.lang-toggle button').forEach(b => b.addEventListener('click', () => apply(b.dataset.lang)));
+
+// Upload field: the real file input covers the drop zone, so clicking and dropping both work natively.
+const fileIn = document.getElementById('fileIn'), drop = document.getElementById('drop');
+const MAX = 8 * 1024 * 1024;
+function fmtSize(b) {
+  const lang = document.documentElement.lang, [kb, mb] = lang === 'fr' ? ['Ko', 'Mo'] : ['KB', 'MB'];
+  const n = (v, d) => v.toLocaleString(lang, { maximumFractionDigits: d });
+  return b < 1024 * 1024 ? n(Math.max(1, Math.round(b / 1024)), 0) + ' ' + kb : n(b / 1048576, 1) + ' ' + mb;
+}
+function showFile() {
+  const f = fileIn.files && fileIn.files[0];
+  const tooBig = !!f && f.size > MAX;
+  document.getElementById('ferr').hidden = !tooBig;
+  if (tooBig) fileIn.value = '';
+  const ok = !!f && !tooBig;
+  drop.hidden = ok;
+  document.getElementById('chosen').hidden = !ok;
+  if (ok) {
+    document.getElementById('fname').textContent = f.name;
+    document.getElementById('fsize').textContent = fmtSize(f.size);
+  }
+}
+fileIn.addEventListener('change', showFile);
+['dragenter', 'dragover'].forEach(e => drop.addEventListener(e, () => drop.classList.add('over')));
+['dragleave', 'drop'].forEach(e => drop.addEventListener(e, () => drop.classList.remove('over')));
+document.getElementById('fclear').addEventListener('click', () => {
+  fileIn.value = ''; document.getElementById('ferr').hidden = true; showFile(); fileIn.focus();
+});
 let start = 'en'; try { start = localStorage.getItem('divedrop.lang') || (l => l.startsWith('nl') ? 'nl' : l.startsWith('fr') ? 'fr' : 'en')((navigator.language || '').toLowerCase()); } catch (e) {}
 apply(start);
 </script>

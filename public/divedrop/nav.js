@@ -7,7 +7,7 @@
     fr: { compatibility: "Compatibilité", changelog: "Nouveautés", support: "Support", press: "Presse", download: "Télécharger", menu: "Menu" },
     nl: { compatibility: "Compatibiliteit", changelog: "Wat is er nieuw", support: "Support", press: "Pers", download: "Downloaden", menu: "Menu" }
   };
-  const ITEMS = ["compatibility", "changelog", "support", "press"];
+  const ITEMS = ["compatibility", "changelog", "support"];  // Press stays in the footers only.
 
   // Works on divedrop.app (pages at the root) and on the repo layout (/divedrop/...).
   const path = location.pathname;

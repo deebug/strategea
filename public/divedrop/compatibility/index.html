@@ -57,14 +57,18 @@
   .dev{background:var(--card-bg);border-radius:22px;padding:1.4rem 1.5rem;box-shadow:var(--shadow);border:1px solid var(--line);display:flex;flex-direction:column;gap:.85rem}
   .dev header{display:flex;justify-content:space-between;align-items:flex-start;gap:.75rem}
   .dev h4{font-size:1.05rem;font-weight:700;line-height:1.25}
-  .dev .models{color:var(--muted);font-size:.85rem;font-weight:400;display:block;margin-top:.15rem;line-height:1.4}
-  .dev .models b{font-weight:600;color:var(--text-secondary)}
-  .dev .models.exp b{font-weight:500;color:var(--muted)}
+  .mods{display:grid;gap:.45rem;margin-top:-.25rem}
+  .mods .sw{color:var(--muted);font-size:.86rem;line-height:1.45}
+  .mrow{display:flex;flex-wrap:wrap;align-items:center;gap:.3rem}
+  .mlab{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-right:.25rem}
+  .mchip{font-size:.8rem;line-height:1.3;padding:.18rem .55rem;border-radius:50px;white-space:nowrap}
+  .mchip.t{background:var(--ok-bg);color:var(--ok);font-weight:600}
+  .mchip.e{border:1px dashed rgba(17,24,39,.22);color:var(--text-secondary)}
   .route{color:var(--text-secondary);font-size:.92rem;line-height:1.55}
   .route b{color:var(--text-primary);font-weight:600}
 
-  .fields{display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem;border-top:1px solid var(--line);padding-top:.85rem}
-  .f{display:flex;align-items:center;gap:.4rem;font-size:.82rem;color:var(--text-secondary);line-height:1.3}
+  .fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.4rem;border-top:1px solid var(--line);padding-top:.85rem}
+  .f{display:flex;align-items:center;gap:.4rem;min-width:0;-webkit-hyphens:auto;hyphens:auto;overflow-wrap:anywhere;font-size:.82rem;color:var(--text-secondary);line-height:1.3}
   .f i{width:17px;height:17px;border-radius:50%;flex:none;display:grid;place-items:center;font-size:.68rem;font-weight:800;font-style:normal}
   .f.y i{background:var(--ok-bg);color:var(--ok)}
   .f.y{color:var(--text-primary);font-weight:500}
@@ -86,7 +90,7 @@
   .cta:hover{transform:translateY(-2px);box-shadow:0 10px 25px -5px rgba(0,0,0,.25)}
   .updated{margin-top:2rem;font-size:.85rem;color:var(--muted)}
   footer{margin-top:3rem;padding-top:2rem;border-top:1px solid var(--line);color:var(--text-secondary);font-size:.85rem;display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between}
-  @media (max-width:760px){h1{font-size:2.1rem}.lang-toggle{top:1rem;right:1rem}.wrap{padding-top:5rem}.fields{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:760px){h1{font-size:2.1rem}.lang-toggle{top:1rem;right:1rem}.wrap{padding-top:5rem}.fields{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
 </head>
 <body>
@@ -323,10 +327,10 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':
 // Models we have seen a real file from, kept apart from models that write the same format but
 // that no file of has crossed our desk yet. Rows about software (Subsurface, MacDive) keep one line.
 function models(r, t) {
-  if (r.models) return '<span class="models">' + esc(r.models) + '</span>';
-  let h = '<span class="models"><b>' + esc(t.m_tested) + ':</b> ' + esc(r.tested) + '</span>';
-  if (r.expected) h += '<span class="models exp"><b>' + esc(t.m_expected) + ':</b> ' + esc(r.expected) + '</span>';
-  return h;
+  if (r.models) return '<div class="mods"><p class="sw">' + esc(r.models) + '</p></div>';
+  const row = (label, list, cls) => '<div class="mrow"><span class="mlab">' + esc(label) + '</span>' +
+    list.split(', ').map(m => '<span class="mchip ' + cls + '">' + esc(m) + '</span>').join('') + '</div>';
+  return '<div class="mods">' + row(t.m_tested, r.tested, 't') + (r.expected ? row(t.m_expected, r.expected, 'e') : '') + '</div>';
 }
 function apply(lang){
   const t = T[lang] || T.en;
@@ -342,8 +346,8 @@ function apply(lang){
         return '<span class="f ' + st + '"><i>' + mark + '</i>' + esc(t['f_' + k]) + '</span>';
       }).join('');
       return '<article class="dev">' +
-        '<header><h4>' + esc(r.dev) + models(r, t) + '</h4>' +
-        '<span class="pill ' + r.s + '">' + esc(label) + '</span></header>' +
+        '<header><h4>' + esc(r.dev) + '</h4>' +
+        '<span class="pill ' + r.s + '">' + esc(label) + '</span></header>' + models(r, t) +
         '<p class="route">' + esc(r.route[lang] || r.route.en) + '</p>' +
         '<div class="fields">' + fields + '</div>' +
         '<p class="note">' + esc(r.note[lang] || r.note.en) + '</p>' +

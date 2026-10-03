@@ -58,6 +58,8 @@
   .dev header{display:flex;justify-content:space-between;align-items:flex-start;gap:.75rem}
   .dev h4{font-size:1.05rem;font-weight:700;line-height:1.25}
   .dev .models{color:var(--muted);font-size:.85rem;font-weight:400;display:block;margin-top:.15rem;line-height:1.4}
+  .dev .models b{font-weight:600;color:var(--text-secondary)}
+  .dev .models.exp b{font-weight:500;color:var(--muted)}
   .route{color:var(--text-secondary);font-size:.92rem;line-height:1.55}
   .route b{color:var(--text-primary);font-weight:600}
 
@@ -131,7 +133,7 @@
     <div class="card"><h3 data-i18n="k4t"></h3><p data-i18n="k4d"></p></div>
   </div>
 
-  <p class="updated"><span data-i18n="updated"></span> 12/09/2026</p>
+  <p class="updated"><span data-i18n="updated"></span> 03/10/2026</p>
 
   <footer>
     <span>DiveDrop &bull; DIEP CLOUD BV, Pannenhuisstraat 9, 8900 Ieper &bull; BTW / VAT: BE 1038.498.133</span>
@@ -146,7 +148,7 @@ const FIELDS = ['profile','temp','pressure','gps','weight','rating'];
 
 const GROUPS = [
  {id:'uddf', ext:'.uddf / .zip', rows:[
-  {dev:"Oceanic+ on Apple Watch", models:"Ultra, Ultra 2, Series 9 and later", s:"ok",
+  {dev:"Oceanic+ on Apple Watch", tested:"Apple Watch Ultra", expected:"Ultra 2, Ultra 3, Series 9 and later", s:"ok",
    f:{profile:'y',temp:'y',pressure:'y',gps:'y',weight:'y',rating:'y'},
    route:{en:"Oceanic+ › Logbook › Export Dives, then share the emailed link with DiveDrop.",
           fr:"Oceanic+ › Logbook › Export Dives, puis partagez le lien reçu par e-mail avec DiveDrop.",
@@ -155,7 +157,7 @@ const GROUPS = [
          fr:"Vérifié plongée par plongée sur un vrai export de 34 plongées, côté SSI, puis sur 34 plongées de plus venant des montres de trois autres plongeurs, dans trois fuseaux horaires. Pression, lestage et note arrivent si vous les avez saisis dans Oceanic+. Cet export stocke les températures en Kelvin et décale les heures de deux minutes ; DiveDrop corrige les deux.",
          nl:"Duik per duik nagekeken aan de SSI-kant, op een echte export van 34 duiken, en daarna op nog eens 34 duiken van de horloges van drie andere duikers, in drie tijdzones. Tankdruk, lood en beoordeling komen mee als je ze in Oceanic+ invulde. Deze export bewaart temperaturen in Kelvin en zet de tijden twee minuten verkeerd; DiveDrop corrigeert allebei."}},
 
-  {dev:"Shearwater Cloud", models:"Perdix, Perdix 2, Petrel 3, Teric, Peregrine, Tern", s:"ok",
+  {dev:"Shearwater Cloud", tested:"Perdix, Perdix 2, Petrel 3, Peregrine TX", expected:"Peregrine, Teric, Tern", s:"ok",
    f:{profile:'y',temp:'y',pressure:'y',gps:'n',weight:'u',rating:'u'},
    route:{en:"Shearwater Cloud on desktop › select your dives › Export › UDDF.",
           fr:"Shearwater Cloud sur ordinateur › sélectionnez vos plongées › Export › UDDF.",
@@ -193,7 +195,7 @@ const GROUPS = [
  ]},
 
  {id:'fit', ext:'.fit', rows:[
-  {dev:"Garmin Descent", models:"Mk1, Mk2, Mk2i, Mk2S, Mk3i", s:"ok",
+  {dev:"Garmin Descent", tested:"Mk1, Mk2, Mk2i, Mk2S, Mk3i", expected:"Mk3", s:"ok",
    f:{profile:'y',temp:'y',pressure:'y',gps:'y',weight:'n',rating:'n'},
    route:{en:"Garmin Connect › open the dive › Export to FIT, then share the file with DiveDrop.",
           fr:"Garmin Connect › ouvrez la plongée › Export to FIT, puis partagez le fichier avec DiveDrop.",
@@ -202,7 +204,7 @@ const GROUPS = [
          fr:"Vérifié sur 30 vraies plongées issues de ces montres : circuit ouvert, multigaz, recycleur et apnée. Avec un émetteur Garmin, la pression de départ suit aussi. La position vient du point en surface, le site est donc généralement trouvé tout seul.",
          nl:"Nagekeken op 30 echte duiken van deze horloges: open circuit, multigas, rebreather en apneu. Met een Garmin-zender komt ook de begindruk mee. De positie komt van de oppervlaktefix, dus de stek wordt meestal vanzelf gevonden."}},
 
-  {dev:"Garmin Descent", models:"G1, G2, X50i", s:"ok",
+  {dev:"Garmin Descent", tested:"G1, X50i", expected:"G2", s:"ok",
    f:{profile:'y',temp:'y',pressure:'y',gps:'y',weight:'n',rating:'n'},
    route:{en:"Same route through Garmin Connect.",
           fr:"Même chemin via Garmin Connect.",
@@ -211,7 +213,7 @@ const GROUPS = [
          fr:"Confirmé sur de vrais fichiers G1 et X50i, dont un avec la pression du bloc. Aucun fichier G2 ne nous est encore passé entre les mains, mais il écrit le même format. Depuis que Garmin a coupé sa connexion SSI, exporter le FIT est la seule sortie de l'app Garmin, et c'est la brèche que ceci comble.",
          nl:"Bevestigd op echte G1- en X50i-bestanden, één ervan met tankdruk. Een G2-bestand hebben we nog niet gezien, maar dat schrijft hetzelfde formaat. Sinds Garmin zijn eigen SSI-koppeling uitzette is het FIT-bestand exporteren de enige uitweg uit de Garmin-app, en precies dat gat vult dit."}},
 
-  {dev:"Suunto", models:"Ocean, Vertical 2", s:"ok",
+  {dev:"Suunto", tested:"Ocean, Vertical 2", s:"ok",
    f:{profile:'y',temp:'y',pressure:'u',gps:'n',weight:'n',rating:'n'},
    route:{en:"Suunto app › the dive › export, which gives a .fit file.",
           fr:"App Suunto › la plongée › exporter, ce qui donne un fichier .fit.",
@@ -264,7 +266,7 @@ const T = {
   k2t:"Running it twice is safe", k2d:"DiveDrop reads your existing MySSI logbook first and recognises what is already there, including dives you entered by hand. Hand it a whole season without making duplicates.",
   k3t:"Short and shallow records are skipped", k3d:"Anything under five minutes or shallower than a metre and a half stays out by default: surface checks and pool dips. Switch it off in the app if you want them.",
   k4t:"Android", k4d:"DiveDrop is on Google Play, for Android 8.0 or later. It reads the same files as the iPhone app.",
-  updated:"Last updated",
+  updated:"Last updated", m_tested:"Tested", m_expected:"Expected to work",
   f_home:"DiveDrop", f_changelog:"What's new", f_press:"Press", f_support:"Support", f_privacy:"Privacy policy", notaff:"Not affiliated with SSI, Oceanic, Garmin, Suunto, Shearwater or Huish Outdoors"},
 
  fr:{back:"retour à DiveDrop", h1:"DiveDrop fonctionnera-t-il avec mon ordinateur ?",
@@ -288,7 +290,7 @@ const T = {
   k2t:"Relancer deux fois ne risque rien", k2d:"DiveDrop lit d'abord votre carnet MySSI et reconnaît ce qui s'y trouve, y compris les saisies manuelles. Confiez-lui une saison entière sans créer de doublons.",
   k3t:"Les enregistrements courts sont ignorés", k3d:"Moins de cinq minutes ou moins d'un mètre cinquante restent dehors par défaut : vérifications en surface et piscine. Désactivable dans l'app.",
   k4t:"Android", k4d:"DiveDrop est sur Google Play, pour Android 8.0 ou plus récent. L'app lit les mêmes fichiers que sur iPhone.",
-  updated:"Dernière mise à jour",
+  updated:"Dernière mise à jour", m_tested:"Testé", m_expected:"Devrait fonctionner",
   f_home:"DiveDrop", f_changelog:"Nouveautés", f_press:"Presse", f_support:"Support", f_privacy:"Politique de confidentialité", notaff:"Sans lien avec SSI, Oceanic, Garmin, Suunto, Shearwater ou Huish Outdoors"},
 
  nl:{back:"terug naar DiveDrop", h1:"Werkt DiveDrop met mijn duikcomputer?",
@@ -312,12 +314,20 @@ const T = {
   k2t:"Twee keer draaien kan geen kwaad", k2d:"DiveDrop leest eerst je bestaande MySSI-logboek en herkent wat er al staat, ook handmatige invoer. Gooi er een heel seizoen in zonder dubbels te maken.",
   k3t:"Korte en ondiepe registraties vallen weg", k3d:"Alles korter dan vijf minuten of ondieper dan anderhalve meter blijft standaard buiten: oppervlaktechecks en zwembaddips. Uit te zetten in de app.",
   k4t:"Android", k4d:"DiveDrop staat op Google Play, voor Android 8.0 of nieuwer. De app leest dezelfde bestanden als op iPhone.",
-  updated:"Laatst bijgewerkt",
+  updated:"Laatst bijgewerkt", m_tested:"Getest", m_expected:"Verwacht compatibel",
   f_home:"DiveDrop", f_changelog:"Wat is er nieuw", f_press:"Pers", f_support:"Support", f_privacy:"Privacybeleid", notaff:"Niet verbonden aan SSI, Oceanic, Garmin, Suunto, Shearwater of Huish Outdoors"}
 };
 
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
+// Models we have seen a real file from, kept apart from models that write the same format but
+// that no file of has crossed our desk yet. Rows about software (Subsurface, MacDive) keep one line.
+function models(r, t) {
+  if (r.models) return '<span class="models">' + esc(r.models) + '</span>';
+  let h = '<span class="models"><b>' + esc(t.m_tested) + ':</b> ' + esc(r.tested) + '</span>';
+  if (r.expected) h += '<span class="models exp"><b>' + esc(t.m_expected) + ':</b> ' + esc(r.expected) + '</span>';
+  return h;
+}
 function apply(lang){
   const t = T[lang] || T.en;
   document.documentElement.lang = lang;
@@ -332,7 +342,7 @@ function apply(lang){
         return '<span class="f ' + st + '"><i>' + mark + '</i>' + esc(t['f_' + k]) + '</span>';
       }).join('');
       return '<article class="dev">' +
-        '<header><h4>' + esc(r.dev) + '<span class="models">' + esc(r.models) + '</span></h4>' +
+        '<header><h4>' + esc(r.dev) + models(r, t) + '</h4>' +
         '<span class="pill ' + r.s + '">' + esc(label) + '</span></header>' +
         '<p class="route">' + esc(r.route[lang] || r.route.en) + '</p>' +
         '<div class="fields">' + fields + '</div>' +

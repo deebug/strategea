@@ -33,6 +33,8 @@
   .tag{font-size:1.25rem;color:var(--text-secondary);font-weight:300;max-width:34ch;margin-bottom:1.5rem}
 
   /* store buttons */
+  .who{font-size:1rem;line-height:1.55;color:var(--text-secondary);max-width:44ch;margin:-.6rem 0 1.6rem}
+  .trial{margin-top:.8rem;font-size:.92rem;font-weight:500;color:var(--text-secondary)}
   .stores{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
   .store{display:inline-flex;align-items:center;gap:.7rem;background:var(--text-primary);color:#fff;text-decoration:none;padding:.7rem 1.25rem;border-radius:14px;transition:transform .3s,box-shadow .3s}
   .store:hover{transform:translateY(-2px);box-shadow:0 10px 25px -5px rgba(0,0,0,.25)}
@@ -149,7 +151,9 @@
       <img class="icon" src="img/icon.png" alt="DiveDrop app icon">
       <h1>DiveDrop</h1>
       <p class="tag" data-i18n="tag"></p>
+      <p class="who" data-i18n="who"></p>
       <div class="stores" id="heroStores"></div>
+      <p class="trial" data-i18n="trial"></p>
       <a class="how-link" href="#how" data-i18n="how_link"></a>
     </div>
     <div class="phones">
@@ -272,7 +276,7 @@ function storeButtons(t, which) {
 }
 
 const T = {
- en: {by:"an app by Strategea", tag:"Share your dive export with DiveDrop. Your SSI logbook is up to date. Depth profile included.",
+ en: {by:"an app by Strategea", tag:"Share your dive export with DiveDrop. Your SSI logbook is up to date. Depth profile included.", who:"For SSI divers with a Garmin Descent, Suunto, Shearwater or Oceanic+ on Apple Watch, or with a logbook in Subsurface, MacDive or Diving Log.", trial:"First 3 dives free · then €4.99 once · no subscription",
   btn_small_ios:"Download on the", btn_small_and:"Get it on", btn_small_soon:"In review, coming to",
   how_link:"How it works", how:"How it works",
   vid_h:"See it in 23 seconds", vid_lead:"From the export to your logbook, depth profile and all.",
@@ -308,7 +312,7 @@ const T = {
   trust_eu:"Belgian company, under EU law", trust_lock:"No server of ours: your SSI login stays on your phone", trust_eye:"No tracking, no ads", trust_shield:"Your data is never sold or shared",
   changelog:"What's new", press:"Press", compat:"Compatibility", support:"Support", privacy:"Privacy policy", notaff:"Not affiliated with SSI, Oceanic, Garmin, Suunto, Shearwater or Huish Outdoors"},
 
- fr: {by:"une app de Strategea", tag:"Partagez votre export de plongées avec DiveDrop. Votre carnet SSI est à jour. Profil de profondeur inclus.",
+ fr: {by:"une app de Strategea", tag:"Partagez votre export de plongées avec DiveDrop. Votre carnet SSI est à jour. Profil de profondeur inclus.", who:"Pour les plongeurs SSI équipés d'un Garmin Descent, d'un Suunto, d'un Shearwater ou d'Oceanic+ sur Apple Watch, ou qui tiennent leur carnet dans Subsurface, MacDive ou Diving Log.", trial:"3 premières plongées gratuites · ensuite 4,99 € une seule fois · sans abonnement",
   btn_small_ios:"Télécharger dans l'", btn_small_and:"Disponible sur", btn_small_soon:"En validation, bientôt sur",
   how_link:"Comment ça marche", how:"Comment ça marche",
   vid_h:"Voyez-le en 23 secondes", vid_lead:"De l'export à votre carnet, profil de profondeur compris.",
@@ -344,7 +348,7 @@ const T = {
   trust_eu:"Entreprise belge, droit européen", trust_lock:"Aucun serveur à nous : votre identifiant SSI reste sur votre téléphone", trust_eye:"Ni pistage ni publicité", trust_shield:"Vos données ne sont jamais vendues ni partagées",
   changelog:"Nouveautés", press:"Presse", compat:"Compatibilité", support:"Support", privacy:"Politique de confidentialité", notaff:"Sans lien avec SSI, Oceanic, Garmin, Suunto, Shearwater ou Huish Outdoors"},
 
- nl: {by:"een app van Strategea", tag:"Deel je duik-export met DiveDrop. Je SSI-logboek is bijgewerkt. Met diepteprofiel.",
+ nl: {by:"een app van Strategea", tag:"Deel je duik-export met DiveDrop. Je SSI-logboek is bijgewerkt. Met diepteprofiel.", who:"Voor SSI-duikers met een Garmin Descent, Suunto, Shearwater of Oceanic+ op Apple Watch, of met een logboek in Subsurface, MacDive of Diving Log.", trial:"Eerste 3 duiken gratis · daarna eenmalig € 4,99 · geen abonnement",
   btn_small_ios:"Download in de", btn_small_and:"Ontdek het op", btn_small_soon:"In beoordeling, binnenkort op",
   how_link:"Zo werkt het", how:"Zo werkt het",
   vid_h:"Bekijk het in 23 seconden", vid_lead:"Van de export tot in je logboek, diepteprofiel incluis.",

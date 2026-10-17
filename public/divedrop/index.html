@@ -43,6 +43,12 @@
   .store small{display:block;font-size:.7rem;font-weight:400;opacity:.75;letter-spacing:.02em}
   .store.soon{background:var(--card-bg);color:var(--text-secondary);border:1px dashed rgba(17,24,39,.22);cursor:default}
   .store.soon:hover{transform:none;box-shadow:none}
+  .paused{display:flex;gap:.8rem;align-items:flex-start;background:#fff7e6;border:1px solid #f5c26b;border-radius:16px;padding:1rem 1.2rem;margin-bottom:2.2rem}
+  .paused svg{flex:none;width:22px;height:22px;margin-top:.1rem;fill:none;stroke:#b26b00;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .paused b{display:block;color:#7a4a00;margin-bottom:.25rem;font-size:1.05rem}
+  .paused p{color:#7a4a00;line-height:1.55;font-size:.95rem;max-width:70ch}
+  .paused a{color:#7a4a00;font-weight:600}
+  [hidden]{display:none!important}
   .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
   .how-link{display:inline-block;margin-top:1rem;font-weight:600;font-size:.95rem}
   .video{margin:3.5rem 0 0}
@@ -145,6 +151,11 @@
 <script src="nav.js"></script>
 <main class="wrap">
   <a class="brand" href="https://strategea.be/"><img src="img/strategea.svg" alt="Strategea"> <span data-i18n="by"></span></a>
+
+  <div class="paused" role="status" id="pausedBar">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 2.6 17.2A2 2 0 0 0 4.3 20h15.4a2 2 0 0 0 1.7-2.8L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+    <div><b data-i18n="paused_t"></b><p data-i18n="paused_p"></p></div>
+  </div>
 
   <section class="hero">
     <div>
@@ -256,6 +267,9 @@
 <script>
 // Flip to true the moment Google approves the app; every Play button on the page turns into a real link.
 const ANDROID_LIVE = true;
+// SSI stopped storing dives from other apps on 7 Oct 2026; the apps are out of both stores until there is an
+// official route. While true: a notice on top, store buttons shown as unavailable, no free-trial line.
+const PAUSED = true;
 const APP_STORE = "https://apps.apple.com/app/id6810127854";
 const PLAY_STORE = "https://play.google.com/store/apps/details?id=be.strategea.divedrop";
 
@@ -265,6 +279,10 @@ const svg = d => '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="' + d + '
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
 function storeButtons(t, which) {
+  if (PAUSED) {
+    const off = (path, name) => '<span class="store soon">' + svg(path) + '<span><small>' + esc(t.btn_small_paused) + '</small><b>' + name + '</b></span></span>';
+    return which === 'ios' ? off(APPLE_PATH, 'App Store') : which === 'and' ? off(PLAY_PATH, 'Google Play') : off(APPLE_PATH, 'App Store') + off(PLAY_PATH, 'Google Play');
+  }
   const apple = '<a class="store" href="' + APP_STORE + '">' + svg(APPLE_PATH) +
     '<span><small>' + esc(t.btn_small_ios) + '</small><b>App Store</b></span></a>';
   const play = ANDROID_LIVE
@@ -277,7 +295,7 @@ function storeButtons(t, which) {
 
 const T = {
  en: {by:"an app by Strategea", tag:"Share your dive export with DiveDrop. Your SSI logbook is up to date. Depth profile included.", who:"For SSI divers with a Garmin Descent, Suunto, Shearwater or Oceanic+ on Apple Watch, or with a logbook in Subsurface, MacDive or Diving Log.", trial:"First 3 dives free · then €4.99 once · no subscription",
-  btn_small_ios:"Download on the", btn_small_and:"Get it on", btn_small_soon:"In review, coming to",
+  btn_small_ios:"Download on the", btn_small_and:"Get it on", btn_small_soon:"In review, coming to", btn_small_paused:"Temporarily unavailable on", paused_t:"DiveDrop is paused", paused_p:"Since 7 October 2026, SSI no longer stores dives that other apps send to MySSI, so DiveDrop is out of the App Store and Google Play for now. We're working with SSI on an official route. <a href=\"support/\">What this means for you</a>",
   how_link:"How it works", how:"How it works",
   vid_h:"See it in 23 seconds", vid_lead:"From the export to your logbook, depth profile and all.",
   vid_play:"Play the video",
@@ -313,7 +331,7 @@ const T = {
   changelog:"What's new", press:"Press", compat:"Compatibility", support:"Support", privacy:"Privacy policy", notaff:"Not affiliated with SSI, Oceanic, Garmin, Suunto, Shearwater or Huish Outdoors"},
 
  fr: {by:"une app de Strategea", tag:"Partagez votre export de plongées avec DiveDrop. Votre carnet SSI est à jour. Profil de profondeur inclus.", who:"Pour les plongeurs SSI équipés d'un Garmin Descent, d'un Suunto, d'un Shearwater ou d'Oceanic+ sur Apple Watch, ou qui tiennent leur carnet dans Subsurface, MacDive ou Diving Log.", trial:"3 premières plongées gratuites · ensuite 4,99 € une seule fois · sans abonnement",
-  btn_small_ios:"Télécharger dans l'", btn_small_and:"Disponible sur", btn_small_soon:"En validation, bientôt sur",
+  btn_small_ios:"Télécharger dans l'", btn_small_and:"Disponible sur", btn_small_soon:"En validation, bientôt sur", btn_small_paused:"Temporairement indisponible sur", paused_t:"DiveDrop est en pause", paused_p:"Depuis le 7 octobre 2026, SSI n'enregistre plus les plongées que d'autres apps envoient à MySSI ; DiveDrop est donc retiré de l'App Store et de Google Play pour l'instant. Nous travaillons avec SSI à une voie officielle. <a href=\"support/\">Ce que cela signifie pour vous</a>",
   how_link:"Comment ça marche", how:"Comment ça marche",
   vid_h:"Voyez-le en 23 secondes", vid_lead:"De l'export à votre carnet, profil de profondeur compris.",
   vid_play:"Lire la vidéo",
@@ -349,7 +367,7 @@ const T = {
   changelog:"Nouveautés", press:"Presse", compat:"Compatibilité", support:"Support", privacy:"Politique de confidentialité", notaff:"Sans lien avec SSI, Oceanic, Garmin, Suunto, Shearwater ou Huish Outdoors"},
 
  nl: {by:"een app van Strategea", tag:"Deel je duik-export met DiveDrop. Je SSI-logboek is bijgewerkt. Met diepteprofiel.", who:"Voor SSI-duikers met een Garmin Descent, Suunto, Shearwater of Oceanic+ op Apple Watch, of met een logboek in Subsurface, MacDive of Diving Log.", trial:"Eerste 3 duiken gratis · daarna eenmalig € 4,99 · geen abonnement",
-  btn_small_ios:"Download in de", btn_small_and:"Ontdek het op", btn_small_soon:"In beoordeling, binnenkort op",
+  btn_small_ios:"Download in de", btn_small_and:"Ontdek het op", btn_small_soon:"In beoordeling, binnenkort op", btn_small_paused:"Tijdelijk niet beschikbaar in", paused_t:"DiveDrop staat op pauze", paused_p:"Sinds 7 oktober 2026 bewaart SSI geen duiken meer die andere apps naar MySSI sturen. Daarom is DiveDrop voorlopig uit de App Store en Google Play. We werken met SSI aan een officiële weg. <a href=\"support/\">Wat dit voor jou betekent</a>",
   how_link:"Zo werkt het", how:"Zo werkt het",
   vid_h:"Bekijk het in 23 seconden", vid_lead:"Van de export tot in je logboek, diepteprofiel incluis.",
   vid_play:"Speel de video af",
@@ -444,7 +462,7 @@ function renderDupMock(t, lang) {
 }
 
 // These sentences carry our own markup (links, bold); everything else is inserted as plain text.
-const HTML_KEYS = new Set(['ios_route', 'and_route', 'faq_more', 'a1']);
+const HTML_KEYS = new Set(['ios_route', 'and_route', 'faq_more', 'a1', 'paused_p']);
 
 function apply(lang){
   const t = T[lang] || T.en;
@@ -455,6 +473,8 @@ function apply(lang){
     if (HTML_KEYS.has(el.dataset.i18n)) el.innerHTML = v; else el.textContent = v;
   });
   document.getElementById('heroStores').innerHTML = storeButtons(t, 'both');
+  document.getElementById('pausedBar').hidden = !PAUSED;
+  document.querySelector('.trial').hidden = PAUSED;
   document.querySelectorAll('[data-i18n-aria]').forEach(el => el.setAttribute('aria-label', t[el.dataset.i18nAria] || ''));
   renderReviews(t, lang);
   renderDupMock(t, lang);

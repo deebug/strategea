@@ -73,7 +73,7 @@ function error(status: number, code: string, message: string, detail = ""): Resp
   return Response.json({ error: { code, http_status: status, message, detail } }, { status, headers: { "cache-control": "no-store" } })
 }
 
-async function callSSI(e: Env, method: "GET" | "POST", path: string, body: Record<string, unknown> | null, user?: { id: string; token: string }): Promise<Response> {
+async function callSSI(e: Env, method: "GET" | "POST", path: string, body: Record<string, unknown> | null, user?: { id: string; token: string }, mode: Env["mode"] = e.mode): Promise<Response> {
   const auth: Record<string, string> = {
     "x-ssi-key": e.key,
     "x-ssi-timestamp": String(Math.floor(Date.now() / 1000)),
@@ -87,12 +87,12 @@ async function callSSI(e: Env, method: "GET" | "POST", path: string, body: Recor
   const uri = path.replace(/\/\d+$/, "")
   const signature = createHmac("sha256", e.secret).update(signingString(method, uri, auth, body)).digest("hex")
   const headers: Record<string, string> = { ...auth, "x-ssi-signature": signature, accept: "application/json" }
-  if (e.mode === "test") headers.authorization = "Basic " + Buffer.from(`${e.key}:${e.testPass}`).toString("base64")
+  if (mode === "test") headers.authorization = "Basic " + Buffer.from(`${e.key}:${e.testPass}`).toString("base64")
   if (body) headers["content-type"] = "application/json"
 
   let res: Response
   try {
-    res = await fetch(`${BASES[e.mode]}/${path}`, { method, headers, body: body ? JSON.stringify(body) : undefined, signal: AbortSignal.timeout(50_000) })
+    res = await fetch(`${BASES[mode]}/${path}`, { method, headers, body: body ? JSON.stringify(body) : undefined, signal: AbortSignal.timeout(50_000) })
   } catch {
     return error(502, "UPSTREAM_UNREACHABLE", "MySSI could not be reached.")
   }
@@ -163,6 +163,19 @@ export default async (req: Request) => {
     return Response.json({ ok: !!e, environment: testMode ? "test" : "production", missing, version: VERSION }, { headers: { "cache-control": "no-store" } })
   }
   if (!e) return error(503, "PROXY_NOT_CONFIGURED", "The DiveDrop SSI relay is not configured.")
+
+  // Read-only key and signature check against both SSI environments (documentation/available).
+  // Answers status and error code only.
+  if (route === "check" && req.method === "GET") {
+    const result: Record<string, unknown> = {}
+    for (const mode of ["production", "test"] as const) {
+      if (mode === "test" && !e.testPass) continue
+      const r = await callSSI(e, "GET", "documentation/available", null, undefined, mode)
+      const j = (await r.json().catch(() => ({}))) as { error?: { code?: string } }
+      result[mode] = { http: r.status, code: j.error?.code ?? (r.ok ? "OK" : "UNKNOWN") }
+    }
+    return Response.json(result, { headers: { "cache-control": "no-store" } })
+  }
 
   if (route === "link" && req.method === "POST") {
     const body = await jsonBody(req)

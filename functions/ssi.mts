@@ -8,6 +8,7 @@
 //   POST link               { return, state } -> { signUpUrl }   (POST requestsignup at SSI)
 //   GET  callback           MySSI sends the diver's browser here after "Accept";
 //                           we forward ssi_user_id / ssi_user_token / name to `return`
+//   GET  check              read-only key/signature check against production and test
 //   GET  divelogs[/:id]     headers x-ssi-user-id + x-ssi-user-token from the app
 //   POST divelogs           same headers, body { dives: [...] } in SSI's canonical contract
 //
@@ -126,8 +127,9 @@ async function jsonBody(req: Request): Promise<Record<string, unknown> | Respons
 
 // ---------- where a linked diver may be sent back to ----------
 
-// The apps register divedrop://; the test script listens on the loopback address (test environment only).
-function allowedReturn(url: string, mode: Env["mode"]): URL | null {
+// The apps register divedrop://. A loopback address (RFC 8252 §7.3) serves the test script: the token
+// only ever reaches the machine that started the link.
+function allowedReturn(url: string, _mode: Env["mode"]): URL | null {
   let u: URL
   try {
     u = new URL(url)
@@ -135,7 +137,7 @@ function allowedReturn(url: string, mode: Env["mode"]): URL | null {
     return null
   }
   if (u.protocol === "divedrop:") return u
-  if (mode === "test" && u.protocol === "http:" && (u.hostname === "127.0.0.1" || u.hostname === "localhost") && u.port) return u
+  if (u.protocol === "http:" && (u.hostname === "127.0.0.1" || u.hostname === "localhost") && u.port) return u
   return null
 }
 

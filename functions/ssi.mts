@@ -154,7 +154,13 @@ export default async (req: Request) => {
   const e = env()
 
   if (route === "health" && req.method === "GET") {
-    return Response.json({ ok: !!e, environment: e?.mode ?? null, version: VERSION }, { headers: { "cache-control": "no-store" } })
+    // Names only, never values: which settings this deploy can see.
+    const testMode = Netlify.env.get("SSI_ENV") !== "production"
+    const missing = [
+      ...(Netlify.env.get("SSI_SECRET") ? [] : ["SSI_SECRET"]),
+      ...(testMode && !(Netlify.env.get("TEST_ENV_PWD") || Netlify.env.get("SSI_TEST_PASS")) ? ["TEST_ENV_PWD"] : []),
+    ]
+    return Response.json({ ok: !!e, environment: testMode ? "test" : "production", missing, version: VERSION }, { headers: { "cache-control": "no-store" } })
   }
   if (!e) return error(503, "PROXY_NOT_CONFIGURED", "The DiveDrop SSI relay is not configured.")
 

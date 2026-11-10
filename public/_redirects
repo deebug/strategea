@@ -14,6 +14,9 @@ https://divedrop.app/video/divedrop-1.0.2-720.mp4   https://divedrop.app/video/d
 https://divedrop.app/video/divedrop-ios.mp4         https://divedrop.app/video/divedrop-23s.mp4       302!
 https://divedrop.app/video/divedrop-ios-720.mp4     https://divedrop.app/video/divedrop-23s-720.mp4   302!
 
+# The SSI relay (functions/ssi.mts) lives outside /divedrop/; keep it out of the catch-all below.
+https://divedrop.app/api/ssi/*           /api/ssi/:splat               200!
+
 https://divedrop.app/*                   /divedrop/:splat              200!
 
 # The old addresses moved there for good. The shipped apps and the store listings

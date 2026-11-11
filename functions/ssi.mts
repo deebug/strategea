@@ -9,6 +9,7 @@
 //   GET  callback           MySSI sends the diver's browser here after "Accept";
 //                           we forward ssi_user_id / ssi_user_token / name to `return`
 //   GET  check              read-only key/signature check against production and test
+//   GET  divesites          one page of SSI's public dive-site list (?offset&limit&countryIso3&lastChanged)
 //   GET  divelogs[/:id]     headers x-ssi-user-id + x-ssi-user-token from the app
 //   POST divelogs           same headers, body { dives: [...] } in SSI's canonical contract
 //
@@ -207,6 +208,18 @@ export default async (req: Request) => {
       target.searchParams.set("error", "not_linked")
     }
     return new Response(null, { status: 302, headers: { location: target.toString(), "cache-control": "no-store", "referrer-policy": "no-referrer" } })
+  }
+
+  // SSI's public dive-site list, one page at a time (signature only, no diver needed).
+  if (route === "divesites" && req.method === "GET") {
+    const q = url.searchParams
+    const body: Record<string, unknown> = {
+      limit: Math.min(1000, Math.max(1, Number(q.get("limit") ?? 1000) || 1000)),
+      offset: Math.max(0, Number(q.get("offset") ?? 0) || 0),
+    }
+    const country = q.get("countryIso3"); if (country && /^[A-Z]{3}$/.test(country)) body.countryIso3 = country
+    const since = q.get("lastChanged"); if (since && /^\d{4}-\d{2}-\d{2}$/.test(since)) body.lastChanged = since
+    return callSSI(e, "POST", "divesites/search", body)
   }
 
   const m = route.match(/^divelogs(?:\/(\d+))?$/)

@@ -10,6 +10,7 @@
 //                           we forward ssi_user_id / ssi_user_token / name to `return`
 //   GET  check              read-only key/signature check against production and test
 //   GET  divesites          one page of SSI's public dive-site list (?offset&limit&countryIso3&lastChanged)
+//   GET  sites              the whole public dive-site list, compact, cached a day by the CDN (for the apps)
 //   GET  divelogs[/:id]     headers x-ssi-user-id + x-ssi-user-token from the app
 //   POST divelogs           same headers, body { dives: [...] } in SSI's canonical contract
 //
@@ -208,6 +209,26 @@ export default async (req: Request) => {
       target.searchParams.set("error", "not_linked")
     }
     return new Response(null, { status: 302, headers: { location: target.toString(), "cache-control": "no-store", "referrer-policy": "no-referrer" } })
+  }
+
+  // The whole public dive-site list as one compact file for the apps: [[id, name, lat, lon, iso3], …].
+  // SSI asks partners to keep a copy and match against it rather than search per dive; Netlify's CDN
+  // keeps this answer for a day, so SSI sees about one full read per day.
+  if (route === "sites" && req.method === "GET") {
+    const rows: unknown[] = []
+    for (let offset = 0; offset < 100_000; offset += 1000) {
+      const r = await callSSI(e, "POST", "divesites/search", { limit: 1000, offset })
+      if (!r.ok) return r
+      const page = ((await r.json()) as { divesites?: Array<{ id: number; name: string; lat: number; lon: number; iso3?: string }> }).divesites ?? []
+      for (const d of page) if (Number.isFinite(d.id) && Number.isFinite(d.lat) && Number.isFinite(d.lon)) rows.push([d.id, d.name, d.lat, d.lon, d.iso3 ?? ""])
+      if (page.length < 1000) break
+    }
+    return Response.json({ generated: new Date().toISOString(), count: rows.length, sites: rows }, {
+      headers: {
+        "cache-control": "public, max-age=3600",
+        "netlify-cdn-cache-control": "public, durable, s-maxage=86400, stale-while-revalidate=604800",
+      },
+    })
   }
 
   // SSI's public dive-site list, one page at a time (signature only, no diver needed).

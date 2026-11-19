@@ -211,6 +211,12 @@ export default async (req: Request) => {
     return new Response(null, { status: 302, headers: { location: target.toString(), "cache-control": "no-store", "referrer-policy": "no-referrer" } })
   }
 
+  // SSI returns some site names HTML-escaped ("Adrian&#039;s Cove", "Army Tank 1 &amp; 2"); the apps show plain text.
+  const unescape = (t: string) => t
+    .replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(Number(n)))
+    .replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCodePoint(parseInt(h, 16)))
+    .replace(/&(quot|apos|lt|gt|nbsp|amp);/g, (_, k) => ({ quot: '"', apos: "'", lt: "<", gt: ">", nbsp: " ", amp: "&" } as Record<string, string>)[k])
+
   // The whole public dive-site list as one compact file for the apps: [[id, name, lat, lon, iso3], …].
   // SSI asks partners to keep a copy and match against it rather than search per dive; Netlify's CDN
   // keeps this answer for a day, so SSI sees about one full read per day.
@@ -220,7 +226,7 @@ export default async (req: Request) => {
       const r = await callSSI(e, "POST", "divesites/search", { limit: 1000, offset })
       if (!r.ok) return r
       const page = ((await r.json()) as { divesites?: Array<{ id: number; name: string; lat: number; lon: number; iso3?: string }> }).divesites ?? []
-      for (const d of page) if (Number.isFinite(d.id) && Number.isFinite(d.lat) && Number.isFinite(d.lon)) rows.push([d.id, d.name, d.lat, d.lon, d.iso3 ?? ""])
+      for (const d of page) if (Number.isFinite(d.id) && Number.isFinite(d.lat) && Number.isFinite(d.lon)) rows.push([d.id, unescape(String(d.name ?? "")), d.lat, d.lon, d.iso3 ?? ""])
       if (page.length < 1000) break
     }
     return Response.json({ generated: new Date().toISOString(), count: rows.length, sites: rows }, {
@@ -240,7 +246,11 @@ export default async (req: Request) => {
     }
     const country = q.get("countryIso3"); if (country && /^[A-Z]{3}$/.test(country)) body.countryIso3 = country
     const since = q.get("lastChanged"); if (since && /^\d{4}-\d{2}-\d{2}$/.test(since)) body.lastChanged = since
-    return callSSI(e, "POST", "divesites/search", body)
+    const r = await callSSI(e, "POST", "divesites/search", body)
+    if (!r.ok) return r
+    const j = (await r.json()) as { divesites?: Array<{ name?: string }> }
+    for (const d of j.divesites ?? []) if (typeof d.name === "string") d.name = unescape(d.name)
+    return Response.json(j)
   }
 
   const m = route.match(/^divelogs(?:\/(\d+))?$/)

@@ -33,6 +33,7 @@
   .tag{font-size:1.25rem;color:var(--text-secondary);font-weight:300;max-width:34ch;margin-bottom:1.5rem}
 
   /* store buttons */
+  .via{font-size:.85rem;color:var(--muted);margin:-1rem 0 1.5rem}
   .who{font-size:1rem;line-height:1.55;color:var(--text-secondary);max-width:44ch;margin:-.6rem 0 1.6rem}
   .trial{margin-top:.8rem;font-size:.92rem;font-weight:500;color:var(--text-secondary)}
   .stores{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
@@ -168,6 +169,7 @@
       <h1>DiveDrop</h1>
       <p class="tag" data-i18n="tag"></p>
       <p class="who" data-i18n="who"></p>
+      <p class="via" data-i18n="via"></p>
       <div class="stores" id="heroStores"></div>
       <p class="trial" data-i18n="trial"></p>
       <a class="how-link" href="#how" data-i18n="how_link"></a>
@@ -300,7 +302,7 @@ function storeButtons(t, which) {
 }
 
 const T = {
- en: {by:"an app by Strategea", tag:"Share your dive export with DiveDrop. Your SSI logbook is up to date. Depth profile included.", who:"For SSI divers with a Garmin Descent, Suunto, Shearwater or Oceanic+ on Apple Watch, or with a logbook in Subsurface, MacDive or Diving Log.", trial:"First 3 dives free · then €4.99 once · no subscription",
+ en: {by:"an app by Strategea", tag:"Share your dive export with DiveDrop. Your SSI logbook is up to date. Depth profile included.", who:"For SSI divers with a Garmin Descent, Suunto, Shearwater or Oceanic+ on Apple Watch, or with a logbook in Subsurface, MacDive or Diving Log.", via:"Connected to MySSI through the official SSI API", trial:"First 3 dives free · then €4.99 once · no subscription",
   btn_small_ios:"Download on the", btn_small_and:"Get it on", btn_small_soon:"In review, coming to", btn_small_paused:"Temporarily unavailable on", paused_t:"DiveDrop is coming back, using the official SSI API", paused_p:"Version 1.1.0 for iPhone and Android arrives soon in the App Store and Google Play.<span class=\"new\"><span>You link DiveDrop with MySSI yourself. DiveDrop never sees your SSI password.</span><span>Dive sites come straight from SSI's own dive-site list.</span><span>You can unlink at any time, in the app and in MySSI.</span></span>Until the update is out, the store buttons below stay unavailable. <a href=\"support/\">What this means for you</a>",
   how_link:"How it works", how:"How it works",
   vid_h:"See it in 23 seconds", vid_lead:"From the export to your logbook, depth profile and all.",
@@ -330,13 +332,13 @@ const T = {
   q2:"Does SSI mark the dives as computer-verified?",
   a2:"No. Dives added this way arrive as unconfirmed, exactly like one you type in by hand, and your dive centre can still verify them. For a certification count the centre verifies from your log either way.",
   q3:"Is this an official SSI product?",
-  a3:"No. DiveDrop is independent. It talks to the same interface the MySSI app uses, on your behalf and with your own account, and it works as long as SSI allows it.",
+  a3:"Yes. DiveDrop has been reviewed and approved by SSI and uses SSI's official API. You link it to MySSI yourself, and you can unlink it at any time.",
   more:"More questions? See the <a href=\"support/\">support page</a>.",
   chip_new:"New", chip_in:"In SSI", chip_ok:"Synced", chip_skip:"Skipped", mock_pool:"Pool",
-  trust_eu:"Belgian company, under EU law", trust_lock:"No server of ours: your SSI login stays on your phone", trust_eye:"No tracking, no ads", trust_shield:"Your data is never sold or shared",
+  trust_eu:"Belgian company, under EU law", trust_lock:"Your SSI password never reaches DiveDrop", trust_eye:"No tracking, no ads", trust_shield:"Your data is never sold or shared",
   changelog:"What's new", press:"Press", compat:"Compatibility", support:"Support", privacy:"Privacy policy", notaff:"Other brand names mentioned are the property of their respective owners"},
 
- fr: {by:"une app de Strategea", tag:"Partagez votre export de plongées avec DiveDrop. Votre carnet SSI est à jour. Profil de profondeur inclus.", who:"Pour les plongeurs SSI équipés d'un Garmin Descent, d'un Suunto, d'un Shearwater ou d'Oceanic+ sur Apple Watch, ou qui tiennent leur carnet dans Subsurface, MacDive ou Diving Log.", trial:"3 premières plongées gratuites · ensuite 4,99 € une seule fois · sans abonnement",
+ fr: {by:"une app de Strategea", tag:"Partagez votre export de plongées avec DiveDrop. Votre carnet SSI est à jour. Profil de profondeur inclus.", who:"Pour les plongeurs SSI équipés d'un Garmin Descent, d'un Suunto, d'un Shearwater ou d'Oceanic+ sur Apple Watch, ou qui tiennent leur carnet dans Subsurface, MacDive ou Diving Log.", via:"Connecté à MySSI via l'API officielle de SSI", trial:"3 premières plongées gratuites · ensuite 4,99 € une seule fois · sans abonnement",
   btn_small_ios:"Télécharger dans l'", btn_small_and:"Disponible sur", btn_small_soon:"En validation, bientôt sur", btn_small_paused:"Temporairement indisponible sur", paused_t:"DiveDrop revient, via l'API officielle de SSI", paused_p:"La version 1.1.0 pour iPhone et Android arrive bientôt sur l'App Store et Google Play.<span class=\"new\"><span>Vous liez vous-même DiveDrop à MySSI. DiveDrop ne voit jamais votre mot de passe SSI.</span><span>Les sites de plongée viennent directement de la liste de SSI.</span><span>Vous pouvez délier à tout moment, dans l'app et dans MySSI.</span></span>En attendant la mise à jour, les boutons des stores ci-dessous restent indisponibles. <a href=\"support/\">Ce que cela change pour vous</a>",
   how_link:"Comment ça marche", how:"Comment ça marche",
   vid_h:"Voyez-le en 23 secondes", vid_lead:"De l'export à votre carnet, profil de profondeur compris.",
@@ -366,13 +368,13 @@ const T = {
   q2:"SSI marque-t-il les plongées comme vérifiées par ordinateur ?",
   a2:"Non. Les plongées ajoutées ainsi arrivent comme non confirmées, exactement comme une saisie à la main, et votre centre peut toujours les valider. Pour un décompte, le centre valide d'après votre carnet de toute façon.",
   q3:"Est-ce un produit officiel SSI ?",
-  a3:"Non. DiveDrop est indépendant. Il dialogue avec la même interface que l'app MySSI, en votre nom et avec votre propre compte, et fonctionne tant que SSI l'autorise.",
+  a3:"Oui. DiveDrop a été examiné et approuvé par SSI et utilise l'API officielle de SSI. Vous le liez vous-même à MySSI et pouvez le délier à tout moment.",
   more:"D'autres questions\u00a0? Voyez la <a href=\"support/\">page de support</a>.",
   chip_new:"Nouvelle", chip_in:"Dans SSI", chip_ok:"Synchronisée", chip_skip:"Ignorée (auto)", mock_pool:"Piscine",
-  trust_eu:"Entreprise belge, droit européen", trust_lock:"Aucun serveur à nous : votre identifiant SSI reste sur votre téléphone", trust_eye:"Ni pistage ni publicité", trust_shield:"Vos données ne sont jamais vendues ni partagées",
+  trust_eu:"Entreprise belge, droit européen", trust_lock:"Votre mot de passe SSI n'arrive jamais chez DiveDrop", trust_eye:"Ni pistage ni publicité", trust_shield:"Vos données ne sont jamais vendues ni partagées",
   changelog:"Nouveautés", press:"Presse", compat:"Compatibilité", support:"Support", privacy:"Politique de confidentialité", notaff:"Les autres marques citées appartiennent à leurs propriétaires respectifs"},
 
- nl: {by:"een app van Strategea", tag:"Deel je duik-export met DiveDrop. Je SSI-logboek is bijgewerkt. Met diepteprofiel.", who:"Voor SSI-duikers met een Garmin Descent, Suunto, Shearwater of Oceanic+ op Apple Watch, of met een logboek in Subsurface, MacDive of Diving Log.", trial:"Eerste 3 duiken gratis · daarna eenmalig € 4,99 · geen abonnement",
+ nl: {by:"een app van Strategea", tag:"Deel je duik-export met DiveDrop. Je SSI-logboek is bijgewerkt. Met diepteprofiel.", who:"Voor SSI-duikers met een Garmin Descent, Suunto, Shearwater of Oceanic+ op Apple Watch, of met een logboek in Subsurface, MacDive of Diving Log.", via:"Gekoppeld met MySSI via de officiële SSI-API", trial:"Eerste 3 duiken gratis · daarna eenmalig € 4,99 · geen abonnement",
   btn_small_ios:"Download in de", btn_small_and:"Ontdek het op", btn_small_soon:"In beoordeling, binnenkort op", btn_small_paused:"Tijdelijk niet beschikbaar in", paused_t:"DiveDrop komt terug, via de officiële API van SSI", paused_p:"Versie 1.1.0 voor iPhone en Android komt binnenkort in de App Store en Google Play.<span class=\"new\"><span>Je koppelt DiveDrop zelf met MySSI. DiveDrop ziet je SSI-wachtwoord nooit.</span><span>Duikstekken komen rechtstreeks uit de stekkenlijst van SSI.</span><span>Ontkoppelen kan altijd, in de app en in MySSI.</span></span>Tot de update er is, blijven de winkelknoppen hieronder onbeschikbaar. <a href=\"support/\">Wat dit voor jou betekent</a>",
   how_link:"Zo werkt het", how:"Zo werkt het",
   vid_h:"Bekijk het in 23 seconden", vid_lead:"Van de export tot in je logboek, diepteprofiel incluis.",
@@ -402,10 +404,10 @@ const T = {
   q2:"Markeert SSI de duiken als computer-geverifieerd?",
   a2:"Nee. Duiken die zo binnenkomen staan als niet bevestigd, net als een duik die je met de hand intikt, en je duikcentrum kan ze nog altijd bevestigen. Voor een duikaantal bevestigt het centrum toch vanuit je eigen logboek.",
   q3:"Is dit een officieel SSI-product?",
-  a3:"Nee. DiveDrop is onafhankelijk. Hij praat met dezelfde interface als de MySSI-app, namens jou en met je eigen account, en werkt zolang SSI dat toelaat.",
+  a3:"Ja. DiveDrop is door SSI nagekeken en goedgekeurd en gebruikt de officiële API van SSI. Je koppelt de app zelf met MySSI en kan ze altijd ontkoppelen.",
   more:"Nog vragen? Bekijk de <a href=\"support/\">supportpagina</a>.",
   chip_new:"Nieuw", chip_in:"In SSI", chip_ok:"Gesynct", chip_skip:"Overgeslagen", mock_pool:"Zwembad",
-  trust_eu:"Belgisch bedrijf, Europees recht", trust_lock:"Geen eigen server: je SSI-login blijft op je toestel", trust_eye:"Geen tracking, geen reclame", trust_shield:"Je gegevens worden nooit verkocht of gedeeld",
+  trust_eu:"Belgisch bedrijf, Europees recht", trust_lock:"Je SSI-wachtwoord komt nooit bij DiveDrop", trust_eye:"Geen tracking, geen reclame", trust_shield:"Je gegevens worden nooit verkocht of gedeeld",
   changelog:"Wat is er nieuw", press:"Pers", compat:"Compatibiliteit", support:"Support", privacy:"Privacybeleid", notaff:"Andere vermelde merknamen zijn eigendom van hun respectieve eigenaars"}
 };
 

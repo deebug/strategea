@@ -43,11 +43,14 @@
   .store small{display:block;font-size:.7rem;font-weight:400;opacity:.75;letter-spacing:.02em}
   .store.soon{background:var(--card-bg);color:var(--text-secondary);border:1px dashed rgba(17,24,39,.22);cursor:default}
   .store.soon:hover{transform:none;box-shadow:none}
-  .paused{display:flex;gap:.8rem;align-items:flex-start;background:#fff7e6;border:1px solid #f5c26b;border-radius:16px;padding:1rem 1.2rem;margin-bottom:2.2rem}
-  .paused svg{flex:none;width:22px;height:22px;margin-top:.1rem;fill:none;stroke:#b26b00;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-  .paused b{display:block;color:#7a4a00;margin-bottom:.25rem;font-size:1.05rem}
-  .paused p{color:#7a4a00;line-height:1.55;font-size:.95rem;max-width:70ch}
-  .paused a{color:#7a4a00;font-weight:600}
+  .paused{display:flex;gap:.8rem;align-items:flex-start;background:#ecfbf2;border:1px solid #8fd6ab;border-radius:16px;padding:1rem 1.2rem;margin-bottom:2.2rem}
+  .paused svg{flex:none;width:22px;height:22px;margin-top:.1rem;fill:none;stroke:#15803d;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .paused b{display:block;color:#14532d;margin-bottom:.25rem;font-size:1.05rem}
+  .paused p{color:#166534;line-height:1.55;font-size:.95rem;max-width:70ch}
+  .paused a{color:#14532d;font-weight:600}
+  .paused .new{display:block;margin:.55rem 0 .4rem}
+  .paused .new span{display:block;padding-left:1.4rem;position:relative}
+  .paused .new span::before{content:"✓";position:absolute;left:0;font-weight:700;color:#15803d}
   [hidden]{display:none!important}
   .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
   .how-link{display:inline-block;margin-top:1rem;font-weight:600;font-size:.95rem}
@@ -157,7 +160,7 @@
   <a class="brand" href="https://strategea.be/"><img src="img/strategea.svg" alt="Strategea"> <span data-i18n="by"></span></a>
 
   <div class="paused" role="status" id="pausedBar">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 2.6 17.2A2 2 0 0 0 4.3 20h15.4a2 2 0 0 0 1.7-2.8L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M7.8 12.3l2.8 2.8 5.6-5.8"/></svg>
     <div><b data-i18n="paused_t"></b><p data-i18n="paused_p"></p></div>
   </div>
 
@@ -167,7 +170,7 @@
       <h1>DiveDrop</h1>
       <p class="tag" data-i18n="tag"></p>
       <p class="who" data-i18n="who"></p>
-      <p class="ssi-badge"><img src="img/ssi-logo.png" alt="SSI" width="56" height="30"><span><b>SSI Accredited App Developer</b><span data-i18n="ssi_acc"></span></span></p>
+      <p class="ssi-badge"><img src="img/ssi-logo.svg" alt="SSI" width="56" height="30"><span><b>SSI Accredited App Developer</b><span data-i18n="ssi_acc"></span></span></p>
       <div class="stores" id="heroStores"></div>
       <p class="trial" data-i18n="trial"></p>
       <a class="how-link" href="#how" data-i18n="how_link"></a>
@@ -300,7 +303,7 @@ function storeButtons(t, which) {
 
 const T = {
  en: {by:"an app by Strategea", tag:"Share your dive export with DiveDrop. Your SSI logbook is up to date. Depth profile included.", who:"For SSI divers with a Garmin Descent, Suunto, Shearwater or Oceanic+ on Apple Watch, or with a logbook in Subsurface, MacDive or Diving Log.", ssi_acc:"Connected to MySSI through the official SSI API", trial:"First 3 dives free · then €4.99 once · no subscription",
-  btn_small_ios:"Download on the", btn_small_and:"Get it on", btn_small_soon:"In review, coming to", btn_small_paused:"Temporarily unavailable on", paused_t:"DiveDrop is paused", paused_p:"Since 7 October 2026, SSI no longer stores dives that other apps send to MySSI, so DiveDrop is out of the App Store and Google Play for now. We're working with SSI on an official route. <a href=\"support/\">What this means for you</a>",
+  btn_small_ios:"Download on the", btn_small_and:"Get it on", btn_small_soon:"In review, coming to", btn_small_paused:"Temporarily unavailable on", paused_t:"DiveDrop is coming back as an official SSI app", paused_p:"DiveDrop now runs on SSI's official API, and its maker Strategea is an <b style=\"display:inline;font-size:inherit;margin:0\">SSI Accredited App Developer</b>. Version 1.1.0 for iPhone and Android arrives soon in the App Store and Google Play.<span class=\"new\"><span>You link DiveDrop with MySSI yourself. DiveDrop never sees your SSI password.</span><span>Dive sites come straight from SSI's own dive-site list.</span><span>You can unlink at any time, in the app and in MySSI.</span></span>Until the update is out, the store buttons below stay unavailable. <a href=\"support/\">What this means for you</a>",
   how_link:"How it works", how:"How it works",
   vid_h:"See it in 23 seconds", vid_lead:"From the export to your logbook, depth profile and all.",
   vid_play:"Play the video",
@@ -336,7 +339,7 @@ const T = {
   changelog:"What's new", press:"Press", compat:"Compatibility", support:"Support", privacy:"Privacy policy", notaff:"Not affiliated with Oceanic, Garmin, Suunto, Shearwater or Huish Outdoors"},
 
  fr: {by:"une app de Strategea", tag:"Partagez votre export de plongées avec DiveDrop. Votre carnet SSI est à jour. Profil de profondeur inclus.", who:"Pour les plongeurs SSI équipés d'un Garmin Descent, d'un Suunto, d'un Shearwater ou d'Oceanic+ sur Apple Watch, ou qui tiennent leur carnet dans Subsurface, MacDive ou Diving Log.", ssi_acc:"Connecté à MySSI via l'API officielle de SSI", trial:"3 premières plongées gratuites · ensuite 4,99 € une seule fois · sans abonnement",
-  btn_small_ios:"Télécharger dans l'", btn_small_and:"Disponible sur", btn_small_soon:"En validation, bientôt sur", btn_small_paused:"Temporairement indisponible sur", paused_t:"DiveDrop est en pause", paused_p:"Depuis le 7 octobre 2026, SSI n'enregistre plus les plongées que d'autres apps envoient à MySSI ; DiveDrop est donc retiré de l'App Store et de Google Play pour l'instant. Nous travaillons avec SSI à une voie officielle. <a href=\"support/\">Ce que cela signifie pour vous</a>",
+  btn_small_ios:"Télécharger dans l'", btn_small_and:"Disponible sur", btn_small_soon:"En validation, bientôt sur", btn_small_paused:"Temporairement indisponible sur", paused_t:"DiveDrop revient, en app SSI officielle", paused_p:"DiveDrop fonctionne désormais avec l'API officielle de SSI, et son éditeur Strategea est <b style=\"display:inline;font-size:inherit;margin:0\">SSI Accredited App Developer</b>. La version 1.1.0 pour iPhone et Android arrive bientôt sur l'App Store et Google Play.<span class=\"new\"><span>Vous liez vous-même DiveDrop à MySSI. DiveDrop ne voit jamais votre mot de passe SSI.</span><span>Les sites de plongée viennent directement de la liste de SSI.</span><span>Vous pouvez délier à tout moment, dans l'app et dans MySSI.</span></span>En attendant la mise à jour, les boutons des stores ci-dessous restent indisponibles. <a href=\"support/\">Ce que cela change pour vous</a>",
   how_link:"Comment ça marche", how:"Comment ça marche",
   vid_h:"Voyez-le en 23 secondes", vid_lead:"De l'export à votre carnet, profil de profondeur compris.",
   vid_play:"Lire la vidéo",
@@ -372,7 +375,7 @@ const T = {
   changelog:"Nouveautés", press:"Presse", compat:"Compatibilité", support:"Support", privacy:"Politique de confidentialité", notaff:"Sans lien avec Oceanic, Garmin, Suunto, Shearwater ou Huish Outdoors"},
 
  nl: {by:"een app van Strategea", tag:"Deel je duik-export met DiveDrop. Je SSI-logboek is bijgewerkt. Met diepteprofiel.", who:"Voor SSI-duikers met een Garmin Descent, Suunto, Shearwater of Oceanic+ op Apple Watch, of met een logboek in Subsurface, MacDive of Diving Log.", ssi_acc:"Gekoppeld met MySSI via de officiële SSI-API", trial:"Eerste 3 duiken gratis · daarna eenmalig € 4,99 · geen abonnement",
-  btn_small_ios:"Download in de", btn_small_and:"Ontdek het op", btn_small_soon:"In beoordeling, binnenkort op", btn_small_paused:"Tijdelijk niet beschikbaar in", paused_t:"DiveDrop staat op pauze", paused_p:"Sinds 7 oktober 2026 bewaart SSI geen duiken meer die andere apps naar MySSI sturen. Daarom is DiveDrop voorlopig uit de App Store en Google Play. We werken met SSI aan een officiële weg. <a href=\"support/\">Wat dit voor jou betekent</a>",
+  btn_small_ios:"Download in de", btn_small_and:"Ontdek het op", btn_small_soon:"In beoordeling, binnenkort op", btn_small_paused:"Tijdelijk niet beschikbaar in", paused_t:"DiveDrop komt terug als officiële SSI-app", paused_p:"DiveDrop werkt nu via de officiële API van SSI, en maker Strategea is <b style=\"display:inline;font-size:inherit;margin:0\">SSI Accredited App Developer</b>. Versie 1.1.0 voor iPhone en Android komt binnenkort in de App Store en Google Play.<span class=\"new\"><span>Je koppelt DiveDrop zelf met MySSI. DiveDrop ziet je SSI-wachtwoord nooit.</span><span>Duikstekken komen rechtstreeks uit de stekkenlijst van SSI.</span><span>Ontkoppelen kan altijd, in de app en in MySSI.</span></span>Tot de update er is, blijven de winkelknoppen hieronder onbeschikbaar. <a href=\"support/\">Wat dit voor jou betekent</a>",
   how_link:"Zo werkt het", how:"Zo werkt het",
   vid_h:"Bekijk het in 23 seconden", vid_lead:"Van de export tot in je logboek, diepteprofiel incluis.",
   vid_play:"Speel de video af",

@@ -141,6 +141,10 @@
   .trust svg{width:17px;height:17px;flex:none;fill:none;stroke:var(--accent-2);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
   footer{margin-top:1.75rem;padding-top:2rem;border-top:1px solid rgba(0,0,0,.06);color:var(--text-secondary);font-size:.85rem;display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between}
   [hidden]{display:none!important}
+  .ssi-badge{display:inline-flex;align-items:center;gap:.8rem;margin:.2rem 0 1.4rem;padding:.6rem 1.1rem .6rem .8rem;background:var(--card-bg);border-radius:14px;box-shadow:0 4px 6px -1px rgba(0,0,0,.05)}
+  .ssi-badge img{height:30px;width:auto;flex:none}
+  .ssi-badge b{display:block;font-size:.95rem;color:var(--text-primary)}
+  .ssi-badge span span{display:block;font-size:.8rem;color:var(--text-secondary)}
   @media (max-width:760px){.grid2{grid-template-columns:1fr}.feat-vis{aspect-ratio:16/11}.flow{padding:1.6rem 1.3rem 1.3rem}.flow ol{grid-template-columns:1fr;gap:1.4rem}.flow li{padding-left:52px}.flow .n{position:absolute;left:0;top:0;margin:0}.flow li:not(:last-child)::after{top:42px;left:16px;right:auto;bottom:calc(-1.4rem + 6px);width:2px;height:auto;background:linear-gradient(180deg,var(--accent-1),rgba(84,179,214,.25))}.hero{grid-template-columns:1fr}h1{font-size:2.3rem}.lang-toggle{top:1rem;right:1rem}.wrap{padding-top:5rem}}
 </style>
 </head>
@@ -163,6 +167,7 @@
       <h1>DiveDrop</h1>
       <p class="tag" data-i18n="tag"></p>
       <p class="who" data-i18n="who"></p>
+      <p class="ssi-badge"><img src="img/ssi-logo.png" alt="SSI" width="56" height="30"><span><b>SSI Accredited App Developer</b><span data-i18n="ssi_acc"></span></span></p>
       <div class="stores" id="heroStores"></div>
       <p class="trial" data-i18n="trial"></p>
       <a class="how-link" href="#how" data-i18n="how_link"></a>
@@ -294,7 +299,7 @@ function storeButtons(t, which) {
 }
 
 const T = {
- en: {by:"an app by Strategea", tag:"Share your dive export with DiveDrop. Your SSI logbook is up to date. Depth profile included.", who:"For SSI divers with a Garmin Descent, Suunto, Shearwater or Oceanic+ on Apple Watch, or with a logbook in Subsurface, MacDive or Diving Log.", trial:"First 3 dives free · then €4.99 once · no subscription",
+ en: {by:"an app by Strategea", tag:"Share your dive export with DiveDrop. Your SSI logbook is up to date. Depth profile included.", who:"For SSI divers with a Garmin Descent, Suunto, Shearwater or Oceanic+ on Apple Watch, or with a logbook in Subsurface, MacDive or Diving Log.", ssi_acc:"Connected to MySSI through the official SSI API", trial:"First 3 dives free · then €4.99 once · no subscription",
   btn_small_ios:"Download on the", btn_small_and:"Get it on", btn_small_soon:"In review, coming to", btn_small_paused:"Temporarily unavailable on", paused_t:"DiveDrop is paused", paused_p:"Since 7 October 2026, SSI no longer stores dives that other apps send to MySSI, so DiveDrop is out of the App Store and Google Play for now. We're working with SSI on an official route. <a href=\"support/\">What this means for you</a>",
   how_link:"How it works", how:"How it works",
   vid_h:"See it in 23 seconds", vid_lead:"From the export to your logbook, depth profile and all.",
@@ -328,9 +333,9 @@ const T = {
   more:"More questions? See the <a href=\"support/\">support page</a>.",
   chip_new:"New", chip_in:"In SSI", chip_ok:"Synced", chip_skip:"Skipped", mock_pool:"Pool",
   trust_eu:"Belgian company, under EU law", trust_lock:"No server of ours: your SSI login stays on your phone", trust_eye:"No tracking, no ads", trust_shield:"Your data is never sold or shared",
-  changelog:"What's new", press:"Press", compat:"Compatibility", support:"Support", privacy:"Privacy policy", notaff:"Not affiliated with SSI, Oceanic, Garmin, Suunto, Shearwater or Huish Outdoors"},
+  changelog:"What's new", press:"Press", compat:"Compatibility", support:"Support", privacy:"Privacy policy", notaff:"Not affiliated with Oceanic, Garmin, Suunto, Shearwater or Huish Outdoors"},
 
- fr: {by:"une app de Strategea", tag:"Partagez votre export de plongées avec DiveDrop. Votre carnet SSI est à jour. Profil de profondeur inclus.", who:"Pour les plongeurs SSI équipés d'un Garmin Descent, d'un Suunto, d'un Shearwater ou d'Oceanic+ sur Apple Watch, ou qui tiennent leur carnet dans Subsurface, MacDive ou Diving Log.", trial:"3 premières plongées gratuites · ensuite 4,99 € une seule fois · sans abonnement",
+ fr: {by:"une app de Strategea", tag:"Partagez votre export de plongées avec DiveDrop. Votre carnet SSI est à jour. Profil de profondeur inclus.", who:"Pour les plongeurs SSI équipés d'un Garmin Descent, d'un Suunto, d'un Shearwater ou d'Oceanic+ sur Apple Watch, ou qui tiennent leur carnet dans Subsurface, MacDive ou Diving Log.", ssi_acc:"Connecté à MySSI via l'API officielle de SSI", trial:"3 premières plongées gratuites · ensuite 4,99 € une seule fois · sans abonnement",
   btn_small_ios:"Télécharger dans l'", btn_small_and:"Disponible sur", btn_small_soon:"En validation, bientôt sur", btn_small_paused:"Temporairement indisponible sur", paused_t:"DiveDrop est en pause", paused_p:"Depuis le 7 octobre 2026, SSI n'enregistre plus les plongées que d'autres apps envoient à MySSI ; DiveDrop est donc retiré de l'App Store et de Google Play pour l'instant. Nous travaillons avec SSI à une voie officielle. <a href=\"support/\">Ce que cela signifie pour vous</a>",
   how_link:"Comment ça marche", how:"Comment ça marche",
   vid_h:"Voyez-le en 23 secondes", vid_lead:"De l'export à votre carnet, profil de profondeur compris.",
@@ -364,9 +369,9 @@ const T = {
   more:"D'autres questions\u00a0? Voyez la <a href=\"support/\">page de support</a>.",
   chip_new:"Nouvelle", chip_in:"Dans SSI", chip_ok:"Synchronisée", chip_skip:"Ignorée (auto)", mock_pool:"Piscine",
   trust_eu:"Entreprise belge, droit européen", trust_lock:"Aucun serveur à nous : votre identifiant SSI reste sur votre téléphone", trust_eye:"Ni pistage ni publicité", trust_shield:"Vos données ne sont jamais vendues ni partagées",
-  changelog:"Nouveautés", press:"Presse", compat:"Compatibilité", support:"Support", privacy:"Politique de confidentialité", notaff:"Sans lien avec SSI, Oceanic, Garmin, Suunto, Shearwater ou Huish Outdoors"},
+  changelog:"Nouveautés", press:"Presse", compat:"Compatibilité", support:"Support", privacy:"Politique de confidentialité", notaff:"Sans lien avec Oceanic, Garmin, Suunto, Shearwater ou Huish Outdoors"},
 
- nl: {by:"een app van Strategea", tag:"Deel je duik-export met DiveDrop. Je SSI-logboek is bijgewerkt. Met diepteprofiel.", who:"Voor SSI-duikers met een Garmin Descent, Suunto, Shearwater of Oceanic+ op Apple Watch, of met een logboek in Subsurface, MacDive of Diving Log.", trial:"Eerste 3 duiken gratis · daarna eenmalig € 4,99 · geen abonnement",
+ nl: {by:"een app van Strategea", tag:"Deel je duik-export met DiveDrop. Je SSI-logboek is bijgewerkt. Met diepteprofiel.", who:"Voor SSI-duikers met een Garmin Descent, Suunto, Shearwater of Oceanic+ op Apple Watch, of met een logboek in Subsurface, MacDive of Diving Log.", ssi_acc:"Gekoppeld met MySSI via de officiële SSI-API", trial:"Eerste 3 duiken gratis · daarna eenmalig € 4,99 · geen abonnement",
   btn_small_ios:"Download in de", btn_small_and:"Ontdek het op", btn_small_soon:"In beoordeling, binnenkort op", btn_small_paused:"Tijdelijk niet beschikbaar in", paused_t:"DiveDrop staat op pauze", paused_p:"Sinds 7 oktober 2026 bewaart SSI geen duiken meer die andere apps naar MySSI sturen. Daarom is DiveDrop voorlopig uit de App Store en Google Play. We werken met SSI aan een officiële weg. <a href=\"support/\">Wat dit voor jou betekent</a>",
   how_link:"Zo werkt het", how:"Zo werkt het",
   vid_h:"Bekijk het in 23 seconden", vid_lead:"Van de export tot in je logboek, diepteprofiel incluis.",
@@ -400,7 +405,7 @@ const T = {
   more:"Nog vragen? Bekijk de <a href=\"support/\">supportpagina</a>.",
   chip_new:"Nieuw", chip_in:"In SSI", chip_ok:"Gesynct", chip_skip:"Overgeslagen", mock_pool:"Zwembad",
   trust_eu:"Belgisch bedrijf, Europees recht", trust_lock:"Geen eigen server: je SSI-login blijft op je toestel", trust_eye:"Geen tracking, geen reclame", trust_shield:"Je gegevens worden nooit verkocht of gedeeld",
-  changelog:"Wat is er nieuw", press:"Pers", compat:"Compatibiliteit", support:"Support", privacy:"Privacybeleid", notaff:"Niet verbonden aan SSI, Oceanic, Garmin, Suunto, Shearwater of Huish Outdoors"}
+  changelog:"Wat is er nieuw", press:"Pers", compat:"Compatibiliteit", support:"Support", privacy:"Privacybeleid", notaff:"Niet verbonden aan Oceanic, Garmin, Suunto, Shearwater of Huish Outdoors"}
 };
 
 

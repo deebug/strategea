@@ -275,8 +275,8 @@
 <script>
 // Flip to true the moment Google approves the app; every Play button on the page turns into a real link.
 const ANDROID_LIVE = true;
-// iPhone 1.1.0 is in review at Apple; flip to true once it is released in the App Store.
-const IOS_LIVE = false;
+// iPhone 1.1.0 is released in the App Store (20 Nov 2026).
+const IOS_LIVE = true;
 // The green "DiveDrop is back" notice on top; set to false once both stores carry 1.1.0 and it is old news.
 const COMEBACK = true;
 const APP_STORE = "https://apps.apple.com/app/id6810127854";
@@ -303,7 +303,7 @@ function storeButtons(t, which) {
 
 const T = {
  en: {by:"an app by Strategea", tag:"Share your dive export with DiveDrop. Your SSI logbook is up to date. Depth profile included.", who:"For SSI divers with a Garmin Descent, Suunto, Shearwater or Oceanic+ on Apple Watch, or with a logbook in Subsurface, MacDive or Diving Log.", via:"Connected to MySSI through the official SSI API", trial:"First 3 dives free · then €4.99 once · no subscription",
-  btn_small_ios:"Download on the", btn_small_and:"Get it on", btn_small_soon:"In review, coming to", btn_small_paused:"Temporarily unavailable on", paused_t:"DiveDrop is back, using the official SSI API", paused_p:"Version 1.1.0 is out on Google Play. The iPhone version is in review at Apple and follows soon.<span class=\"new\"><span>You link DiveDrop with MySSI yourself. DiveDrop never sees your SSI password.</span><span>Dive sites come straight from SSI's own dive-site list.</span><span>You can unlink at any time, in the app and in MySSI.</span></span>Already using DiveDrop? Update the app and link it once under Account. <a href=\"changelog/\">What's new</a>",
+  btn_small_ios:"Download on the", btn_small_and:"Get it on", btn_small_soon:"In review, coming to", btn_small_paused:"Temporarily unavailable on", paused_t:"DiveDrop is back, using the official SSI API", paused_p:"Version 1.1.0 is out in the App Store and on Google Play.<span class=\"new\"><span>You link DiveDrop with MySSI yourself. DiveDrop never sees your SSI password.</span><span>Dive sites come straight from SSI's own dive-site list.</span><span>You can unlink at any time, in the app and in MySSI.</span></span>Already using DiveDrop? Update the app and link it once under Account. <a href=\"changelog/\">What's new</a>",
   how_link:"How it works", how:"How it works",
   vid_h:"See it in 23 seconds", vid_lead:"From the export to your logbook, depth profile and all.",
   vid_play:"Play the video",
@@ -339,7 +339,7 @@ const T = {
   changelog:"What's new", press:"Press", compat:"Compatibility", support:"Support", privacy:"Privacy policy", notaff:"Other brand names mentioned are the property of their respective owners"},
 
  fr: {by:"une app de Strategea", tag:"Partagez votre export de plongées avec DiveDrop. Votre carnet SSI est à jour. Profil de profondeur inclus.", who:"Pour les plongeurs SSI équipés d'un Garmin Descent, d'un Suunto, d'un Shearwater ou d'Oceanic+ sur Apple Watch, ou qui tiennent leur carnet dans Subsurface, MacDive ou Diving Log.", via:"Connecté à MySSI via l'API officielle de SSI", trial:"3 premières plongées gratuites · ensuite 4,99 € une seule fois · sans abonnement",
-  btn_small_ios:"Télécharger dans l'", btn_small_and:"Disponible sur", btn_small_soon:"En validation, bientôt sur", btn_small_paused:"Temporairement indisponible sur", paused_t:"DiveDrop est de retour, via l'API officielle de SSI", paused_p:"La version 1.1.0 est disponible sur Google Play. La version iPhone est en validation chez Apple et suit bientôt.<span class=\"new\"><span>Vous liez vous-même DiveDrop à MySSI. DiveDrop ne voit jamais votre mot de passe SSI.</span><span>Les sites de plongée viennent directement de la liste de SSI.</span><span>Vous pouvez délier à tout moment, dans l'app et dans MySSI.</span></span>Vous utilisez déjà DiveDrop ? Mettez l'app à jour et liez-la une fois dans Compte. <a href=\"changelog/\">Nouveautés</a>",
+  btn_small_ios:"Télécharger dans l'", btn_small_and:"Disponible sur", btn_small_soon:"En validation, bientôt sur", btn_small_paused:"Temporairement indisponible sur", paused_t:"DiveDrop est de retour, via l'API officielle de SSI", paused_p:"La version 1.1.0 est disponible sur l'App Store et sur Google Play.<span class=\"new\"><span>Vous liez vous-même DiveDrop à MySSI. DiveDrop ne voit jamais votre mot de passe SSI.</span><span>Les sites de plongée viennent directement de la liste de SSI.</span><span>Vous pouvez délier à tout moment, dans l'app et dans MySSI.</span></span>Vous utilisez déjà DiveDrop ? Mettez l'app à jour et liez-la une fois dans Compte. <a href=\"changelog/\">Nouveautés</a>",
   how_link:"Comment ça marche", how:"Comment ça marche",
   vid_h:"Voyez-le en 23 secondes", vid_lead:"De l'export à votre carnet, profil de profondeur compris.",
   vid_play:"Lire la vidéo",
@@ -375,7 +375,7 @@ const T = {
   changelog:"Nouveautés", press:"Presse", compat:"Compatibilité", support:"Support", privacy:"Politique de confidentialité", notaff:"Les autres marques citées appartiennent à leurs propriétaires respectifs"},
 
  nl: {by:"een app van Strategea", tag:"Deel je duik-export met DiveDrop. Je SSI-logboek is bijgewerkt. Met diepteprofiel.", who:"Voor SSI-duikers met een Garmin Descent, Suunto, Shearwater of Oceanic+ op Apple Watch, of met een logboek in Subsurface, MacDive of Diving Log.", via:"Gekoppeld met MySSI via de officiële SSI-API", trial:"Eerste 3 duiken gratis · daarna eenmalig € 4,99 · geen abonnement",
-  btn_small_ios:"Download in de", btn_small_and:"Ontdek het op", btn_small_soon:"In beoordeling, binnenkort op", btn_small_paused:"Tijdelijk niet beschikbaar in", paused_t:"DiveDrop is terug, via de officiële API van SSI", paused_p:"Versie 1.1.0 staat op Google Play. De iPhone-versie ligt ter beoordeling bij Apple en volgt binnenkort.<span class=\"new\"><span>Je koppelt DiveDrop zelf met MySSI. DiveDrop ziet je SSI-wachtwoord nooit.</span><span>Duikstekken komen rechtstreeks uit de stekkenlijst van SSI.</span><span>Ontkoppelen kan altijd, in de app en in MySSI.</span></span>Gebruik je DiveDrop al? Werk de app bij en koppel hem één keer onder Account. <a href=\"changelog/\">Wat is er nieuw</a>",
+  btn_small_ios:"Download in de", btn_small_and:"Ontdek het op", btn_small_soon:"In beoordeling, binnenkort op", btn_small_paused:"Tijdelijk niet beschikbaar in", paused_t:"DiveDrop is terug, via de officiële API van SSI", paused_p:"Versie 1.1.0 staat in de App Store en op Google Play.<span class=\"new\"><span>Je koppelt DiveDrop zelf met MySSI. DiveDrop ziet je SSI-wachtwoord nooit.</span><span>Duikstekken komen rechtstreeks uit de stekkenlijst van SSI.</span><span>Ontkoppelen kan altijd, in de app en in MySSI.</span></span>Gebruik je DiveDrop al? Werk de app bij en koppel hem één keer onder Account. <a href=\"changelog/\">Wat is er nieuw</a>",
   how_link:"Zo werkt het", how:"Zo werkt het",
   vid_h:"Bekijk het in 23 seconden", vid_lead:"Van de export tot in je logboek, diepteprofiel incluis.",
   vid_play:"Speel de video af",
